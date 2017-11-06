@@ -859,10 +859,14 @@ function Indicador01($zona, $mes)
 
 		array_push($resultadoFinal, $filaVentas['categoria_actividad_mp']); // sector priorizado
 
-		array_push($resultadoFinal, $filaVentas['bien_servicio']); // bien o servicio contratado
+
+
+		// array_push($resultadoFinal, $filaVentas['bien_servicio']); // bien o servicio contratado
 
 		// Tipo de Organizacion
 		$codOrganizacion = $filaVentas['cod_u_organizaciones'];
+		$bienOrganizacion = GetInformacionOrg($codOrganizacion, "actividad");
+		array_push($resultadoFinal, $bienOrganizacion); // bien o servicio contratado
 		$tipoDeOrganizacion = GetInformacionOrg($codOrganizacion, "tipoOrg");
 		array_push($resultadoFinal, $tipoDeOrganizacion);
 
@@ -996,10 +1000,12 @@ function Indicador02($zona, $mes)
 
 		array_push($resultadoFinal, $filaVentas['categoria_actividad_mp']); // sector priorizado
 
-		array_push($resultadoFinal, $filaVentas['bien_servicio']); // bien o servicio contratado
+		
 
 		// Tipo de Organizacion
 		$codOrganizacion = $filaVentas['cod_u_organizaciones'];
+		$bienOrganizacion = GetInformacionOrg($codOrganizacion, "actividad");
+		array_push($resultadoFinal, $bienOrganizacion); // bien o servicio contratado
 		$tipoDeOrganizacion = GetInformacionOrg($codOrganizacion, "tipoOrg");
 		array_push($resultadoFinal, $tipoDeOrganizacion);
 
@@ -1154,8 +1160,7 @@ function Indicador03($zona, $mes)
 					$numEmpleados = $fila['num_empleados'];
 					$codProv = $fila['cod_provincia'];
 					$canton = $fila['cod_canton'];
-					// $asesoriaPublica = $fila['descripcion'];
-					$asesoriaPublica = GetInformacionOrg($codOrg, "actividad");
+					$asesoriaPublica = $fila['descripcion'];
 					$servicioRegistrado = $fila['servicio'];
 					$tipoServicioRegistrado = $fila['tipo_servicio'];
 					$cEconomico = $fila['circuito_economico'];
@@ -1179,8 +1184,7 @@ function Indicador03($zona, $mes)
 				$numEmpleados = $fila['num_empleados'];
 				$codProv = $fila['cod_provincia'];
 				$canton = $fila['cod_canton'];
-				// $asesoriaPublica = $fila['descripcion'];
-				$asesoriaPublica = GetInformacionOrg($codOrg, "actividad");
+				$asesoriaPublica = $fila['descripcion'];
 				$servicioRegistrado = $fila['servicio'];
 				$tipoServicioRegistrado = $fila['tipo_servicio'];
 				$cEconomico = $fila['circuito_economico'];
@@ -1694,8 +1698,7 @@ function Indicador05($zona, $mes)
 			while($filaInfoServicios = mysql_fetch_array($resInfoServicios))
 			{
 				$tipoServicioContratacion = $filaInfoServicios['servicio'];
-				// $bienServicio = $filaInfoServicios['descripcion'];
-				$bienServicio = GetInformacionOrg($codOrg, "actividad");
+				$bienServicio = $filaInfoServicios['descripcion'];
 				$adjudicadoMonto = $filaInfoServicios['adjudicado'];
 				$codProv = $filaInfoServicios['cod_provincia'];
 				$servicioRegistrado = $filaInfoServicios['servicio'];
@@ -2169,9 +2172,7 @@ function Indicador07($zona, $mes)
 			while($filaInfoServicios = mysql_fetch_array($resInfoServicios))
 			{
 				$tipoServicioContratacion = $filaInfoServicios['tipo_contrato'];
-				// $bienServicio = $filaInfoServicios['descripcion'];
-				$bienServicio = GetInformacionOrg($codOrg, "actividad");
-
+				$bienServicio = $filaInfoServicios['descripcion'];
 				$adjudicadoSocio = 'no';
 
 				if($filaInfoServicios['categoria_actividad_mp'] == 'no_priorizado_en_el_cambio_matriz_productiva')
@@ -2799,8 +2800,7 @@ function ReporteGeneralActores($zona, $mes)
 							$sectorPriorizado = $filaServicio['categoria_actividad_mp'];
 
 							// Bien o servicio
-							// $bienServicio = $filaServicio['descripcion'];
-							$bienServicio = GetInformacionOrg($codOrg, "actividad");
+							$bienServicio = $filaServicio['descripcion'];
 							$adjudicadoActor = 'no';
 
 							// cdmp
