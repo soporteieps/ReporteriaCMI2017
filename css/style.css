@@ -1,0 +1,90 @@
+/***************************************************************************************************************************************/
+body { font-size: 62.5%; background-image:url('../images/paper2.gif'); }
+        h1 { font-size: 1.2em; margin: .6em 0; }
+        div#users-contain { width: 350px; margin: 20px 0; }
+        div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+        div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+        .ui-dialog .ui-state-error { padding: .3em; }
+        .validateTips { border: 1px solid transparent; padding: 0.3em; }
+		
+		/* css for timepicker */
+		.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+		.ui-timepicker-div dl{ text-align: left; }
+		.ui-timepicker-div dl dt{ height: 25px; }
+		.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+		.ui-timepicker-div td { font-size: 90%; }
+		
+#searchresults { text-align:left; margin-top:20px; display:none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#000; }  
+.word { font-weight:bold; color:#000000; }  
+#search_box { padding:4px; border:solid 1px #666666; width:300px; height:30px; font-size:18px;-moz-border-radius: 6px;-webkit-border-radius: 6px; }  
+.search_button { border:#000000 solid 1px; padding: 6px; color:#000; font-weight:bold; font-size:16px;-moz-border-radius: 6px;-webkit-border-radius: 6px; } 
+
+.tableSearch table,th,td{
+	border:1px solid #666;
+	border-collapse:collapse;
+}
+.tableSearch table{
+	border:none;
+	border-top:1px solid #000;
+}
+.tableSearch thead th{
+	background:url(http://icant.co.uk/csstablegallery/greychrome.gif) top left repeat-x #fff;
+	padding:5px 10px;
+
+	text-transform:uppercase;
+	color:#333;
+}
+.tableSearch tbody td,tbody th{
+	background:#eee;
+}
+.tableSearch tbody th{
+	background:url(http://icant.co.uk/csstablegallery/bluechrome.gif) top left repeat-x #fff;
+	color:#333;
+}
+.tableSearch tbody tr.odd td{
+	background:#ddd;
+}
+.tableSearch tbody tr.odd th{
+	background:url(http://icant.co.uk/csstablegallery/greenchrome.gif) top left repeat-x #fff;
+	color:#333;
+}
+.tableSearch tfoot td,tfoot th{
+	border:none;
+	padding-top:10px;
+}
+.tableSearch caption{
+	font-family:Tahoma;
+	text-align:left;
+	text-transform:uppercase;
+	font-size:130%;
+	padding:10px 0;
+	color:#036;
+}
+.tableSearch table a:link{
+	color:#369;
+}
+.tableSearch table a:visited{
+	color:#036;
+}
+.tableSearch table a:hover{
+	color:#000;
+	text-decoration:none;
+}
+.tableSearch table a:active{
+	color:#000;
+}
+
+tr,th{
+	font-size: 14px;
+
+}
+td,th {
+	 font-size: 14px;
+}
+.descripcionIndicador{
+	display: block;
+	width: 500px;
+	font-size: 12px;
+	padding-bottom: 5%;
+	
+}

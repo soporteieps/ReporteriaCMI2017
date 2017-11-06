@@ -1,0 +1,71 @@
+HACK
+
+jquery.validate.js
+LINEA 900:
+staticRules: function( element ) {
+CAMBIO
+validator!=null &&
+
+
+
+CAMBIAR
+http://malsup.github.io/jquery.form.js POR
+constantes.STRCONTEXTOAPLICACIONTOCOMPLETE+"/"+constantes.STRCARPETAJAVASCRIPT+"/jquery-ui-"+constantes.STRJQUERYVERSION+"/"+constantes.STRPLUGGIN+"/jquery.form.js"
+
+uploadfile.css
+.ajax-file-upload {
+	width:50px;
+
+abortStr: "Abortar",
+cancelStr: "Cancelar",
+deletelStr: "Eliminar",
+doneStr: "Ok",
+            
+            
+-----------------------------------------------------------------------------------------------------------
+jquery.uploadfile.js
+ function serializeAndUploadFiles	
+ 
+ if (extraData) {
+                	if(extraData.id!=null) {
+                		if(jQuery("#form-id")!=null) {
+                			var id=jQuery("#form-id").val();
+                		
+                			extraData.id=id;
+                			
+                			//alert(id);
+                		}
+                	}
+                	
+                	
+ -----------------------------------------------------------------------------------------------------------
+ 
+ CAMBIAR CSS DE TABLA JQUERY
+1) 
+ table.dataTable thead tr,
+table.dataTable tfoot tr {
+ background-image:url('../../../../../../../webroot/img/Imagenes/fondo-cabecera-tabla.gif');
+}
+
+2)
+table.dataTable.hover tbody tr:hover,
+table.dataTable.hover tbody tr.odd:hover,
+table.dataTable.hover tbody tr.even:hover, table.dataTable.display tbody tr:hover,
+table.dataTable.display tbody tr.odd:hover,
+table.dataTable.display tbody tr.even:hover {
+  background-color: yellow;
+}
+
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+	background-color: #D6E8FC
+  /*background-color: #f9f9f9;*/
+}
+table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected  {
+  background-color: #FFFFFF;
+  /*background-color: #abb9d3;*/
+}
+
+
+ /*padding: 58px 10px;*/
+  border-right: 1px solid #dddddd;
+ 

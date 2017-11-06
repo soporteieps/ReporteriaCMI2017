@@ -1,0 +1,3 @@
+onBlur="return check_cedula(this.form,this);"
+
+http://www.lawebdelprogramador.com/icocur.php

@@ -1,0 +1,14 @@
+http://xdsoft.net/jqplugins/datetimepicker/
+
+
+file upload
+http://hayageek.com/docs/jquery-upload-file.php
+
+select
+http://ivaynberg.github.io/select2/
+
+table
+https://datatables.net/examples/styling/cell-border.html
+
+tree
+http://www.jstree.com/demo/

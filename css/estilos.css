@@ -1,0 +1,124 @@
+table {
+  background: rgba(169,169,169,0.2);
+  font-size: 9px;
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+}
+th,
+td {
+  border: 1px solid #000;
+  padding: 0 5px;
+  padding-bottom: 2px;
+}
+
+#tablaResultado {
+  border: 1px solid #000;
+  border-collapse: collapse;
+  text-align: center;
+  vertical-align: text-bottom;
+  background: rgba(150,149,149,0.1);
+}
+#tablaResultado #cuadroBlanco,
+#tablaResultado .colorBlanco {
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  background: #fff;
+}
+#tablaResultado .colorIndicador {
+  background: rgba(204,239,246,0.71);
+}
+#tablaResultado .colorIndicador1 {
+  background: #ecdada;
+}
+#tablaResultado .colorIndicador_im,
+#tablaResultado .colorIndicador_im1 {
+  background: rgba(0,127,251,0.43);
+}
+#tablaResultado .total {
+  border-right: 2px solid #000;
+}
+#tablaResultado th,
+#tablaResultado td {
+  border: 1px solid #000;
+  border-spacing: 0;
+}
+#resultadoIndicadores {
+  text-align: center;
+}
+
+.cabecera {
+  background: rgba(7,7,186,0.8);
+  color: #fff;
+}
+
+#cargando
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff url(../images/ajax-loader.gif) no-repeat center;
+}
+
+.botonReporte
+{
+  background: #5c6a9b;
+  color: white;
+  text-align: center;  
+  margin: 0 auto 2px auto;
+  width: 300px;
+  border-radius: 4px;
+  box-shadow: 4px 1px rgba(0,0,0,0.7);
+  cursor: pointer;
+}
+
+#grafica
+{
+  text-align: center;
+}
+
+.reportesGenerales
+{
+  text-align: center;
+  background: #eee;
+  width: auto; 
+  font-size: 2em;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.botonMuestra
+{
+  cursor: pointer;
+  font-size: 3em;
+  float: right;
+}
+
+.linksReportes
+{
+  overflow: hidden;
+  width: 0;
+  height: 0;
+}
+
+.linksReportes a
+{
+  background: rgba(18, 60, 142, 0.52);
+  padding: 2px 7px;
+  border: 1px solid black;
+  margin-bottom: 2px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: white;
+  float: left;
+  font-size: 15px;
+  margin-left: 5px;
+  margin-top: 2px;
+
+}
+
+.linksReportes a:hover
+{
+  background: rgba(18, 60, 142, 1);
+}
