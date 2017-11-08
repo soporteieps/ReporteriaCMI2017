@@ -1642,8 +1642,7 @@ function Indicador05($zona, $mes)
 			$mesReporte = $filaServicioContratacion['mesReporte'];
 			$codServicioContratacion = $filaServicioContratacion['cod_im_contratacion_servicios'];
 			$tipoServicioContratacion = $filaServicioContratacion['tipo'];
-
-
+			$bienServicio = GetInformacionOrg($codOrg, "actividad");
 		}
 
 		// Informacion de la organizacion
@@ -1657,7 +1656,8 @@ function Indicador05($zona, $mes)
 			while($filaInfoContratacion = mysql_fetch_array($resInfoContratacion))
 			{
 				$tipoServicioContratacion = $filaInfoContratacion['tipo_contrato'];
-				$bienServicio = $filaInfoContratacion['bien_servicio'];
+				// $bienServicio = $filaInfoContratacion['bien_servicio'];
+				// $bienServicio = GetInformacionOrg($codOrg, "actividad");
 				$adjudicadoMonto = 0;
 				$codProv = $filaInfoContratacion['cod_provincia'];
 				$servicioRegistrado = "no";
@@ -1695,7 +1695,7 @@ function Indicador05($zona, $mes)
 			{
 				$tipoServicioContratacion = $filaInfoServicios['servicio'];
 				// $bienServicio = $filaInfoServicios['descripcion'];
-				$bienServicio = GetInformacionOrg($codOrg, "actividad");
+				
 				$adjudicadoMonto = $filaInfoServicios['adjudicado'];
 				$codProv = $filaInfoServicios['cod_provincia'];
 				$servicioRegistrado = $filaInfoServicios['servicio'];
@@ -2104,6 +2104,7 @@ function Indicador07($zona, $mes)
 			$mesReporte = $filaServicioContratacion['mesReporte'];
 			$codServicioContratacion = $filaServicioContratacion['cod_im_contratacion_servicios'];
 			$tipoServicioContratacion = $filaServicioContratacion['tipo'];
+			$bienServicio = GetInformacionOrg($codOrg, "actividad");
 		}
 
 		// Informacion de la organizacion
@@ -2117,7 +2118,8 @@ function Indicador07($zona, $mes)
 			while($filaInfoContratacion = mysql_fetch_array($resInfoContratacion))
 			{
 				$tipoServicioContratacion = $filaInfoContratacion['tipo_contrato'];
-				$bienServicio = $filaInfoContratacion['bien_servicio'];
+				// $bienServicio = $filaInfoContratacion['bien_servicio'];
+				// $bienServicio = GetInformacionOrg($codOrg, "actividad");
 				if($filaInfoContratacion['monto_contratacion'] > 0)
 					$adjudicadoSocio = 'si';
 				else
@@ -2170,7 +2172,7 @@ function Indicador07($zona, $mes)
 			{
 				$tipoServicioContratacion = $filaInfoServicios['tipo_contrato'];
 				// $bienServicio = $filaInfoServicios['descripcion'];
-				$bienServicio = GetInformacionOrg($codOrg, "actividad");
+				// $bienServicio = GetInformacionOrg($codOrg, "actividad");
 
 				$adjudicadoSocio = 'no';
 
