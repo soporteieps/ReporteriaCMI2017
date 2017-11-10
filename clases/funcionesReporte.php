@@ -30,53 +30,63 @@ include ('../lib/dbconfig.php');
     $codEventosActual = array();
     $cedulaAsistentesActual = array();
 
-    for($i = 2016; $i <= $anioCurso; $i++ )
+   
+
+        
+    // Se debe consultar todas las organizaciones que se capacitaron para obtener sus rucs
+    $sqlOrgCapacitadas = "select eo.cod_u_organizaciones, o.organizacion, o.ruc_definitivo, o.ruc_provisional from eventos_u_organizaciones eo inner join u_organizaciones o on (o.cod_u_organizaciones = eo.cod_u_organizaciones) where eo.anio = 2017 and eo.cod_u_organizaciones between 1 and 50 group by eo.cod_u_organizaciones";
+
+    // $pruebaEdad = CalculoEdad(2, 11, 1986);
+    // echo $sqlOrgCapacitadas . "<br>";
+    $resOrgCapacitadas = query($sqlOrgCapacitadas);
+    while($filaOrg = mysql_fetch_array($resOrgCapacitadas))
     {
-        // Se debe consultar todas las organizaciones que se capacitaron para obtener sus rucs
-        $sqlOrgCapacitadas = "select eo.cod_u_organizaciones, o.organizacion, o.ruc_definitivo, o.ruc_provisional from eventos_u_organizaciones eo inner join u_organizaciones o on (o.cod_u_organizaciones = eo.cod_u_organizaciones) where eo.anio = " . $i . " group by eo.cod_u_organizaciones";
+        $nombreOrg = $filaOrg['organizacion'];
+        $codigoOrg = $filaOrg['cod_u_organizaciones'];
+        $rucOrg = $filaOrg['ruc_definitivo'];
+        if($rucOrg == '')
+            $rucOrg = $filaOrg['ruc_provisional'];
 
-        // $pruebaEdad = CalculoEdad(2, 11, 1986);
-        // echo $sqlOrgCapacitadas . "<br>";
-        $resOrgCapacitadas = query($sqlOrgCapacitadas);
-        while($filaOrg = mysql_fetch_array($resOrgCapacitadas))
-        {
-            $nombreOrg = $filaOrg['organizacion'];
-            $codigoOrg = $filaOrg['cod_u_organizaciones'];
-            $rucOrg = $filaOrg['ruc_definitivo'];
-            if($rucOrg == '')
-                $rucOrg = $filaOrg['ruc_provisional'];
+        // echo $rucOrg . "<br>";
+        ob_start();
+        echo '.';
+        ob_flush();
+        $edadesConsultadas = GetCapacitadosPorEdad($codigoOrg, 2017);
+        ob_start();
+        echo '.';
+        ob_flush();
 
-            // echo $rucOrg . "<br>";
-            $edadesConsultadas = GetCapacitadosPorEdad($codigoOrg, $i);
-            
-            // // echo $edad65120 . "<br>";
+        
+        // // echo $edad65120 . "<br>";
 
-            $lineaTabla = "<tr>
-                            <td>" . $nombreOrg . "</td>
-                            <td>" . $rucOrg . "</td>
-                            <td>" . $edadesConsultadas[0] . "</td>
-                            <td>" . $edadesConsultadas[1] . "</td>
-                            <td>" . $edadesConsultadas[2] . "</td>
-                            <td>" . $edadesConsultadas[3] . "</td>
-                            <td>" . $edadesConsultadas[4] . "</td>
-                            <td>" . $i . "</td>
-                            </tr>";
-            $table .= $lineaTabla;
-            echo '.';
-        }
+        $lineaTabla = "<tr>
+                        <td>" . $nombreOrg . "</td>
+                        <td>" . $rucOrg . "</td>
+                        <td>" . $edadesConsultadas[0] . "</td>
+                        <td>" . $edadesConsultadas[1] . "</td>
+                        <td>" . $edadesConsultadas[2] . "</td>
+                        <td>" . $edadesConsultadas[3] . "</td>
+                        <td>" . $edadesConsultadas[4] . "</td>
+                        <td>2017</td>
+                        </tr>";
+        $table .= $lineaTabla;
+
     }
+        
+        
+    
     $table .= "</table>";
     echo $table;
 
-    // $edad1824 = GetCapacitadosPorEdad(1200, 18, 24, 2017);
-    // echo $edad1824 . "<br>";
-    // $edad2529 = GetCapacitadosPorEdad(1200, 25, 29, 2017);
+    // $edad1824 = GetCapacitadosPorEdad(1200, 2017);
+    // print_r2($edad1824);
+    // $edad2529 = GetCapacitadosPorEdad(1200, 2017);
     // echo $edad2529 . "<br>";
-    // $edad3045 = GetCapacitadosPorEdad(1200, 30, 45, 2017);
+    // $edad3045 = GetCapacitadosPorEdad(1200, 2017);
     // echo $edad3045 . "<br>";
-    // $edad4664 = GetCapacitadosPorEdad(1201, 46, 64, 2017);
+    // $edad4664 = GetCapacitadosPorEdad(1201, 2017);
     // echo $edad4664 . "<br>";
-    // $edad65120 = GetCapacitadosPorEdad(1201, 65, 120, 2017);
+    // $edad65120 = GetCapacitadosPorEdad(1201, 2017);
     // echo $edad65120 . "<br>";
 
 
@@ -84,7 +94,7 @@ include ('../lib/dbconfig.php');
     function GetCapacitadosPorEdad($codOrganizacion, $anio)
     {
         global $codOrgActual, $codEventosActual, $cedulaAsistentesActual;
-        $edadesRango = array(0, 0, 0, 0, 0);
+        $edadesRango = array(0,0,0,0,0);
         
         if($codOrgActual == 0 || $codOrgActual != $codOrganizacion)
         {
@@ -151,6 +161,7 @@ include ('../lib/dbconfig.php');
             //      En este caso se debe tomar la edad registrada en la tabla asistentes
             while($row = mysql_fetch_array($resCedulaPerteneceOrg))
             {
+                //echo '.';
                 $anioConsultado = $row['anio'];
                 $mesConsultado = $row['mes'];
                 $diaConsultado = $row['dia'];
@@ -185,7 +196,9 @@ include ('../lib/dbconfig.php');
                 $edadesRango[3]++;
             if($edadConsultada >= 65)
                 $edadesRango[4]++;
+            
         }
+        
 
         return $edadesRango;
         
