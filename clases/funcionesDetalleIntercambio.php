@@ -1910,7 +1910,7 @@ function Indicador06($zona, $mes)
 
 		$codOrg = $valor;
 		$sqlOrgContratacion = "select cod_contratacion, tipo_contrato, cod_tipo_entidad_contratante, cod_entidad_contratante, month(fecha_reporte) as mesReporte, num_socios, num_empleados  from im_contratacion where cod_u_organizaciones = " . $codOrg . " and cod_zona = " . $zonaInd . " and year(fecha_reporte) = " . $anioInd . " and circuito_economico = 'si' order by cod_contratacion limit 1";
-		//echo $sqlOrgContratacion . "<br />";
+		// echo $sqlOrgContratacion . "<br />";
 
 		$resOrgContratacion = query($sqlOrgContratacion);
 		$numFilas = mysql_num_rows($resOrgContratacion);
@@ -1958,7 +1958,9 @@ function Indicador06($zona, $mes)
 		else
 		{
 			// Al no haber contrataciones se revisa los servicios
-			$sqlServicio = "select cod_servicio, servicio, tipo_servicio, month(fecha_reporte) as mesReporte, num_socios, num_empleados from im_servicios where cod_u_organizaciones = " . $codOrg . " and year(fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' order by cod_servicio limit 1";
+			$sqlServicio = "select cod_servicio, servicio, tipo_servicio, month(fecha_reporte) as mesReporte, num_socios, num_empleados from im_servicios where cod_u_organizaciones = " . $codOrg . " and year(fecha_reporte) = " . $anioInd . " and circuito_economico = 'si' order by cod_servicio limit 1";
+
+			// echo $sqlServicio . "<br />";
 			$resServicio = query($sqlServicio);			
 			while($fila = mysql_fetch_array($resServicio))
 			{
@@ -2737,8 +2739,7 @@ function ReporteGeneralActores($zona, $mes)
 							$sectorPriorizado = $filaContratacion['categoria_actividad_mp'];
 
 							// Bien o servicio
-							// $bienServicio = $filaContratacion['bien_servicio'];
-							$bienServicio = GetInformacionOrg($valor, "actividad");
+							$bienServicio = $filaContratacion['bien_servicio'];
 
 							// adjudicado
 							if($filaContratacion['monto_contratacion'] > 0)
@@ -2802,7 +2803,7 @@ function ReporteGeneralActores($zona, $mes)
 
 							// Bien o servicio
 							// $bienServicio = $filaServicio['descripcion'];
-							$bienServicio = GetInformacionOrg($valor, "actividad");
+							$bienServicio = GetInformacionOrg($codOrg, "actividad");
 							$adjudicadoActor = 'no';
 
 							// cdmp

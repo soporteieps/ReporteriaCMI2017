@@ -1971,7 +1971,7 @@ function RevisarCircuitosEconomicos($zona, $mes)
 
 	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
 
-	//echo $sqlOrgMes . "<br>";
+	// echo $sqlOrgMes . "<br>";
 
 	//ejecucion del sql que busca las organizaciones del mes y zona indicados
 	$resSqlOrgMes = query($sqlOrgMes);	
@@ -1985,6 +1985,8 @@ function RevisarCircuitosEconomicos($zona, $mes)
 
 	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
 
+	// echo $sqlOrgMes . "<br>";
+
 	$resSqlOrgMes = query($sqlOrgMes);
 	while($fila = mysql_fetch_array($resSqlOrgMes))
 	{
@@ -1995,84 +1997,41 @@ function RevisarCircuitosEconomicos($zona, $mes)
 
 	$orgReportadasMes = array_unique($orgReportadasMes); 
 	$orgReportadasMes =  array_values($orgReportadasMes);
-	$numOrgReportadas = count($orgReportadasMes);
 
-	//print_r2($orgReportadasMes);
 
-	//Se debe revisar si las organizaciones consultadas tienen reportado el mismo servicio en meses anteriores
-	// for($i = 0; $i < count($orgReportadasMes); $i++)
-	// {
-
-		
-	// 	// SE REVISA SI LA ORGANIZACION ES NUEVA
-	// 	$sqlOrgAntiguedad = "select cod_u_organizaciones,  antiguedad_im from u_organizaciones where cod_u_organizaciones = " . $orgReportadasMes[$i] . "";
-
-	// 	//echo $sqlOrgAntiguedad . "<br>";
-
-	// 	$resOrgAntiguedad = query($sqlOrgAntiguedad);
-
-	// 	while($fila = mysql_fetch_array($resOrgAntiguedad))
-	// 	{
-	// 		//echo $fila['antiguedad_im'] . "<br>";
-		
-	// 		if($fila['antiguedad_im'] == 'no')
-	// 			$numOrgReportadas++;			
-	// 	}
-	// }
-
-	//SE CONSERVA CODIGO PARA POSIBLES CAMBIOS A FUTURO
-
-	/*$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_registro, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_registro) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and u.circuito_economico = 'si' and year(si.fecha_registro) = " . $anioInd . " group by si.cod_u_organizaciones";
-
-	//echo $sqlOrgMes . "<br>";
-
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
+	// Reviso si la org ha sido reportada antes
+	$indiceArray = 0;
+	foreach($orgReportadasMes as $valor)
 	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		array_push($orgReportadasMes, $fila['servicio']);
-		array_push($orgReportadasMes, $fila['tipo_servicio']);
+		$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.cod_u_organizaciones = " . $valor;
+
+		// echo $sqlOrgMesReportada . "<br>";
+		$resOrgMesReportada = query($sqlOrgMesReportada);
+		$vecesOrgReportada = mysql_num_rows($resOrgMesReportada);
+
+		if($vecesOrgReportada > 0)
+		{
+			unset($orgReportadasMes[$indiceArray]);
+		}
+		else
+		{
+			// se revisa en contrataciones si ya fue reportada la org o uep
+			$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.cod_u_organizaciones = " . $valor;
+			$resOrgMesReportada = query($sqlOrgMesReportada);
+			$vecesOrgReportada = mysql_num_rows($resOrgMesReportada);
+			if($vecesOrgReportada > 0)
+			{
+				unset($orgReportadasMes[$indiceArray]);
+			}
+		}
+		$indiceArray++;
 	}
 
-	//print_r2($orgReportadasMes);
+	$orgReportadasMes = array_values($orgReportadasMes);
 
-	//Se debe revisar si las organizaciones consultadas tienen reportado el mismo servicio en meses anteriores
-	for($i = 0; $i < count($orgReportadasMes); $i = $i + 3)
-	{
-		$sqlRevisarServicioAnterior = "select si.cod_u_organizaciones, si.fecha_registro, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where si.fecha_registro <= '" . $fechaConsultar . "' and u.cod_u_organizaciones = " . $orgReportadasMes[$i] . " and si.servicio = '" . $orgReportadasMes[$i + 1] . "' and si.tipo_servicio = '" . $orgReportadasMes[$i + 2] . "' group by si.cod_u_organizaciones ";
+	$numOrgReportadas = count($orgReportadasMes);
 
-		//echo $sqlRevisarServicioAnterior . "<br>";
-		$resSqlRevisarServicioAnterior = query($sqlRevisarServicioAnterior);
-
-		//**************************************************************************************
-		//*	Se debe buscar:
-		//		Registros de la organizacion con los mismos servicios. Si existen, no se debe sumar a este indicador
-		//		Si no existen:
-		//		- Se debe buscar si existe registros con diferente servicio, si los encuentra, esta organizacion es vieja y ha recibido otro servicio
-		//		-Si no existen mas registros ademas del reportado en el mes indicado, esta organizacion es nueva y debe sumar al indicador
-
-		//****************************************************************************************
-		$numFilas = mysql_num_rows($resSqlRevisarServicioAnterior);
-
-		//echo $numFilas . "<br>";
-
-		if($numFilas == 0)
-		{
-			$sqlDiferenteServicio = "select si.cod_u_organizaciones, si.fecha_registro, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where si.fecha_registro <= '" . $fechaConsultar . "' and u.cod_u_organizaciones = " . $orgReportadasMes[$i] . " and si.servicio <> '" . $orgReportadasMes[$i + 1] . "' and si.tipo_servicio <> '" . $orgReportadasMes[$i + 2] . "' group by si.cod_u_organizaciones ";
-
-			//echo $sqlDiferenteServicio . "<br>";
-
-			$resSqlDiferenteServicio = query($sqlDiferenteServicio);
-
-			$numFilasDifServicio = mysql_num_rows($resSqlDiferenteServicio);
-
-			if($numFilasDifServicio == 0)
-				$numOrgReportadas++;
-
-		}
-	}*/
+	// print_r2($orgReportadasMes);	
 
 	return $numOrgReportadas;
 
