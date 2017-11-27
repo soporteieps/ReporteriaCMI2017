@@ -1586,6 +1586,7 @@ function Indicador05($zona, $mes)
 	
 
 	$sociosRep = RevisarSociosOrg($zonaInd, $mesInd);
+	// print_r2($sociosRep);
 	// echo "REVISAR SOCIOS ORG <BR>";
 
 	// <tr class='cabecera'>
@@ -3094,6 +3095,7 @@ function OrgReportadasMesesAnteriores($mes, $zona, $tipoOrg)
 	return $orgAux;
 }
 
+
 function RevisarSociosOrg($zona, $mes)
 {
 	$zonaInd = $zona;
@@ -3108,7 +3110,7 @@ function RevisarSociosOrg($zona, $mes)
 	$arraySociosMesAnterior = array();
 
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.cod_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) <= " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
+	$sqlOrgMes = "select si.cod_u_organizaciones, si.cod_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
 
 	//echo $sqlOrgMes . "<br>";
 
@@ -3124,7 +3126,7 @@ function RevisarSociosOrg($zona, $mes)
 
 	//print_r2($orgReportadasMes);	
 
-	$sqlOrgMes = "select si.cod_u_organizaciones from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) <= " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
+	$sqlOrgMes = "select si.cod_u_organizaciones from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
 
 	//echo $sqlOrgMes . "<br>";
 
@@ -3139,6 +3141,8 @@ function RevisarSociosOrg($zona, $mes)
 	$orgReportadasMes = array_unique($orgReportadasMes); 
 	$orgReportadasMes =  array_values($orgReportadasMes);
 
+
+
 	//print_r2($orgReportadasMes);	
 
 	//se revisara si el codigo en la tabla de socios es igual al reportado
@@ -3146,10 +3150,12 @@ function RevisarSociosOrg($zona, $mes)
 	{
 
 		
-		$sqlSocios = "select cod_socios, cedula from im_contratacion_servicios_socios where year(fecha_reporte) = " . $anioInd . " and month(fecha_reporte) <= " . $mesInd . " and cod_u_organizaciones = " . $orgReportadasMes[$i];
+		$sqlSocios = "select cod_socios, cedula from im_contratacion_servicios_socios where year(fecha_reporte) = " . $anioInd . " and month(fecha_reporte) = " . $mesInd . " and cod_u_organizaciones = " . $orgReportadasMes[$i];
 
-		//echo $sqlSocios . "<br />";
-		
+		// $sqlSocios = "select s.cod_socios, s.cedula from socios  s inner join im_contratacion_socios ic on (s.cod_socios = ic.cod_socios) where s.estado = 1 and year(ic.fecha_reporte_im) = " . $anioInd . " and month(ic.fecha_reporte_im) = " . $mesInd . " and ic.cod_u_organizaciones = " . $orgReportadasMes[$i];
+
+		//$sqlSocios = "select cod_socios, cedula from socios where estado = 1 and cod_u_organizaciones = " . $orgReportadasMes[$i];
+		//echo $sqlSocios . "<br>";
 
 		$resSqlSocios = query($sqlSocios);
 
@@ -3166,18 +3172,7 @@ function RevisarSociosOrg($zona, $mes)
 	$arraySociosMes = array_unique($arraySociosMes);
 	$arraySociosMes = array_values($arraySociosMes);
 
-	
-
-	//print_r2($arraySociosMes);
-	$sociosReportados = $arraySociosMes;
-
-
-
-
-	
-
-
-	return $sociosReportados;
+	return $arraySociosMes;
 
 }
 
