@@ -1690,6 +1690,11 @@ function Indicador05($zona, $mes)
 		}
 		else if($tipoServicioContratacion == 's')
 		{
+			$asesoriaCompraPublica = "no";
+			$asesoriaCompraOrg = "no";
+			$redFeriasSomos = "no";
+			$comercializacionRuedasNegocio = "no";
+			$asistenciaTecnica = "no";
 			$sqlInfoServicios = "select servicio, descripcion, adjudicado, cod_provincia, servicio, tipo_servicio, circuito_economico, antiguedad from im_servicios where cod_servicio = " . $codServicioContratacion . " and year(fecha_reporte) = " . $anioInd;
 			$resInfoServicios = query($sqlInfoServicios);
 			while($filaInfoServicios = mysql_fetch_array($resInfoServicios))
@@ -1708,6 +1713,7 @@ function Indicador05($zona, $mes)
 				{
 					$asesoriaCompraPublica = "si";
 					$mercado = "publica";
+
 				}
 				if($servicioRegistrado == "acompañamiento_asesoria" && $tipoServicioRegistrado == "organizaciones_unidades_eps")
 				{
@@ -2409,11 +2415,11 @@ function Indicador08($zona, $mes)
 		$numEmpleados = 0;
 		$codProv = 0;
 		$codCanton = 0;
-		$asesoriaCompraPublica = "";
-		$asesoriaCompraOrg = "";
-		$redFeriasSomos = "";
-		$comercializacionRuedasNegocio = "";
-		$asistenciaTecnica = "";
+		$asesoriaCompraPublica = "no";
+		$asesoriaCompraOrg = "no";
+		$redFeriasSomos = "no";
+		$comercializacionRuedasNegocio = "no";
+		$asistenciaTecnica = "no";
 		$servicioRegistrado = "";
 		$tipoServicioRegistrado = "";
 		$cEconomico = "";
