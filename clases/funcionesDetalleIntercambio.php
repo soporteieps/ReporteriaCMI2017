@@ -1090,6 +1090,8 @@ function Indicador03($zona, $mes)
 	// reinicio el index del array
 	$orgReportadasMes = array_values($orgReportadasMes);
 
+	// print_r2($orgReportadasMes);
+
 	$indice = 0;
 	foreach($orgReportadasMes as $valor)
 	{
@@ -1100,7 +1102,7 @@ function Indicador03($zona, $mes)
 		// y se debe guardar si es contratacion o es servicio
 
 		$codOrg = $valor;
-		$sqlOrgContratacion = "select cod_contratacion, circuito_economico, num_socios, cod_provincia, cod_canton, tipo_contrato, cod_tipo_entidad_contratante, cod_entidad_contratante, month(fecha_reporte) as mesReporte, num_socios, num_empleados  from im_contratacion where cod_u_organizaciones = " . $codOrg . " and cod_zona = " . $zonaInd . " and year(fecha_reporte) = " . $anioInd . " and antiguedad = 'no' order by cod_contratacion limit 1";
+		$sqlOrgContratacion = "select cod_contratacion, circuito_economico, num_socios, cod_provincia, cod_canton, tipo_contrato, cod_tipo_entidad_contratante, cod_entidad_contratante, month(fecha_reporte) as mesReporte, num_socios, num_empleados  from im_contratacion where cod_u_organizaciones = " . $codOrg . " and cod_zona = " . $zonaInd . " and year(fecha_reporte) = " . $anioInd . " and antiguedad = 'no' and se_reporta = 'si' order by cod_contratacion limit 1";
 		//echo $sqlOrgContratacion . "<br />";
 
 		$resOrgContratacion = query($sqlOrgContratacion);
@@ -1139,13 +1141,13 @@ function Indicador03($zona, $mes)
 			}
 
 			// Revisamos si existe un servicio anterior a la fecha de contratacion
-			$sqlExisteServicio = "select * from im_servicios where cod_u_organizaciones = " . $codOrg . " and year(fecha_reporte) = " . $anioInd . " and antiguedad = 'no' and month(fecha_reporte) < " . $mesContratacionServicio;
+			$sqlExisteServicio = "select * from im_servicios where cod_u_organizaciones = " . $codOrg . " and year(fecha_reporte) = " . $anioInd . " and antiguedad = 'no' and se_reporta = 'si' and month(fecha_reporte) < " . $mesContratacionServicio;
 
 			$resExisteServicio = query($sqlExisteServicio);
 			$numFilasServ = mysql_num_rows($resExisteServicio);
 			if($numFilasServ > 0)
 			{
-				$sqlServicio = "select cod_servicio, cod_provincia, num_socios, circuito_economico, cod_canton, servicio, tipo_servicio, descripcion, tipo_servicio, month(fecha_reporte) as mesReporte, num_socios, num_empleados from im_servicios where cod_u_organizaciones = " . $codOrg . " and year(fecha_reporte) = " . $anioInd . " order by cod_servicio limit 1";
+				$sqlServicio = "select cod_servicio, cod_provincia, num_socios, circuito_economico, cod_canton, servicio, tipo_servicio, descripcion, tipo_servicio, month(fecha_reporte) as mesReporte, num_socios, num_empleados from im_servicios where cod_u_organizaciones = " . $codOrg . " and  year(fecha_reporte) = " . $anioInd . " and se_reporta = 'si' order by cod_servicio limit 1";
 				$resServicio = query($sqlServicio);
 				while($fila = mysql_fetch_array($resServicio))
 				{
@@ -1170,7 +1172,7 @@ function Indicador03($zona, $mes)
 		else
 		{
 			// Al no haber contrataciones se revisa los servicios
-			$sqlServicio = "select cod_servicio, cod_provincia, num_socios, cod_canton, servicio, tipo_servicio, month(fecha_reporte) as mesReporte, num_socios, num_empleados from im_servicios where cod_u_organizaciones = " . $codOrg . " and year(fecha_reporte) = " . $anioInd . " order by cod_servicio limit 1";
+			$sqlServicio = "select cod_servicio, cod_provincia, num_socios, cod_canton, servicio, tipo_servicio, month(fecha_reporte) as mesReporte, num_socios, num_empleados from im_servicios where cod_u_organizaciones = " . $codOrg . " and year(fecha_reporte) = " . $anioInd . " and se_reporta = 'si' order by cod_servicio limit 1";
 			$resServicio = query($sqlServicio);			
 			while($fila = mysql_fetch_array($resServicio))
 			{

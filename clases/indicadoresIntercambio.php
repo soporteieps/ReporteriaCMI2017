@@ -570,7 +570,7 @@ function Indicador03($zona, $mes)
 
 	//	echo $metaMes . "<br>" . $metaAnual;
 
-
+	// echo "Indicador03:" . $mesInd . "<br>";
 	$numOrgReportadas = RevisarOrgMes($zonaInd, $mesInd, "org");
 	//print_r2($numOrgReportadas);
 	//echo $numOrgReportadas . "***********<br>";
@@ -1459,6 +1459,7 @@ function RevisarOrgMes($zona, $mes, $tipoOrg)
 	//Revisamos las organizaciones / uep reportadas en meses anteriores
 	$orgReportadasMesAnterior = array();
 	$orgReportadasMesAnterior = OrgReportadasMesesAnteriores($mesInd, $zonaInd, $tipoOrg);
+	// print_r2($orgReportadasMesAnterior);
 
 
 	$posicionArray = 0;
