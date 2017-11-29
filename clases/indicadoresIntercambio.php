@@ -693,7 +693,7 @@ function Indicador04($zona, $mes)
 
 	//	echo $metaMes . "<br>" . $metaAnual;
 
-
+	// echo "Indicador04: " . $mes . "<br>";
 	$numOrgReportadas = RevisarOrgMes($zonaInd, $mesInd, "uep");
 	//echo $numOrgReportadas . "***********<br>";
 		
@@ -713,6 +713,7 @@ function Indicador04($zona, $mes)
 	{
 		for($i = 1; $i < $mesInd; $i++)
 		{
+			// echo "Indicador04: " . $i . "<br>";
 			$metaAcumulaEjecutada += RevisarOrgMes($zonaInd, $i, "uep");
 		}
 		$metaAcumulaEjecutada += $numOrgReportadas;
@@ -1182,7 +1183,7 @@ function Indicador08($zona, $mes)
 
 	//	echo $metaMes . "<br>" . $metaAnual;
 
-
+	// echo "mes Indicador = " .  $mesInd;
 	$orgNuevas = RevisarOrgMesNuevas($zonaInd, $mesInd);
 	//echo $orgNuevas . "*****<br>";
 		
@@ -1473,6 +1474,9 @@ function RevisarOrgMes($zona, $mes, $tipoOrg)
 	$orgReportadasMes = array_unique($orgReportadasMes);
 	$orgReportadasMes =  array_values($orgReportadasMes);
 
+	// echo "mes: " . $mes . "<br>";
+	// print_r2($orgReportadasMes);
+
 
 	$numOrgReportadas = count($orgReportadasMes);
 
@@ -1737,7 +1741,8 @@ function RevisarOrgMesNuevas($zona, $mes)
 	}
 
 	$orgReportadasMes = array_unique($orgReportadasMes);
-	$orgReportadasMes = array_values($orgReportadasMes);	
+	$orgReportadasMes = array_values($orgReportadasMes);
+	// print_r2($orgReportadasMes);	
 	$numOrgReportadas = count($orgReportadasMes);	
 
 	return $numOrgReportadas;

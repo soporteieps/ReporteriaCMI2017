@@ -824,7 +824,7 @@ function Indicador01($zona, $mes)
 	while($filaVentas = mysql_fetch_array($resVentasAcumuladas))
 	{
 		$indice++;
-
+		$codOrganizacion = $filaVentas['cod_u_organizaciones'];
 		// añadimos la informacion a desplegar en el reporte
 		array_push($resultadoFinal, $indice); // indice
 		array_push($resultadoFinal, $filaVentas['cod_zona']); // zona
@@ -857,9 +857,11 @@ function Indicador01($zona, $mes)
 		$entidadContratante = getEntidadContratante($filaVentas['cod_tipo_entidad_contratante'], $filaVentas['cod_entidad_contratante']);
 		array_push($resultadoFinal, $entidadContratante); // nombre entidad contratante
 
-		array_push($resultadoFinal, $filaVentas['categoria_actividad_mp']); // sector priorizado
+		$categoriaMp = GetInformacionOrg($codOrganizacion, "categoria");
+		array_push($resultadoFinal, $categoriaMp); // sector priorizado
 
-		array_push($resultadoFinal, $filaVentas['bien_servicio']); // bien o servicio contratado
+		$bienServicio = GetInformacionOrg($codOrganizacion, "actividad");
+		array_push($resultadoFinal, $bienServicio); // bien o servicio contratado
 
 		// Tipo de Organizacion
 		$codOrganizacion = $filaVentas['cod_u_organizaciones'];
@@ -961,7 +963,7 @@ function Indicador02($zona, $mes)
 	while($filaVentas = mysql_fetch_array($resVentasAcumuladas))
 	{
 		$indice++;
-
+		$codOrganizacion = $filaVentas['cod_u_organizaciones'];
 		// añadimos la informacion a desplegar en el reporte
 		array_push($resultadoFinal, $indice); // indice
 		array_push($resultadoFinal, $filaVentas['cod_zona']); // zona
@@ -994,9 +996,11 @@ function Indicador02($zona, $mes)
 		$entidadContratante = getEntidadContratante($filaVentas['cod_tipo_entidad_contratante'], $filaVentas['cod_entidad_contratante']);
 		array_push($resultadoFinal, $entidadContratante); // nombre entidad contratante
 
-		array_push($resultadoFinal, $filaVentas['categoria_actividad_mp']); // sector priorizado
+		$categoriaMp = GetInformacionOrg($codOrganizacion, "categoria");
+		array_push($resultadoFinal, $categoriaMp); // sector priorizado
 
-		array_push($resultadoFinal, $filaVentas['bien_servicio']); // bien o servicio contratado
+		$bienServicio = GetInformacionOrg($codOrganizacion, "actividad");
+		array_push($resultadoFinal, $bienServicio); // bien o servicio contratado
 
 		// Tipo de Organizacion
 		$codOrganizacion = $filaVentas['cod_u_organizaciones'];
@@ -1352,11 +1356,11 @@ function Indicador04($zona, $mes)
 		$servicioRegistrado = "";
 		$tipoServicioRegistrado = "";
 		$cEconomico = "";
-		$asesoriaCompraPublica = "";
-		$asesoriaCompraOrg = "";
-		$redFeriasSomos = "";
-		$comercializacionRuedasNegocio = "";
-		$asistenciaTecnica = "";
+		$asesoriaCompraPublica = "no";
+		$asesoriaCompraOrg = "no";
+		$redFeriasSomos = "no";
+		$comercializacionRuedasNegocio = "no";
+		$asistenciaTecnica = "no";
 
 		$codOrg = $valor;
 		$sqlOrgContratacion = "select cod_contratacion, cod_provincia, circuito_economico, cod_canton, tipo_contrato, cod_tipo_entidad_contratante, cod_entidad_contratante, month(fecha_reporte) as mesReporte, num_socios, num_empleados  from im_contratacion where cod_u_organizaciones = " . $codOrg . " and cod_zona = " . $zonaInd . " and year(fecha_reporte) = " . $anioInd . "  order by cod_contratacion limit 1";
@@ -1791,6 +1795,7 @@ function Indicador05($zona, $mes)
 		// array_push($resultadoFinal, $actividad);
 
 		// BIEN O SERVICIO
+		$bienServicio = GetInformacionOrg($codOrg, "actividad");
 		array_push($resultadoFinal, $bienServicio);
 
 		// adjudicado
@@ -2302,6 +2307,7 @@ function Indicador07($zona, $mes)
 		array_push($resultadoFinal, $poblacion);
 
 		//Bien o servicio
+		$bienServicio = GetInformacionOrg($codOrg, "actividad");
 		array_push($resultadoFinal, $bienServicio);
 
 		// adjudicador
@@ -2739,6 +2745,7 @@ function ReporteGeneralActores($zona, $mes)
 					{
 						// El socio es reportado como contracion
 						$sqlContratacion = "select * from im_contratacion where cod_u_organizaciones = " . $valor . " and cod_contratacion = " . $codContServicio . " and year(fecha_reporte) = " . $anioInd . " and month(fecha_reporte) = " . $mesInd . " and cod_zona = " . $zonaInd;
+						// echo $sqlContratacion . "<br>";
 						$resContratacion = query($sqlContratacion);
 						while($filaContratacion = mysql_fetch_array($resContratacion))
 						{
@@ -2879,7 +2886,9 @@ function ReporteGeneralActores($zona, $mes)
 				array_push($resultadoFinal, $tipoSocio);	// estatus
 				array_push($resultadoFinal, $discapacidadActor);	// discapacidad
 				array_push($resultadoFinal, $poblacionActor);	// sector
+				$sectorPriorizado = GetInformacionOrg($valor, "categoria");
 				array_push($resultadoFinal, $sectorPriorizado);	//sector priorizado
+				$bienServicio = GetInformacionOrg($valor, "actividad");
 				array_push($resultadoFinal, $bienServicio);	// bien o servicio
 				array_push($resultadoFinal, $adjudicadoActor);		// adjudicacion
 				array_push($resultadoFinal, $nombresMes[$mesInd - 1]);	// mes
@@ -3357,7 +3366,7 @@ function RevisarOrgMesNuevas($zona, $mes)
 	$orgReportadasMes = array_values($orgReportadasMes);
 	$numOrgReportadas = $orgReportadasMes;
 	
-
+	// print_r2($orgReportadasMes);
 	return $numOrgReportadas;
 
 }
