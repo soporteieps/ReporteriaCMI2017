@@ -141,7 +141,7 @@ echo '<form name="form1" method="post">
 ?>
 <?php
 $perfil = $_GET['perfil'];
-if($perfil == 7)
+if($perfil == 7 || $perfil == 1)
 {
     ?>
     <div class="reportesGenerales">
