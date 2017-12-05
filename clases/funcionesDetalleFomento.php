@@ -320,7 +320,7 @@ function CrearDetalleIndicador()
 
 		// ademas se de sumar el numero de beneficiarios por cdh
 		// Sumamos las personas beneficiadas para cdh
-		$sqlSumPersonasCdh = "select sum(num_per_benef_cdh) as suma from fp_asesoria_asistencia_cofinanciamiento where month(fecha_reporte) = " . $mesInd . " and year(fecha_reporte) = " . $anioInd . " and zona = " . $zonaInd;
+		$sqlSumPersonasCdh = "select sum(num_per_benef_cdh) as suma from fp_asesoria_asistencia_cofinanciamiento where month(fecha_reporte) = " . $mesInd . " and documentacion_valida = 'si' and year(fecha_reporte) = " . $anioInd . " and zona = " . $zonaInd;
 
 		$resSumPersonasCdh = query($sqlSumPersonasCdh);
 		$sumPersonasCdh = 0;
