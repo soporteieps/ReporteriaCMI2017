@@ -1409,11 +1409,11 @@ function RevisarOrgMes($zona, $mes, $tipoOrg)
 
 	if($tipoOrg == 'org')
 	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' and antiguedad = 'no' group by si.cod_u_organizaciones";
+		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
 	}
 	else
 	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' group by si.cod_u_organizaciones";
+		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
 	}
 
 	//echo $sqlOrgMes . "<br>";
@@ -1428,11 +1428,11 @@ function RevisarOrgMes($zona, $mes, $tipoOrg)
 
 	if($tipoOrg == 'org')
 	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' and antiguedad = 'no' group by si.cod_u_organizaciones";
+		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
 	}
 	else
 	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' group by si.cod_u_organizaciones";
+		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
 	}
 
 	//echo $sqlOrgMes . "<br>";
@@ -1499,11 +1499,11 @@ function OrgReportadasMesesAnteriores($mes, $zona, $tipoOrg)
 	// Servicios
 	if($tipoOrg == 'org')
 	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' and antiguedad = 'no' group by si.cod_u_organizaciones";
+		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and antiguedad = 'no' group by si.cod_u_organizaciones";
 	}
 	else
 	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' group by si.cod_u_organizaciones";
+		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
 	}
 
 	$resSqlOrgMesesAnteriores = query($sqlOrgMesesAnteriores);	
@@ -1517,11 +1517,11 @@ function OrgReportadasMesesAnteriores($mes, $zona, $tipoOrg)
 	// Contrataciones
 	if($tipoOrg == 'org')
 	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' and antiguedad = 'no' group by si.cod_u_organizaciones";
+		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
 	}
 	else
 	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and se_reporta = 'si' group by si.cod_u_organizaciones";
+		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
 	}
 
 	//echo $sqlOrgMesesAnteriores . "<br>";
