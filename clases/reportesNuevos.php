@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <?php 
 include("../lib/dbconfig.php");
-include("funcionesDetalleIntercambio.php");
+include("reportesIntercambio.php");
 ?>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>DETALLE INDICADOR</title>
-	<link rel="stylesheet" href="../css/bootstrap.css">
 	<link rel="stylesheet" href="../css/estilos.css">
 	<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 	$(window).load(function(){
 		$('#cargando').hide();
@@ -53,7 +51,7 @@ include("funcionesDetalleIntercambio.php");
 		<div id="grafica"></div>
 		<input type="hidden"  id="datos_a_enviar" name="datos_a_enviar" />
 	</form>	
-	<div class="row">
+	<div>
 	<?php
 
 	// $tabla ="<table>";

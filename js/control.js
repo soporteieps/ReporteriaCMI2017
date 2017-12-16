@@ -88,7 +88,11 @@ function BucarIndicadorIM()
 		{
 			$('#resultadoIndicadores').html(request.responseText);
 			document.getElementById("reporteGeneral").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=0&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteMontoPublicoBoton").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=1&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteMontoPrivadoBoton").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=2&mes=" + idMes + "&zona=" + idZona;
 			document.getElementById("reporteGeneral").target = "_blank";
+			document.getElementById("reporteMontoPublicoBoton").target = "_blank";
+			document.getElementById("reporteMontoPrivadoBoton").target = "_blank";
 		}
 		else
 			console.log('no se logro la conexion');

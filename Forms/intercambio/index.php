@@ -149,10 +149,17 @@ echo '<form name="form1" method="post">
             if($perfil == 1 || $perfil == 7)
             {
               echo '<tr>
-                      <td colspan="9" width="140" height="30">
+                      <td colspan="3" width="140" height="30">
                         <a id="reporteGeneral" href="#">Reporte General Actores</a>
                       </td>
-                    </tr>';
+                      <td colspan="3" width="140" height="30">
+                        <a id="reporteMontoPublicoBoton" href="#">Reporte Montos Publicos</a>
+                      </td>
+                      <td colspan="3" width="140" height="30">
+                        <a id="reporteMontoPrivadoBoton" href="#">Reporte Montos Privados</a>
+                      </td>
+                    </tr>
+                    ';
             }
 
         
