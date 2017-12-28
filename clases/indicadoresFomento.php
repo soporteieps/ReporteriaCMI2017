@@ -496,7 +496,7 @@ function Indicador02($zona, $mes)
 		{
 			// Esta sentencia controla que la organizacion no sea reportada dos veces
 			// Se pide deshabilitar este control el 27-12-2017
-			
+
 			// $sqlOrgOtroServicio = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.fecha_registro < '" . $fechaConsultar . "'";
 
 			//echo $sqlOrgOtroServicio . "<br>";
@@ -642,7 +642,10 @@ function Indicador03($zona, $mes)
 
 		if($numFilas == 0)
 		{
-			$sqlOrgOtroServicio = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and u.tipo = 'uep' and fp.documentacion_valida = 'si' and fp.fecha_registro < '" . $fechaConsultar . "'";
+			// Control para que una uep no sea reportada dos veces
+			// Esto se pide deshabilitar el 27-12-2017 por parte de fomento productivo
+			
+			// $sqlOrgOtroServicio = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and u.tipo = 'uep' and fp.documentacion_valida = 'si' and fp.fecha_registro < '" . $fechaConsultar . "'";
 
 			// echo $sqlOrgOtroServicio . "<br>";
 
@@ -652,13 +655,13 @@ function Indicador03($zona, $mes)
 			-- Si no existe ningun otro codigo, esta organizacion es nueva y es su primera vez tomando un servicio de Fomento Productivo, por lo cual debe supara 1 al valor del servicio
 			******************************************************************************************************************/
 
-			$resOrgOtroServicio = query($sqlOrgOtroServicio);
+			// $resOrgOtroServicio = query($sqlOrgOtroServicio);
 
-			$numFilasOrgOtroServicio = mysql_num_rows($resOrgOtroServicio);
-			if($numFilasOrgOtroServicio == 0)
-			{
+			// $numFilasOrgOtroServicio = mysql_num_rows($resOrgOtroServicio);
+			// if($numFilasOrgOtroServicio == 0)
+			// {
 				$orgServicios[$orgCodYServicios[$i + 1] - 1]++;
-			}			
+			// }			
 		}
 		
 	}
@@ -1272,7 +1275,9 @@ function Indicador07($zona, $mes)
 
 
 	//sql que consulta las organizaciones en el mes indicado
-	$sqlOrgReportadaMes = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where month(fp.fecha_reporte) >= " . $mesInicial . " and month(fp.fecha_reporte) <= " . $mesInd ." and year(fp.fecha_reporte) = " . $anioInd . " and fp.zona = " . $zonaInd ." and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.cod_servicio = 3 group by fp.cod_u_organizaciones";
+	// 27-12-2017
+	// El indicador supuestamente tambien tiene que sumar las ueps
+	$sqlOrgReportadaMes = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where month(fp.fecha_reporte) >= " . $mesInicial . " and month(fp.fecha_reporte) <= " . $mesInd ." and year(fp.fecha_reporte) = " . $anioInd . " and fp.zona = " . $zonaInd ."  and fp.documentacion_valida = 'si' and fp.cod_servicio = 3 group by fp.cod_u_organizaciones";
 
 	// echo $sqlOrgReportadaMes . "<br>";
 
@@ -1282,7 +1287,7 @@ function Indicador07($zona, $mes)
 	while($fila = mysql_fetch_array($resSqlOrgReportadasMes))
 	{
 		// se necesita, si fuera el caso, el primer registro correspondiente a la organizacion
-		$sqlPrimerRegistroOrg = "select fp.cod_u_organizaciones, fp.cod_servicio, fp.fecha_reporte from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where month(fp.fecha_reporte) >= " . $mesInicial . " and month(fp.fecha_reporte) <= " . $mesInd ." and year(fp.fecha_reporte) = " . $anioInd . " and fp.zona = " . $zonaInd ." and fp.cod_u_organizaciones = " . $fila['cod_u_organizaciones'] . " and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.cod_servicio = 3  order by fp.fecha_reporte asc limit 1";
+		$sqlPrimerRegistroOrg = "select fp.cod_u_organizaciones, fp.cod_servicio, fp.fecha_reporte from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where month(fp.fecha_reporte) >= " . $mesInicial . " and month(fp.fecha_reporte) <= " . $mesInd ." and year(fp.fecha_reporte) = " . $anioInd . " and fp.zona = " . $zonaInd ." and fp.cod_u_organizaciones = " . $fila['cod_u_organizaciones'] . " and fp.documentacion_valida = 'si' and fp.cod_servicio = 3  order by fp.fecha_reporte asc limit 1";
 
 		// echo $sqlPrimerRegistroOrg . "<br>";
 
@@ -1303,7 +1308,7 @@ function Indicador07($zona, $mes)
 	//Se revisa si esta organizacion ya tuvo registrado el servicio en fechas anteriores
 	for($i = 0; $i < count($orgCodYServicios); $i = $i + 2)
 	{
-		$sqlOrgServAnteriores = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and fp.cod_servicio = " . $orgCodYServicios[$i + 1] . " and u.tipo = 'org' and fp.fecha_reporte > '" . $fechaInicial . "' and fp.documentacion_valida = 'si' and month(fp.fecha_reporte) < " . $mesInicial;
+		$sqlOrgServAnteriores = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and fp.cod_servicio = " . $orgCodYServicios[$i + 1] . " and fp.fecha_reporte > '" . $fechaInicial . "' and fp.documentacion_valida = 'si' and month(fp.fecha_reporte) < " . $mesInicial;
 
 		//echo $sqlOrgServAnteriores . "***<br>";
 		
