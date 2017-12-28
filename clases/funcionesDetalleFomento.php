@@ -608,7 +608,7 @@ function Indicador01($zona, $mes)
 
 
 	//sql que consulta las organizaciones en el mes indicado
-	$sqlOrgReportadaMes = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where month(fp.fecha_reporte) = " . $mesInd ." and year(fp.fecha_reporte) = " . $anioInd . " and fp.zona = " . $zonaInd ." and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.antiguedad = 'si' and cod_servicio <> 3 group by fp.cod_u_organizaciones";
+	$sqlOrgReportadaMes = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where month(fp.fecha_reporte) = " . $mesInd ." and year(fp.fecha_reporte) = " . $anioInd . " and fp.zona = " . $zonaInd ." and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.antiguedad = 'si'  group by fp.cod_u_organizaciones";
 
 	//echo $sqlOrgReportadaMes . "<br>";
 
@@ -658,7 +658,9 @@ function Indicador01($zona, $mes)
 
 		if($numFilas == 0)
 		{
-			$sqlOrgOtroServicio = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.fecha_reporte < '" . $fechaConsultar . "'";
+			// Deshabilitado por peticion del 27-12-2017
+
+			// $sqlOrgOtroServicio = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.fecha_reporte < '" . $fechaConsultar . "'";
 
 			// echo $sqlOrgOtroServicio . "<br>";
 
@@ -668,11 +670,11 @@ function Indicador01($zona, $mes)
 			-- Si no existe ningun otro codigo, esta organizacion es nueva y es su primera vez tomando un servicio de Fomento Productivo, por lo cual no deberia sumar a este indicador
 			******************************************************************************************************************/
 
-			$resOrgOtroServicio = query($sqlOrgOtroServicio);
+			// $resOrgOtroServicio = query($sqlOrgOtroServicio);
 
-			$numFilasOrgOtroServicio = mysql_num_rows($resOrgOtroServicio);
-			if($numFilasOrgOtroServicio == 0)
-			{
+			// $numFilasOrgOtroServicio = mysql_num_rows($resOrgOtroServicio);
+			// if($numFilasOrgOtroServicio == 0)
+			// {
 				// echo $orgCodYServicios[$i] . "<br>";
 				// $orgServicios[$orgCodYServicios[$i + 1] - 1]++;
 				array_push($resultadoFinal, $orgCodYServicios[$i]);
@@ -681,7 +683,7 @@ function Indicador01($zona, $mes)
 				array_push($resultadoFinal, $orgCodYServicios[$i + 3]);
 				array_push($resultadoFinal, $orgCodYServicios[$i + 4]);
 				array_push($resultadoFinal, $orgCodYServicios[$i + 5]);
-			}			
+			// }			
 		}
 		
 	}
@@ -769,7 +771,9 @@ function Indicador02($zona, $mes)
 
 		if($numFilas == 0)
 		{
-			$sqlOrgOtroServicio = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.fecha_registro < '" . $fechaConsultar . "'";
+			// Deshabilitado por peticion de fomento productivo el 27-12-2017
+			
+			// $sqlOrgOtroServicio = "select fp.cod_u_organizaciones from fp_asesoria_asistencia_cofinanciamiento fp inner join u_organizaciones u on (u.cod_u_organizaciones = fp.cod_u_organizaciones) where fp.cod_u_organizaciones = " . $orgCodYServicios[$i] . " and u.tipo = 'org' and fp.documentacion_valida = 'si' and fp.fecha_registro < '" . $fechaConsultar . "'";
 
 			//echo $sqlOrgOtroServicio . "<br>";
 
@@ -779,11 +783,11 @@ function Indicador02($zona, $mes)
 			-- Si no existe ningun otro codigo, esta organizacion es nueva y es su primera vez tomando un servicio de Fomento Productivo, por lo cual debe supara 1 al valor del servicio
 			******************************************************************************************************************/
 
-			$resOrgOtroServicio = query($sqlOrgOtroServicio);
+			// $resOrgOtroServicio = query($sqlOrgOtroServicio);
 
-			$numFilasOrgOtroServicio = mysql_num_rows($resOrgOtroServicio);
-			if($numFilasOrgOtroServicio == 0)
-			{
+			// $numFilasOrgOtroServicio = mysql_num_rows($resOrgOtroServicio);
+			// if($numFilasOrgOtroServicio == 0)
+			// {
 				//echo $orgCodYServicios[$i] . " nueva<br>";
 				// $orgServicios[$orgCodYServicios[$i + 1] - 1]++;
 
@@ -793,7 +797,7 @@ function Indicador02($zona, $mes)
 				array_push($resultadoFinal, $orgCodYServicios[$i + 3]);
 				array_push($resultadoFinal, $orgCodYServicios[$i + 4]);
 				array_push($resultadoFinal, $orgCodYServicios[$i + 5]);
-			}			
+			// }			
 		}
 		
 	}
