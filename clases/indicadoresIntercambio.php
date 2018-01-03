@@ -355,6 +355,26 @@ function Indicador01($zona, $mes)
 	
 
 	//IMPRESION DE RESULATDOS	
+
+	/*"		<tr>
+				<th class='colorIndicador'>ZONA</th>
+				<th class='colorIndicador'>PROVINCIA</th>
+				<th class='colorIndicador'>CANTÓN</th>
+				<th class='colorIndicador'>MES DE REPORTE</th>
+				<th class='colorIndicador'>ENTIDAD CONTRATANTE</th>				
+				<th class='colorIndicador1'>FECHA DE ADJUDICACION</th>
+				<th class='colorIndicador1'>CÓDIGO DEL PROCESO</th>
+				<th class='colorIndicador1'>CÓDIGO CPC</th>
+				<th class='colorIndicador1'>MONTO DE CONTRATACIÓN SIN IVA</th>
+				<th class='colorIndicador1'>TIPO ENTINDAD CONTRATANTE</th>
+				<th class='colorIndicador1'>NOMBRE DE ENTIDAD CONTRATANTE</th>
+				<th class='colorIndicador1'>FECHA DE ADJUDICACION DEL CONTRATO</th>
+				<th class='colorIndicador1'>MONTO DE CONTRATACION SIN IVA</th>
+				<th class='colorIndicador1'>SECTOR PRIORIZADO</th>
+			</tr>";*/
+
+	//print_r2($codIndicadoresArray);
+
 	
 	$tabla .= "<tr>
 			<td>5.1</td>
@@ -476,7 +496,22 @@ function Indicador02($zona, $mes)
 
 	//IMPRESION DE RESULATDOS	
 
-	
+	/*"		<tr>
+				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+				<th class='colorIndicador1'>Zona</th>
+				<th class='colorIndicador1'>Mes</th>
+			</tr>";*/
+
 	
 	$tabla .= "<tr>
 			<td>5.2</td>
@@ -586,6 +621,21 @@ function Indicador03($zona, $mes)
 
 	//IMPRESION DE RESULATDOS	
 
+	/*"		<tr>
+				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+				<th class='colorIndicador1'>Zona</th>
+				<th class='colorIndicador1'>Mes</th>
+			</tr>";*/
 
 	
 	$tabla .= "<tr>
@@ -1878,7 +1928,7 @@ function RevisarCircuitosEconomicos($zona, $mes)
 	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
+	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
 
 	// echo $sqlOrgMes . "<br>";
 
@@ -1892,7 +1942,7 @@ function RevisarCircuitosEconomicos($zona, $mes)
 		//array_push($orgReportadasMes, $fila['tipo_servicio']);
 	}
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
+	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.se_reporta = 'si' group by si.cod_u_organizaciones";
 
 	// echo $sqlOrgMes . "<br>";
 
@@ -1912,7 +1962,7 @@ function RevisarCircuitosEconomicos($zona, $mes)
 	$indiceArray = 0;
 	foreach($orgReportadasMes as $valor)
 	{
-		$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.cod_u_organizaciones = " . $valor;
+		$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and si.se_reporta = 'si' and  year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.cod_u_organizaciones = " . $valor;
 
 		// echo $sqlOrgMesReportada . "<br>";
 		$resOrgMesReportada = query($sqlOrgMesReportada);
@@ -1925,7 +1975,7 @@ function RevisarCircuitosEconomicos($zona, $mes)
 		else
 		{
 			// se revisa en contrataciones si ya fue reportada la org o uep
-			$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.cod_u_organizaciones = " . $valor;
+			$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.se_reporta = 'si' and  si.cod_u_organizaciones = " . $valor;
 			$resOrgMesReportada = query($sqlOrgMesReportada);
 			$vecesOrgReportada = mysql_num_rows($resOrgMesReportada);
 			if($vecesOrgReportada > 0)

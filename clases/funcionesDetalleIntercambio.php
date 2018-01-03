@@ -252,17 +252,9 @@ function getHeaderTablaIndicador($indicadorSeleccionado)
 		case 1:
 		{
 			$tHeader = "<tr class='cabecera'>
+							<th>INDICE</th>
 							<th>SECTOR</th>
-							<th>MONTO EN VENTAS</th>							
-						</tr>";
-			break;
-		}
-
-		case 2:
-		{
-			$tHeader = "<tr class='cabecera'>
-							<th>PROVINCIA</th>
-							<th>MONTO EN VENTAS</th>							
+							<th>MONTO</th>							
 						</tr>";
 			break;
 		}
@@ -305,7 +297,7 @@ function CrearDetalleIndicador()
 							<td>" .$resDetalle[$i + 6] . "</td>
 							<td>" .$resDetalle[$i + 7] . "</td>
 							<td>" .$resDetalle[$i + 8] . "</td>
-							<td>" . CambiarSignoDecimal($resDetalle[$i + 9]) . "</td>
+							<td>" .$resDetalle[$i + 9] . "</td>
 							<td>" .$resDetalle[$i + 10] . "</td>
 							<td>" .$resDetalle[$i + 11] . "</td>
 							<td>" .$resDetalle[$i + 12] . "</td>
@@ -323,7 +315,7 @@ function CrearDetalleIndicador()
 
 		$tabla .= "<tr>
 						<td colspan='9'>TOTAL</td>
-						<td>" . CambiarSignoDecimal($totalVentas) . "</td>
+						<td>" . $totalVentas . "</td>
 					<tr>";
 		$tabla .= "</table>";
 			
@@ -350,7 +342,7 @@ function CrearDetalleIndicador()
 							<td>" .$resDetalle[$i + 6] . "</td>
 							<td>" .$resDetalle[$i + 7] . "</td>
 							<td>" .$resDetalle[$i + 8] . "</td>
-							<td>" .CambiarSignoDecimal($resDetalle[$i + 9]) . "</td>
+							<td>" .$resDetalle[$i + 9] . "</td>
 							<td>" .$resDetalle[$i + 10] . "</td>
 							<td>" .$resDetalle[$i + 11] . "</td>
 							<td>" .$resDetalle[$i + 12] . "</td>
@@ -368,7 +360,7 @@ function CrearDetalleIndicador()
 
 		$tabla .= "<tr>
 						<td colspan='9'>TOTAL</td>
-						<td>" . CambiarSignoDecimal($totalVentas) . "</td>
+						<td>" . $totalVentas . "</td>
 					<tr>";
 		$tabla .= "</table>";
 		
@@ -666,32 +658,19 @@ function CrearDetalleIndicador()
 
 	if($indSeleccionado == 1)
 	{
-		
-		$headerTablaMontoSector = getHeaderTablaIndicador(1);
-		$headerTablaMontoProvincia = getHeaderTablaIndicador(2);
-		// Armamos el primer div
-		$divCol6 = "<div class='col-md-6'>";
-		// Añadimos las dos tablas 
-		$tablaMonto = "<table>";
-		$tablaMonto .= "<tr>";
-		$tablaMonto .= $headerTablaMontoSector;
-		$tablaMonto .= "</tr>";
-		$tablaMonto .= "</table>";
-		$divCol6 .= $tablaMonto;
-		$divCol6 .= "</div>";
+		$tabla = "<div class='container table-responsive'>";
+		$tabla .= "<div class='col-md-6'>";
+		$tabla .= "<table class=''>";
+		$tabla .= getHeaderTablaIndicador($indSeleccionado); 
+		$tabla .= "</table>";
+		$tabla .= "</div>";
 
-		$tabla = $divCol6;
-		$divCol6 = "<div class='col-md-6'>";
-		// Añadimos las dos tablas 
-		$tablaMonto = "<table>";
-		$tablaMonto .= "<tr>";
-		$tablaMonto .= $headerTablaMontoProvincia;
-		$tablaMonto .= "</tr>";
-		$tablaMonto .= "</table>";
-		$divCol6 .= $tablaMonto;
-		$divCol6 .= "</div>";
-
-		$tabla .= $divCol6;
+		$tabla .= "<div class='col-md-6'>";
+		$tabla .= "<table class=''>";
+		$tabla .= getHeaderTablaIndicador($indSeleccionado); 
+		$tabla .= "</table>";
+		$tabla .= "</div>";
+		$tabla .= "</div>";
 	}
 
 	echo $tabla;
@@ -700,12 +679,6 @@ function CrearDetalleIndicador()
 
 
 	//echo "Indicador = " . $indSeleccionado . ", año = " . $anioInd . ", mes= " . $mesInd . ", zona = " . $zonaInd . "<br>";
-}
-
-function CambiarSignoDecimal($valor)
-{
-	$stringCambiado = str_replace('.', ',', $valor);
-	return $stringCambiado;
 }
 
 function getInfoOrganizacion($codOrganizacionConsultar)
@@ -850,7 +823,7 @@ function Indicador01($zona, $mes)
 	
 
 	//sql que consulta las ventas en el mes indicado
-	$sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_registro) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
+	$sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_registro) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
 
 	//echo $sqlVentasMesPub . "<br>";
 
@@ -870,7 +843,7 @@ function Indicador01($zona, $mes)
 	//echo $avanceMes . "<br>";
 
 	//calcularemos las ventas acumuladas hasta el mes especificado
-	$sqlVentasAcumuladas = "select cod_zona, cod_provincia, cod_canton, codigo_proceso, codigo_cpc, cod_tipo_entidad_contratante, cod_contratacion, tipo_contrato, cod_u_organizaciones, antiguedad, bien_servicio, categoria_actividad_mp, num_socios, num_empleados, fecha_adjudicacion, month(fecha_reporte) as mesReporte, monto_contratacion, cod_tipo_entidad_contratante, cod_entidad_contratante, circuito_economico from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
+	$sqlVentasAcumuladas = "select cod_zona, cod_provincia, cod_canton, codigo_proceso, codigo_cpc, cod_tipo_entidad_contratante, cod_contratacion, tipo_contrato, cod_u_organizaciones, antiguedad, bien_servicio, categoria_actividad_mp, num_socios, num_empleados, fecha_adjudicacion, month(fecha_reporte) as mesReporte, monto_contratacion, cod_tipo_entidad_contratante, cod_entidad_contratante, circuito_economico from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
 
 	//echo $sqlVentasAcumuladas . "<br>";
 	$resVentasAcumuladas = query($sqlVentasAcumuladas);
@@ -989,7 +962,7 @@ function Indicador02($zona, $mes)
 	
 
 	//sql que consulta las ventas en el mes indicado
-	$sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_registro) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
+	$sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_registro) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
 
 	//echo $sqlVentasMesPub . "<br>";
 
@@ -1009,7 +982,7 @@ function Indicador02($zona, $mes)
 	//echo $avanceMes . "<br>";
 
 	//calcularemos las ventas acumuladas hasta el mes especificado
-	$sqlVentasAcumuladas = "select cod_zona, cod_provincia, cod_canton, cod_contratacion, categoria_actividad_mp, circuito_economico, bien_servicio, fecha_adjudicacion, codigo_cpc, codigo_proceso, tipo_contrato, cod_u_organizaciones, antiguedad, num_socios, num_empleados, fecha_adjudicacion, month(fecha_reporte) as mesReporte, monto_contratacion, cod_tipo_entidad_contratante, cod_entidad_contratante from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
+	$sqlVentasAcumuladas = "select cod_zona, cod_provincia, cod_canton, cod_contratacion, categoria_actividad_mp, circuito_economico, bien_servicio, fecha_adjudicacion, codigo_cpc, codigo_proceso, tipo_contrato, cod_u_organizaciones, antiguedad, num_socios, num_empleados, fecha_adjudicacion, month(fecha_reporte) as mesReporte, monto_contratacion, cod_tipo_entidad_contratante, cod_entidad_contratante from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
 
 	//echo $sqlVentasAcumuladas . "<br>";
 	$resVentasAcumuladas = query($sqlVentasAcumuladas);
@@ -3257,7 +3230,7 @@ function RevisarCircuitosEconomicos($zona, $mes)
 	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) <= " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
+	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) <= " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.se_reporta = 'si' group by si.cod_u_organizaciones";
 
 	//echo $sqlOrgMes . "<br>";
 
@@ -3271,7 +3244,7 @@ function RevisarCircuitosEconomicos($zona, $mes)
 		//array_push($orgReportadasMes, $fila['tipo_servicio']);
 	}
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) <= " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
+	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) <= " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and  si.circuito_economico = 'si' group by si.cod_u_organizaciones";
 
 	$resSqlOrgMes = query($sqlOrgMes);
 	while($fila = mysql_fetch_array($resSqlOrgMes))
