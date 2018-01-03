@@ -259,6 +259,16 @@ function getHeaderTablaIndicador($indicadorSeleccionado)
 			break;
 		}
 
+		case 2:
+		{
+			$tHeader = "<tr class='cabecera'>
+							<th>INDICE</th>
+							<th>PROVINCIA</th>
+							<th>MONTO</th>							
+						</tr>";
+			break;
+		}
+
 		
 
 
@@ -658,16 +668,20 @@ function CrearDetalleIndicador()
 
 	if($indSeleccionado == 1)
 	{
+
+		
 		$tabla = "<div class='container table-responsive'>";
 		$tabla .= "<div class='col-md-6'>";
 		$tabla .= "<table class=''>";
-		$tabla .= getHeaderTablaIndicador($indSeleccionado); 
+		$tabla .= getHeaderTablaIndicador(1);
+		$tabla .= GetMontos($mesInd, $anioInd, $indSeleccionado, 'sector'); 
 		$tabla .= "</table>";
 		$tabla .= "</div>";
 
 		$tabla .= "<div class='col-md-6'>";
 		$tabla .= "<table class=''>";
-		$tabla .= getHeaderTablaIndicador($indSeleccionado); 
+		$tabla .= getHeaderTablaIndicador(2); 
+		$tabla .= GetMontos($mesInd, $anioInd, $indSeleccionado, 'provincia');
 		$tabla .= "</table>";
 		$tabla .= "</div>";
 		$tabla .= "</div>";
@@ -3437,6 +3451,240 @@ function GetTipoEntidadContratante($codTipoEntidad)
 	}
 
 	return $auxTipo;
+}
+
+function GetMontos($mes, $anio, $indicador, $tipoReporte)
+{
+	$mesInd = $mes;
+	$anioInd = $anio;
+	$indicadorSel = $indicador;
+	$tipoOrg = "";
+	$resTabla = "";
+
+	$arrayOtros = array(
+		'actividades_alojamiento_y_servicio_comidas',
+		'astillero',
+		'farmaceutica',
+		'otros',
+		'refineria_de_aluminio',
+		'refineria_de_cobre',
+		'siderurgica_acero',
+		' '
+		);
+	$arrayPetroquimica = array(
+		'derivados_del_petroleo',
+		'detergentes',
+		'fibras_sinteticas',
+		'jabones',
+		'revestimientos'
+		);
+	$arrayPichincha = array(
+		'DM QUITO',
+		'PICHINCHA');
+	$arrayGuayas = array(
+		'DM GUAYAQUIL',
+		'GUAYAS');
+	$arrayTotalSectores = array();
+	$arrayProvincias = array();
+
+	$sqlTotalSectores = "select tipo, codigo from catalogo where tipo = 'identificacion_categoria_actividad' group by codigo";
+	$resTotalSectores = query($sqlTotalSectores);
+
+	while($fila = mysql_fetch_array($resTotalSectores))
+	{
+		array_push($arrayTotalSectores, $fila['codigo']);
+	}
+
+	$sqlProvincias = "select provincia from u_provincia group by provincia";
+	$resProvincias = query($sqlProvincias);
+	while($fila = mysql_fetch_array($resProvincias))
+	{
+		array_push($arrayProvincias, $fila['provincia']);
+	}
+
+	// print_r2($arrayTotalSectores);
+	// print_r2($arrayProvincias);
+
+	$sqlMontos = "";
+
+	if($indicadorSel == 1 && $tipoReporte == 'sector')
+	{
+		$tipoOrg = 'org';	
+
+		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' group by i.identificacion_actividad_mp";
+
+	}
+	elseif ($indicadorSel == 1 && $tipoReporte == 'provincia') 
+	{
+		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' group by p.provincia";
+	}
+
+	$resMontos = query($sqlMontos);
+	$montosMes = array();
+	$arraySectores = array();
+	while($fila = mysql_fetch_array($resMontos))
+	{
+		if($tipoReporte == 'sector')
+		{
+			array_push($arraySectores, $fila['sector']);				
+		}
+		else
+		{
+			array_push($arraySectores, $fila['provincia']);			
+		}
+		array_push($montosMes, $fila['monto']);
+		
+	}
+	// print_r2($arraySectores);
+	// print_r2($montosMes);
+
+	$montosOtros = 0;
+	$montosPetroquimica = 0;
+	$montosTotal = 0;
+	$montosPichincha = 0;
+	$montosGuayas = 0;
+	$cont = 0;
+	if($tipoReporte == 'sector')
+	{
+		foreach($arrayTotalSectores as $valor)
+		{
+
+			if(in_array($valor, $arrayOtros))
+			{
+				$index = GetIndexArray($arraySectores, $valor);
+				if($index >= 0)
+				{
+					$montosOtros += $montosMes[$index];
+				}				
+			}
+			elseif(in_array($valor, $arrayPetroquimica))
+			{
+				$index = GetIndexArray($arraySectores, $valor);
+				if($index >= 0)
+				{
+					$montosPetroquimica += $montosMes[$index];
+				}				
+			}
+			else
+			{
+				$cont++;
+				$index = GetIndexArray($arraySectores, $valor);				
+				$resTabla .= "<tr>";
+				$resTabla .= "<td>" . $cont  . "</td>";
+				$resTabla .= "<td>" . strtoupper($valor)  . "</td>";
+				if($index >= 0)
+				{
+					$resTabla .= "<td>" . $montosMes[$index] . "</td>";
+				}
+				else
+				{
+					$resTabla .= "<td>0</td>";	
+				}				
+				$resTabla .= "</tr>";
+
+				$montosTotal += $montosMes[$index];
+			}
+		}
+
+		$resTabla .= "<tr>";
+		$resTabla .= "<td>" . $cont++  . "</td>";
+		$resTabla .= "<td>PETROQUÍMICA</td>";		
+		$resTabla .= "<td>" . $montosPetroquimica . "</td>";		
+		$resTabla .= "</tr>";
+		$resTabla .= "<tr>";
+		$resTabla .= "<td>" . $cont++  . "</td>";
+		$resTabla .= "<td>OTROS</td>";		
+		$resTabla .= "<td>" . $montosOtros . "</td>";		
+		$resTabla .= "</tr>";
+
+		$montosTotal += ($montosPetroquimica + $montosOtros);
+
+		$resTabla .= "<tr>";
+		$resTabla .= "<td colspan=2>TOTAL</td>";		
+		$resTabla .= "<td>" . $montosTotal . "</td>";		
+		$resTabla .= "</tr>";
+	}
+	else
+	{
+		foreach($arrayProvincias as $valor)
+		{
+
+			if(in_array($valor, $arrayPichincha))
+			{
+				$index = GetIndexArray($arraySectores, $valor);
+				if($index >= 0)
+				{
+					$montosPichincha += $montosMes[$index];
+				}				
+			}
+			elseif(in_array($valor, $arrayGuayas))
+			{
+				$index = GetIndexArray($arraySectores, $valor);
+				if($index >= 0)
+				{
+					$montosGuayas += $montosMes[$index];
+				}				
+			}
+			else
+			{
+				$cont++;
+				$index = GetIndexArray($arraySectores, $valor);				
+				$resTabla .= "<tr>";
+				$resTabla .= "<td>" . $cont  . "</td>";
+				$resTabla .= "<td>" . strtoupper($valor)  . "</td>";
+				if($index >= 0)
+				{
+					$resTabla .= "<td>" . $montosMes[$index] . "</td>";
+				}
+				else
+				{
+					$resTabla .= "<td>0</td>";	
+				}				
+				$resTabla .= "</tr>";
+
+				$montosTotal += $montosMes[$index];
+			}
+		}
+
+		$resTabla .= "<tr>";
+		$resTabla .= "<td>" . $cont++  . "</td>";
+		$resTabla .= "<td>PICHINCHA</td>";		
+		$resTabla .= "<td>" . $montosPichincha . "</td>";		
+		$resTabla .= "</tr>";
+		$resTabla .= "<tr>";
+		$resTabla .= "<td>" . $cont++  . "</td>";
+		$resTabla .= "<td>GUAYAS</td>";		
+		$resTabla .= "<td>" . $montosGuayas . "</td>";		
+		$resTabla .= "</tr>";
+
+		$montosTotal += ($montosPichincha + $montosGuayas);
+
+		$resTabla .= "<tr>";
+		$resTabla .= "<td colspan=2>TOTAL</td>";		
+		$resTabla .= "<td>" . $montosTotal . "</td>";		
+		$resTabla .= "</tr>";
+	}
+	
+
+	return $resTabla;
+
+	// echo $mesInd . " - " . $anioInd . " - " . $tipoOrg . "<br>";
+}
+
+function GetIndexArray($arrayBuscar, $valorBuscar)
+{
+	$tamArrayBuscar = count($arrayBuscar);
+	// echo $tamArrayBuscar."<br>";
+	$resIndex = -1;
+	for($i = 0; $i < $tamArrayBuscar; $i++)
+	{
+		if($valorBuscar == $arrayBuscar[$i])
+		{
+			$resIndex = $i;
+		}
+	}
+
+	return $resIndex;
 }
 
 
