@@ -149,14 +149,29 @@ echo '<form name="form1" method="post">
             if($perfil == 1 || $perfil == 7)
             {
               echo '<tr>
-                      <td colspan="3" width="140" height="30">
+                      <td colspan="2" width="140" height="30">
                         <a id="reporteGeneral" href="#">Reporte General Actores</a>
                       </td>
-                      <td colspan="3" width="140" height="30">
-                        <a id="reporteMontoPublicoBoton" href="#">Reporte Montos Publicos</a>
+                      <td colspan="1" width="140" height="30">
+                        <a id="reporteMontoPublicoBoton" href="#">Reporte Montos Publicos Org Menssual</a>
                       </td>
-                      <td colspan="3" width="140" height="30">
-                        <a id="reporteMontoPrivadoBoton" href="#">Reporte Montos Privados</a>
+                      <td colspan="1" width="140" height="30">
+                        <a id="reporteMontoPrivadoBoton" href="#">Reporte Montos Privados Org Menssual</a>
+                      </td>
+                      <td colspan="1" width="140" height="30">
+                        <a id="reporteMontoPublicoBotonUeps" href="#">Reporte Montos Publicos Ueps Menssual</a>
+                      </td>
+                      <td colspan="1" width="140" height="30">
+                        <a id="reporteMontoPrivadoBotonUeps" href="#">Reporte Montos Privados Ueps Menssual</a>
+                      </td>
+                      <td colspan="1" width="140" height="30">
+                        <a id="reporteAcumuladoPublico" href="#">Reporte Montos Públicos Acumulado</a>
+                      </td>
+                      <td colspan="1" width="140" height="30">
+                        <a id="reporteAcumuladoPrivado" href="#">Reporte Montos Privados Acumulado</a>
+                      </td>
+                      <td colspan="1" width="140" height="30">
+                        <a id="reporteAcumuladoAnual" href="#">Reporte Acumulado Anual</a>
                       </td>
                     </tr>
                     ';
