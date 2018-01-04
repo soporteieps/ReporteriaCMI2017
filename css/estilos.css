@@ -50,6 +50,7 @@ td {
 .cabecera {
   background: rgba(7,7,186,0.8);
   color: #fff;
+  text-align: center;
 }
 
 #cargando

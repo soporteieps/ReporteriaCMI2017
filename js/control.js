@@ -117,7 +117,7 @@ function ShowReportes()
 {
 	numClicks++;
 	var fechaCon = new Date();
-	var anio = fechaCon.getFullYear();
+	var anio = $('#cmbAnios').prop('selected', true).val();
 	var idMes = $('#cmbMeses').prop('selected', true).val();
 	if(numClicks == 1)
 	{
