@@ -268,6 +268,19 @@ function getHeaderTablaIndicador($indicadorSeleccionado)
 						</tr>";
 			break;
 		}
+		case 7:
+		{
+			$tHeader = "<tr class='cabecera'>
+							<th colspan='4'>MERCADO PÚBLICO Y PRIVADO 2010 A " . $nombreMes[getMes() - 1] . " " . getAnioSeleccionado() . "</th>
+						</tr>
+						<tr class='cabecera'>
+							<th>AÑO</th>
+							<th>PÚBLICO</th>
+							<th>PRIVADO</th>
+							<th>MONTO</th>
+						</tr>";
+			break;
+		}
 
 		
 
@@ -666,15 +679,15 @@ function CrearDetalleIndicador()
 		$tabla .= "</table>";
 	}
 
-	if($indSeleccionado == 1)
+	if($indSeleccionado >= 1 && $indSeleccionado <= 6)
 	{
 
 		
-		$tabla = "<div class='container table-responsive'>";
+		$tabla = "<div class='table-responsive'>";
 		$tabla .= "<div class='col-md-6'>";
 		$tabla .= "<table class=''>";
 		$tabla .= getHeaderTablaIndicador(1);
-		$tabla .= GetMontos($mesInd, $anioInd, $indSeleccionado, 'sector'); 
+		$tabla .= GetMontos($mesInd, $anioInd, $indSeleccionado, 'sector');
 		$tabla .= "</table>";
 		$tabla .= "</div>";
 
@@ -685,6 +698,21 @@ function CrearDetalleIndicador()
 		$tabla .= "</table>";
 		$tabla .= "</div>";
 		$tabla .= "</div>";
+	}
+
+	if($indSeleccionado == 7)
+	{
+
+		
+		$tabla = "<div class='table-responsive'>";
+		$tabla .= "<div class='col-md-12'>";
+		$tabla .= "<table class=''>";
+		$tabla .= getHeaderTablaIndicador(7);
+		$tabla .= GetMontos($mesInd, $anioInd, $indSeleccionado, 'general');
+		$tabla .= "</table>";
+		$tabla .= "</div>";
+
+		
 	}
 
 	echo $tabla;
@@ -3460,6 +3488,8 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 	$indicadorSel = $indicador;
 	$tipoOrg = "";
 	$resTabla = "";
+	$montoPublica = 0;
+	$montoPrivado = 0;
 
 	$arrayOtros = array(
 		'actividades_alojamiento_y_servicio_comidas',
@@ -3469,7 +3499,7 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 		'refineria_de_aluminio',
 		'refineria_de_cobre',
 		'siderurgica_acero',
-		' '
+		''
 		);
 	$arrayPetroquimica = array(
 		'derivados_del_petroleo',
@@ -3494,6 +3524,7 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 	{
 		array_push($arrayTotalSectores, $fila['codigo']);
 	}
+	array_push($arrayTotalSectores, '');
 
 	$sqlProvincias = "select provincia from u_provincia group by provincia";
 	$resProvincias = query($sqlProvincias);
@@ -3511,13 +3542,100 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 	{
 		$tipoOrg = 'org';	
 
-		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' group by i.identificacion_actividad_mp";
+		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'publica' group by i.identificacion_actividad_mp";
 
 	}
 	elseif ($indicadorSel == 1 && $tipoReporte == 'provincia') 
 	{
-		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' group by p.provincia";
+		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'publica' group by p.provincia";
 	}
+	elseif ($indicadorSel == 2 && $tipoReporte == 'sector') 
+	{
+		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'privada' group by i.identificacion_actividad_mp";
+	}
+	elseif ($indicadorSel == 2 && $tipoReporte == 'provincia') 
+	{
+		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='org') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'privada' group by p.provincia";
+	}
+	elseif ($indicadorSel == 3 && $tipoReporte == 'sector') 
+	{
+		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='uep') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'publica' group by i.identificacion_actividad_mp";
+	}
+	elseif ($indicadorSel == 3 && $tipoReporte == 'provincia') 
+	{
+		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='uep') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'publica' group by p.provincia";
+	}
+
+	elseif ($indicadorSel == 4 && $tipoReporte == 'sector') 
+	{
+		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='uep') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'privada' group by i.identificacion_actividad_mp";
+	}
+	elseif ($indicadorSel == 4 && $tipoReporte == 'provincia') 
+	{
+		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) inner join u_organizaciones o on (o.cod_u_organizaciones = i.cod_u_organizaciones and o.tipo='uep') where month(i.fecha_reporte) = " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'privada' group by p.provincia";
+	}
+
+	elseif ($indicadorSel == 5 && $tipoReporte == 'sector') 
+	{
+		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i where month(i.fecha_reporte) <= " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'publica' group by i.identificacion_actividad_mp";
+	}
+	elseif ($indicadorSel == 5 && $tipoReporte == 'provincia') 
+	{
+		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) where month(i.fecha_reporte) <= " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'publica' group by p.provincia";
+	}
+	elseif ($indicadorSel == 6 && $tipoReporte == 'sector') 
+	{
+		$sqlMontos = "select i.identificacion_actividad_mp as sector, sum(i.monto_contratacion) as monto from im_contratacion i where month(i.fecha_reporte) <= " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'privada' group by i.identificacion_actividad_mp";
+	}
+	elseif ($indicadorSel == 6 && $tipoReporte == 'provincia') 
+	{
+		$sqlMontos = "select p.provincia, sum(i.monto_contratacion) as monto from im_contratacion i inner join u_provincia p on (p.cod_provincia = i.cod_provincia and p.zona = i.cod_zona) where month(i.fecha_reporte) <= " . $mesInd . " and year(i.fecha_reporte) = " . $anioInd . " and i.se_reporta = 'si' and i.tipo_contrato = 'privada' group by p.provincia";
+	}
+
+	elseif ($indicadorSel == 7 && $tipoReporte == 'general') 
+	{
+		
+
+		for($anioReporte = 2010; $anioReporte <= $anioInd; $anioReporte++)
+		{
+
+			$sqlMontos = "select sum(i.monto_contratacion) as monto from im_contratacion i where  year(i.fecha_reporte) = " . $anioReporte . " and i.se_reporta = 'si' and i.tipo_contrato = 'publica'";
+			$resMontos = query($sqlMontos);
+			while($fila = mysql_fetch_array($resMontos))
+			{
+				if($fila['monto'] != '')
+				{
+					$montoPublica = $fila['monto'];	
+				}
+				else
+					$montoPublica = 0;
+				
+			}
+
+			$sqlMontos = "select sum(i.monto_contratacion) as monto from im_contratacion i where  year(i.fecha_reporte) = " . $anioReporte . " and i.se_reporta = 'si' and i.tipo_contrato = 'privada'";
+			$resMontos = query($sqlMontos);
+			while($fila = mysql_fetch_array($resMontos))
+			{
+				if($fila['monto'] != '')
+					$montoPrivado = $fila['monto'];
+				else
+					$montoPrivado = 0;
+			}
+
+			$resTabla .= "<tr>";
+			$resTabla .= "<td>" . $anioReporte . "</td>";
+			$resTabla .= "<td>" . CambiarPuntoComa($montoPublica) . "</td>";
+			$resTabla .= "<td>" . CambiarPuntoComa($montoPrivado) . "</td>";
+			$resTabla .= "<td>" . CambiarPuntoComa($montoPublica + $montoPrivado) . "</td>";
+			$resTabla .= "</tr>";
+
+		}
+
+		return $resTabla;
+
+
+	}	
+
 
 	$resMontos = query($sqlMontos);
 	$montosMes = array();
@@ -3528,10 +3646,10 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 		{
 			array_push($arraySectores, $fila['sector']);				
 		}
-		else
+		elseif($tipoReporte == 'provincia')
 		{
 			array_push($arraySectores, $fila['provincia']);			
-		}
+		}		
 		array_push($montosMes, $fila['monto']);
 		
 	}
@@ -3548,14 +3666,15 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 	{
 		foreach($arrayTotalSectores as $valor)
 		{
-
+			// echo $valor;
 			if(in_array($valor, $arrayOtros))
 			{
 				$index = GetIndexArray($arraySectores, $valor);
 				if($index >= 0)
 				{
 					$montosOtros += $montosMes[$index];
-				}				
+				}
+				// echo " - " . $index . " -<br> "; 				
 			}
 			elseif(in_array($valor, $arrayPetroquimica))
 			{
@@ -3574,7 +3693,7 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 				$resTabla .= "<td>" . strtoupper($valor)  . "</td>";
 				if($index >= 0)
 				{
-					$resTabla .= "<td>" . $montosMes[$index] . "</td>";
+					$resTabla .= "<td>" . CambiarPuntoComa($montosMes[$index]) . "</td>";
 				}
 				else
 				{
@@ -3586,25 +3705,32 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 			}
 		}
 
+		// // suma al array cuando no tiene identificador
+		// if(in_array('', $arraySectores))
+		// {
+		// 	$index = GetIndexArray($arraySectores, '');
+		// 	$montosOtros += $montosMes[$index];
+		// }
+
 		$resTabla .= "<tr>";
 		$resTabla .= "<td>" . $cont++  . "</td>";
 		$resTabla .= "<td>PETROQUÍMICA</td>";		
-		$resTabla .= "<td>" . $montosPetroquimica . "</td>";		
+		$resTabla .= "<td>" . CambiarPuntoComa($montosPetroquimica) . "</td>";		
 		$resTabla .= "</tr>";
 		$resTabla .= "<tr>";
 		$resTabla .= "<td>" . $cont++  . "</td>";
 		$resTabla .= "<td>OTROS</td>";		
-		$resTabla .= "<td>" . $montosOtros . "</td>";		
+		$resTabla .= "<td>" . CambiarPuntoComa($montosOtros) . "</td>";		
 		$resTabla .= "</tr>";
 
 		$montosTotal += ($montosPetroquimica + $montosOtros);
 
 		$resTabla .= "<tr>";
 		$resTabla .= "<td colspan=2>TOTAL</td>";		
-		$resTabla .= "<td>" . $montosTotal . "</td>";		
+		$resTabla .= "<td>" . CambiarPuntoComa($montosTotal) . "</td>";		
 		$resTabla .= "</tr>";
 	}
-	else
+	elseif($tipoReporte == 'provincia')
 	{
 		foreach($arrayProvincias as $valor)
 		{
@@ -3634,7 +3760,7 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 				$resTabla .= "<td>" . strtoupper($valor)  . "</td>";
 				if($index >= 0)
 				{
-					$resTabla .= "<td>" . $montosMes[$index] . "</td>";
+					$resTabla .= "<td>" . CambiarPuntoComa($montosMes[$index]) . "</td>";
 				}
 				else
 				{
@@ -3649,19 +3775,19 @@ function GetMontos($mes, $anio, $indicador, $tipoReporte)
 		$resTabla .= "<tr>";
 		$resTabla .= "<td>" . $cont++  . "</td>";
 		$resTabla .= "<td>PICHINCHA</td>";		
-		$resTabla .= "<td>" . $montosPichincha . "</td>";		
+		$resTabla .= "<td>" . CambiarPuntoComa($montosPichincha) . "</td>";		
 		$resTabla .= "</tr>";
 		$resTabla .= "<tr>";
 		$resTabla .= "<td>" . $cont++  . "</td>";
 		$resTabla .= "<td>GUAYAS</td>";		
-		$resTabla .= "<td>" . $montosGuayas . "</td>";		
+		$resTabla .= "<td>" . CambiarPuntoComa($montosGuayas) . "</td>";		
 		$resTabla .= "</tr>";
 
 		$montosTotal += ($montosPichincha + $montosGuayas);
 
 		$resTabla .= "<tr>";
 		$resTabla .= "<td colspan=2>TOTAL</td>";		
-		$resTabla .= "<td>" . $montosTotal . "</td>";		
+		$resTabla .= "<td>" . CambiarPuntoComa($montosTotal) . "</td>";		
 		$resTabla .= "</tr>";
 	}
 	
@@ -3685,6 +3811,12 @@ function GetIndexArray($arrayBuscar, $valorBuscar)
 	}
 
 	return $resIndex;
+}
+
+function CambiarPuntoComa($valor)
+{
+	$cambio = str_replace(".", ",", $valor);
+	return $cambio;
 }
 
 
