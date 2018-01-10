@@ -154,7 +154,7 @@ function GuardarIndicadores()
 {
 	document.getElementById('botonGrabar').disabled = true;
 	console.log('ejecutado la funcion');
-	var idIndicador = 0;
+	var idIndicador = $('#cmbIndicador').prop('selected', true).val();
 	var idZona = $('#cmbZona').prop('selected', true).val();
 	var idMes = $('#cmbMeses').prop('selected', true).val();
 	var idAnio = $('#cmbAnios').prop('selected', true).val();
@@ -190,6 +190,7 @@ function GuardarIndicadores()
 	{
 		if(request.status == 200)
 		{
+			console.log(request.responseText);
 			alert('Datos guardados satisfactoriamente');
 			document.getElementById('botonGrabar').disabled = false;
 		}

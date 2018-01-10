@@ -12,7 +12,7 @@
     <title>REPORTE DE INDICADORES</title>
    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../../css/flexigrid.css" />
-    <script src='../../js/jquery-1.6.4.min.js'></script> 
+    <script src='../../js/jquery.js'></script> 
     <script type="text/javascript" src="../../js/flexigrid.pack.js"></script>  
     <link rel="stylesheet" href="../../css/themes/base/jquery.ui.all.css">
     <script src="../../js/external/jquery.bgiframe-2.1.2.js"></script>
@@ -29,7 +29,7 @@
 	<script src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
     <script src="../../js/jquery-ui-timepicker-addon.js"></script>
     <script src="../../js/index.js"></script>
-  
+    <script src="../../js/control.js"></script>
 </head>
 <body>
 <div id='DivIndex' align='center'>
@@ -103,8 +103,11 @@
               </tr>
               <tr>
                     <td colspan="9" width="140" height="30">
-                     <input name='btnExportar' id='btnExportar' type='button' value="   Exportar" style='background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;' onclick='exportarExcell();'></td>
-			</tr>
+                     <input name='btnExportar' id='btnExportar' type='button' value="   Exportar" style='background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;' onclick='exportarExcell();'>
+                     
+                     </td>
+                      
+			</tr>      
 </table>
 <table style="border-style:none" align="center">               
                  <tr>
