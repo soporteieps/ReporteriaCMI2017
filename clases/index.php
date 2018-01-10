@@ -22,11 +22,12 @@
 	<script src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
     <script src="../../js/jquery-ui-timepicker-addon.js"></script>
     <script src="../../js/index.js"></script>
-  
+  	<script src="../../js/control.js"></script>
 </head>
 <form action="../../clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
 <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
 </form>
+
 </html>
 <script type="text/javascript">
 function exportarExcell() {
@@ -59,7 +60,7 @@ function consultar($cod_indicador, $cod_mes, $cod_zona, $anio)
 	echo '<form name="form1" method="post"> 
           <table style="border-style:none" align="center">
                  <tr>
-                    <td colspan="9" height="30" align="center" valign="middle" bgcolor="#000000"><font color="#ffffff" size="3" face="Arial, Helvetica, sans-serif"><strong><left>REPORTE DE INDICADORES CONSOLIDADO CMI NACIONAL</left></strong></font>
+                    <td colspan="9" height="30" align="center" valign="middle" bgcolor="#000000"><font color="#ffffff" size="3" face="Arial, Helvetica, sans-serif"><strong><left>REPORTE DE INDICADORES CONSOLIDADO CMI NACIONAL 2017</left></strong></font>
                     </td>
               </tr>
               
@@ -134,8 +135,15 @@ function consultar($cod_indicador, $cod_mes, $cod_zona, $anio)
                    </td>				   
               </tr>
               <tr>
-					<td colspan="9" width="140" height="30">
-                     <input name="btnExportar" id="btnExportar" type="button" value="   Exportar" style="background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;" onclick="exportarExcell();"></td>
+					<td colspan="9" width="140" height="30" style="text-align:center">
+                     <input name="btnExportar" id="btnExportar" type="button" value="   Exportar" style="background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;" onclick="exportarExcell();">';
+                     $perfil = $_GET['perfil'];                     
+                     if($perfil == 7)
+                     {
+                     	echo '<input type="button" class="botonGrabar" id="botonGrabar" value="Grabar Indicador" onclick="GuardarIndicadores();" />';
+                     }
+                     
+                     echo '</td>
                </tr>
 </table>
 <table style="border-style:none" align="center"> 

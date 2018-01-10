@@ -1,11 +1,12 @@
 $(document).on('ready', inicio);
 var numClicks = 0;
 
+
 function inicio()
 {
 	$('#btnBuscar').on('click', BuscarIndicador);
 	$('#btnBuscarInt').on('click', BucarIndicadorIM);
-	$('#botonMuestra').on('click', ShowReportes);
+	$('#botonMuestra').on('click', ShowReportes);	
 }
 
 function crearAjax()
@@ -147,5 +148,61 @@ function ShowReportes()
 	}
 
 
+}
+
+function GuardarIndicadores()
+{
+	document.getElementById('botonGrabar').disabled = true;
+	console.log('ejecutado la funcion');
+	var idIndicador = 0;
+	var idZona = $('#cmbZona').prop('selected', true).val();
+	var idMes = $('#cmbMeses').prop('selected', true).val();
+	var idAnio = $('#cmbAnios').prop('selected', true).val();
+	var idDepartamento = 'FA';
+	var request = crearAjax();
+
+	if(idZona == -1)
+	{
+		alert('Por favor, eliga una zona');
+		return false;
+	}
+	if(idMes == -1)
+	{
+		alert('Por favor, eliga una mes');
+		return false;
+	}
+	if(idAnio == -1)
+	{
+		alert('Por favor, eliga una año');
+		return false;
+	}
+
+	var fdata = new FormData();
+
+	fdata.append('idIndicador', idIndicador);
+	fdata.append('idZona', idZona);
+	fdata.append('idMes', idMes);
+	fdata.append('idAnio', idAnio);
+	fdata.append('idDepartamento', idDepartamento);
+
+	request.open('POST', '../../clases/grabarIndicadoresCMI.php', true);
+	request.onload = function(e)
+	{
+		if(request.status == 200)
+		{
+			alert('Datos guardados satisfactoriamente');
+			document.getElementById('botonGrabar').disabled = false;
+		}
+		else
+		{
+			console.log('no se logro la conexion');
+			document.getElementById('botonGrabar').disabled = false;
+		}
+	};
+
+	request.send(fdata);
+ 
+
+	console.log(idZona + " - " + idMes + " - " + idAnio);
 }
 

@@ -32,8 +32,9 @@ function reporte(indicador, mes, zona, anio)
 	}
 	else
 	{*/
+		var perfil = 7;
 		var ajax=nuevoAjax();
-			ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&accion=consultar",true);
+			ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&perfil=" + perfil + "&accion=consultar",true);
 			ajax.onreadystatechange=function() 
 			{
 				
