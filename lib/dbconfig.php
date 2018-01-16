@@ -1,9 +1,10 @@
 <?php session_start(); 
 function query($sql)
 {
-	$server = "10.2.74.36";//Dirección del servidor
+	$server = "10.2.74.50";//Dirección del servidor
 	$user = "root";
 	$pwd = "n1md0gm11i3p5";
+	// $pwd = "namd0gma1";
 	$basedatos = "cmi";//Base de datos a ser utilizada
 	$connect = mysql_connect($server,$user,$pwd);
        mysql_set_charset('utf8', $connect); 

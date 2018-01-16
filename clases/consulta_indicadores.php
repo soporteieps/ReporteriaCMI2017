@@ -2138,7 +2138,7 @@ function meta_ejecutada($zona,$cod_indicador,$cod_mes)
 			$meta_alcanzada = resultado_indicadores($cod_indicador, $mes, $zona);
 			$claseMetaEjecutada = $zona . "-" . $mes . "-" . $cod_indicador;
 			//echo '<td align="center" bgcolor="#93CDDD">'.$meta_alcanzada.'</td>';
-			$consulta = $consulta.'<td align="center" class="' . $claseMetaEjecutada . '">'.$meta_alcanzada.'</td>';
+			$consulta = $consulta.'<td align="center" id="' . $claseMetaEjecutada . '">'.$meta_alcanzada.'</td>';
 			$meta_alcanzada_total = $meta_alcanzada + $meta_alcanzada_total;
 		}
 	$consulta = $consulta.'<td align="center" bgcolor="#93CDDD"><strong>'.$meta_alcanzada_total.'</strong></td>';

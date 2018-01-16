@@ -163,27 +163,49 @@ function GuardarIndicadores()
 
 	if(idZona == -1)
 	{
+		document.getElementById('botonGrabar').disabled = false;
 		alert('Por favor, eliga una zona');
 		return false;
 	}
 	if(idMes == -1)
 	{
+		document.getElementById('botonGrabar').disabled = false;
 		alert('Por favor, eliga una mes');
 		return false;
 	}
 	if(idAnio == -1)
 	{
+		document.getElementById('botonGrabar').disabled = false;
 		alert('Por favor, eliga una año');
+		return false;
+	}
+	if(idIndicador > 0)
+	{
+		document.getElementById('botonGrabar').disabled = false;
+		alert('Por favor, elija "TODOS" en el INDICADOR');
 		return false;
 	}
 
 	var fdata = new FormData();
+	var lengthIndicador = document.getElementById('cmbIndicador').length;
+	var valoresIndicadores = [];
+	console.log(lengthIndicador);
+
+	for(var i = 1; i < lengthIndicador; i++)
+	{
+		var idText = idZona + "-" + idMes + "-" + i;
+		var textoTd = document.getElementById(idText).innerHTML;
+		valoresIndicadores.push(textoTd);
+	}
+
+	console.log(valoresIndicadores);
 
 	fdata.append('idIndicador', idIndicador);
 	fdata.append('idZona', idZona);
 	fdata.append('idMes', idMes);
 	fdata.append('idAnio', idAnio);
 	fdata.append('idDepartamento', idDepartamento);
+	fdata.append('valoresIndicadores', valoresIndicadores);
 
 	request.open('POST', '../../clases/grabarIndicadoresCMI.php', true);
 	request.onload = function(e)
@@ -191,7 +213,7 @@ function GuardarIndicadores()
 		if(request.status == 200)
 		{
 			console.log(request.responseText);
-			alert('Datos guardados satisfactoriamente');
+			// alert('Datos guardados satisfactoriamente');
 			document.getElementById('botonGrabar').disabled = false;
 		}
 		else
