@@ -21,7 +21,7 @@
     <script src="../../js/ui/jquery.ui.datepicker.js"></script> 
 	<script src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
     <script src="../../js/jquery-ui-timepicker-addon.js"></script>
-    <script src="../../js/index.js"></script>
+    <!-- <script src="../../js/index.js"></script> -->
   	<script src="../../js/control.js"></script>
 </head>
 <form action="../../clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
@@ -140,7 +140,7 @@ function consultar($cod_indicador, $cod_mes, $cod_zona, $anio)
                      $perfil = $_GET['perfil'];                     
                      if($perfil == 7)
                      {
-                     	echo '<input type="button" class="botonGrabar" id="botonGrabar" value="Grabar Indicador" onclick="GuardarIndicadores();" />';
+                     	echo '<input type="button" class="botonGrabar" id="botonGrabar" value="Grabar Indicador" onclick="VerificarDatos();" />';
                      }
                      
                      echo '</td>
@@ -246,7 +246,9 @@ function consultar($cod_indicador, $cod_mes, $cod_zona, $anio)
 					 }
         echo '</table>
     </form>
-</div>';	
+</div>
+<div id="fechaServer">' . date('Y-m-d') . '</div>';
+	
 }
 ?>
 

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 
 include("../lib/dbconfig.php");
@@ -27,11 +26,7 @@ function getDepartamento()
     return $departamento;
 }
 
-function getIndicador()
-{
-    $indicador = $_POST['idIndicador'];
-    return $indicador;
-}
+
 
 function getValoresIndicadores()
 {
@@ -83,7 +78,7 @@ function GrabarIndicadores()
 {
 
     // Se obtiene los valores elegidos en la interfaz de los indicadores
-    $indicador = getIndicador();
+    
     $anioInd = getAnio();
     $mesInd = getMes();
     $zonaInd = getZona();
@@ -102,26 +97,80 @@ function GrabarIndicadores()
 
     // dependiendo de la revision de los indicadores, la sentencia sql puede cambiar de INSERT a UPDATE
     $existenRegistros = RevisarValoresIndicador($idDepartamento, $anioInd, $mesInd, $zonaInd);
+    $tipoConsulta = '';
 
     if($existenRegistros)
     {
-        echo 'update';
+        $tipoConsulta = 'update';
     }
     else
     {
-        echo 'insert';
+        $tipoConsulta = 'insert';
     }
 
-    // for($i = 0; $i < count($indicadores); $i++)
-    // {
-    //     $sqlInsertIndicador = "insert into indicador_registro_mensual(cod_indicador, departamento, mes, anio, valor_registro, zona) values(" . $indicadores[$i] . ", '" . $idDepartamento . "', " . $mesInd . ", " . $anioInd .", " . $valoresIndicadores[$i] . ", " . $zonaInd . ")";
-    //     query($sqlInsertIndicador);     
-    // }
+    for($i = 0; $i < count($indicadores); $i++)
+    {
+        $sqlInsertIndicador = "";
+        if($tipoConsulta == 'insert')
+        {
+            $sqlInsertIndicador = "insert into indicador_registro_mensual(cod_indicador, departamento, mes, anio, valor_registro, zona) values(" . $indicadores[$i] . ", '" . $idDepartamento . "', " . $mesInd . ", " . $anioInd .", " . $valoresIndicadores[$i] . ", " . $zonaInd . ")";
+            // echo $sqlInsertIndicador;
+                     
+        }
+        else
+        {
 
-    // echo "Datos ingresados correctamente";
+            $sqlInsertIndicador = "update indicador_registro_mensual set valor_registro = " . $valoresIndicadores[$i] . " where cod_indicador = " . $indicadores[$i] . " and zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $idDepartamento . "'";
+            
+            // echo $sqlInsertIndicador;            
+        }
+        query($sqlInsertIndicador);
+        
+    }
+
+    echo "Datos ingresados correctamente";
     
 
 
+}
+
+function VerificarIndicadoresIngresados()
+{
+    $anio = getAnio();
+    $mes = getMes();
+    $zona = getZona();
+    $departamento = getDepartamento();
+    $nombresMes  = array('ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
+    $sqlValoresIndicador = "select * from indicador_registro_mensual where anio = " . $anio . " and mes = " . $mes . " and zona = " . $zona . " and departamento = '" . $departamento . "'";
+    // echo $sqlValoresIndicador;
+    $resValoresIndicador = query($sqlValoresIndicador);
+    $numFilasValoresIndicador = mysql_num_rows($resValoresIndicador);
+    $existeRegistroIndicador = false;
+
+    switch ($departamento) 
+    {
+        case 'FA':
+        {
+            if($numFilasValoresIndicador == 9)
+            {
+                $existeRegistroIndicador = true;
+                break;
+            }
+        }
+        default:
+        {
+            $existeRegistroIndicador = false;
+        }
+    }
+
+    if($existeRegistroIndicador)
+    {
+        echo "Ya existen registros para los indicadores de la zona " . $zona . ", en el mes de " . $nombresMes[$mes - 1] . " en el año " . $anio . ". Desea guardar de todas formas?";
+    }
+    else
+    {
+        echo "Desea guardar los indicadores de la zona " . $zona . ", del mes de " . $nombresMes[$mes - 1] . " del año " . $anio . "?";
+    } 
 }
 
 function print_r2($val)
@@ -131,6 +180,24 @@ function print_r2($val)
     echo '</pre>';
 }
 
-GrabarIndicadores();
+
+
+
+//**********************************************
+// Se ejecuta las sentencias dependiendo de la accion
+// que enviemos desde el archivo control.js
+//**********************************************
+
+$accion = $_POST['accion'];
+if($accion == 'verificar')
+{
+    VerificarIndicadoresIngresados();
+}
+
+if($accion == 'procesar')
+{
+    GrabarIndicadores();    
+}
+
 
 ?>

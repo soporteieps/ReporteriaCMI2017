@@ -28,7 +28,7 @@
     <script src="../../js/ui/jquery.ui.datepicker.js"></script> 
 	<script src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
     <script src="../../js/jquery-ui-timepicker-addon.js"></script>
-    <script src="../../js/index.js"></script>
+    <!-- <script src="../../js/index.js"></script> -->
     <script src="../../js/control.js"></script>
 </head>
 <body>

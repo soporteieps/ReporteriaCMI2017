@@ -1,5 +1,7 @@
-$(document).on('ready', inicio);
 var numClicks = 0;
+var respuesta = "";
+$(document).on('ready', inicio);
+
 
 
 function inicio()
@@ -19,6 +21,43 @@ function crearAjax()
 		res = new ActiveXObject("Microsoft.XMLHTTP");
 
 	return res;
+}
+
+function reporte(indicador, mes, zona, anio)
+{
+	
+	// se debe revisar si el reporte es anterior al mes y año actual
+	var fecha = document.getElementById('fechaServer');
+	if(!fecha)
+	{
+		console.log('fecha es null');	
+	}
+	else
+	{
+		var dateDiff = new Date - fecha.innerHTML;
+		console.log(dateDiff);
+	}
+	
+
+
+	var perfil = 7;
+	var ajax=crearAjax();
+		ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&perfil=" + perfil + "&accion=consultar",true);
+		ajax.onreadystatechange=function() 
+		{
+			
+			document.getElementById('DivIndex').innerHTML = '<img src="../../images/cargando.gif"x/>';
+			 ajax.onreadystatechange=function() 
+			{ 
+				if (ajax.readyState==4)
+				{
+					document.getElementById("DivIndex").parentNode.innerHTML=ajax.responseText;
+					vu=true;
+				}
+			}
+		}
+		ajax.send(null);
+	
 }
 
 function BuscarIndicador()
@@ -150,16 +189,80 @@ function ShowReportes()
 
 }
 
-function GuardarIndicadores()
+function GuardarIndicadores(departamento, anio, mes, zona)
 {
-	document.getElementById('botonGrabar').disabled = true;
+	
 	console.log('ejecutado la funcion');
+	
+	var idZona = zona;
+	var idMes = mes;
+	var idAnio = anio;
+	var idDepartamento = departamento;
+	var request = crearAjax();
+	
+
+	var fdata = new FormData();
+	var lengthIndicador = document.getElementById('cmbIndicador').length;
+	var valoresIndicadores = [];
+	console.log(lengthIndicador);
+
+	for(var i = 1; i < lengthIndicador; i++)
+	{
+		var idText = idZona + "-" + idMes + "-" + i;
+		
+		if(document.getElementById(idText) == null)
+		{
+			alert('Por favor, pulse el botón de "Buscar" para calcular los indicadores que desea guardar. (La ZONA, MES o AÑO NO CONCUERDAN CON LOS DATOS MOSTRADOS EN PATALLA).');
+			return false;
+		}
+		else
+		{
+			var textoTd = document.getElementById(idText).innerHTML;
+			valoresIndicadores.push(textoTd);
+		}
+	}
+
+	console.log(valoresIndicadores);
+	
+	fdata.append('idZona', idZona);
+	fdata.append('idMes', idMes);
+	fdata.append('idAnio', idAnio);
+	fdata.append('idDepartamento', idDepartamento);
+	fdata.append('valoresIndicadores', valoresIndicadores);
+	fdata.append('accion', 'procesar');
+
+	request.open('POST', '../../clases/grabarIndicadoresCMI.php', true);
+	request.onload = function(e)
+	{
+		if(request.status == 200)
+		{
+			console.log(request.responseText);
+			// alert('Datos guardados satisfactoriamente');
+			document.getElementById('botonGrabar').disabled = false;
+			alert('Indicadores guardados correctamente');
+		}
+		else
+		{
+			console.log('no se logro la conexion');
+			document.getElementById('botonGrabar').disabled = false;
+		}
+	};
+
+	request.send(fdata);
+ 
+
+	console.log(idZona + " - " + idMes + " - " + idAnio);
+}
+
+function VerificarDatos()
+{
+	var consulta = crearAjax();
+	document.getElementById('botonGrabar').disabled = true;
 	var idIndicador = $('#cmbIndicador').prop('selected', true).val();
 	var idZona = $('#cmbZona').prop('selected', true).val();
 	var idMes = $('#cmbMeses').prop('selected', true).val();
 	var idAnio = $('#cmbAnios').prop('selected', true).val();
 	var idDepartamento = 'FA';
-	var request = crearAjax();
 
 	if(idZona == -1)
 	{
@@ -187,45 +290,32 @@ function GuardarIndicadores()
 	}
 
 	var fdata = new FormData();
-	var lengthIndicador = document.getElementById('cmbIndicador').length;
-	var valoresIndicadores = [];
-	console.log(lengthIndicador);
-
-	for(var i = 1; i < lengthIndicador; i++)
-	{
-		var idText = idZona + "-" + idMes + "-" + i;
-		var textoTd = document.getElementById(idText).innerHTML;
-		valoresIndicadores.push(textoTd);
-	}
-
-	console.log(valoresIndicadores);
-
-	fdata.append('idIndicador', idIndicador);
-	fdata.append('idZona', idZona);
-	fdata.append('idMes', idMes);
-	fdata.append('idAnio', idAnio);
 	fdata.append('idDepartamento', idDepartamento);
-	fdata.append('valoresIndicadores', valoresIndicadores);
+	fdata.append('idAnio', idAnio);
+	fdata.append('idMes', idMes);
+	fdata.append('idZona', idZona);
+	fdata.append('accion', 'verificar');
 
-	request.open('POST', '../../clases/grabarIndicadoresCMI.php', true);
-	request.onload = function(e)
+
+	
+	consulta.onreadystatechange = function()
 	{
-		if(request.status == 200)
+		if(consulta.status == 200 && consulta.readyState == 4)
 		{
-			console.log(request.responseText);
-			// alert('Datos guardados satisfactoriamente');
-			document.getElementById('botonGrabar').disabled = false;
+			respuesta = consulta.responseText;
+			var confirmar = confirm(respuesta);
+			if(confirmar)
+			{
+				GuardarIndicadores(idDepartamento, idAnio, idMes, idZona);
+			}
+			else
+			{
+				message('Se cancelo la grabación de los indicadores');
+			}		
 		}
-		else
-		{
-			console.log('no se logro la conexion');
-			document.getElementById('botonGrabar').disabled = false;
-		}
-	};
-
-	request.send(fdata);
- 
-
-	console.log(idZona + " - " + idMes + " - " + idAnio);
+	}
+	consulta.open('POST', '../../clases/grabarIndicadoresCMI.php', true);
+	consulta.send(fdata);
+	
 }
 
