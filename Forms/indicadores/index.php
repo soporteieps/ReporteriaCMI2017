@@ -150,6 +150,7 @@
             </table>
     </form>
 </div>
+<div id="fechaServer"><?php echo date('Y-m-d'); ?></div>
 <script type="text/javascript">
 function exportarExcell() {
 	//alert("*************************function exportarExcell******************************");

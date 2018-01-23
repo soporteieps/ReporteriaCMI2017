@@ -28,21 +28,34 @@ function reporte(indicador, mes, zona, anio)
 	
 	// se debe revisar si el reporte es anterior al mes y año actual
 	var fecha = document.getElementById('fechaServer');
+	var arrayDate = new Array(0, 0, 0);
 	if(!fecha)
 	{
 		console.log('fecha es null');	
 	}
 	else
 	{
-		var dateDiff = new Date - fecha.innerHTML;
-		console.log(dateDiff);
+		var dateDiff = fecha.innerHTML;
+		arrayDate = dateDiff.split('-');
+		console.log(arrayDate[0] + " " + arrayDate[1] + " " + arrayDate[2]);
 	}
-	
+
+	arrayDate[0] = parseInt(arrayDate[0]);
+	arrayDate[1] = parseInt(arrayDate[1]);
+	arrayDate[2] = parseInt(arrayDate[2]);	
 
 
 	var perfil = 7;
 	var ajax=crearAjax();
-		ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&perfil=" + perfil + "&accion=consultar",true);
+	if(arrayDate[0] == anio && arrayDate[1] == mes)
+	{
+		ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&perfil=" + perfil + "&tipoReporte=normal&accion=consultar",true);
+	}
+	else
+	{
+		ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&perfil=" + perfil + "&tipoReporte=antiguo&accion=consultar",true);
+	}
+		
 		ajax.onreadystatechange=function() 
 		{
 			

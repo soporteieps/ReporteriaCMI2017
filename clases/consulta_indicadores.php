@@ -2132,18 +2132,48 @@ function meta_ejecutada($zona,$cod_indicador,$cod_mes)
 					
 	$result_meses2=query($consulta_meses1);
 	$consulta="";
+	$reporteTipo = $_GET['tipoReporte'];
+	$meta_alcanzada_total = 0;
+	// echo $reporteTipo . "</br>";
 	while($mes_aux2=mysql_fetch_object($result_meses2))
 		{
 			$mes = $mes_aux2->mes;
-			$meta_alcanzada = resultado_indicadores($cod_indicador, $mes, $zona);
+			if($reporteTipo == 'antiguo')
+			{
+				$meta_alcanzada = ShowIndicadorRegistrado($cod_indicador, $anioCurso, $mes, $zona);	
+			}
+			else
+			{
+				$meta_alcanzada = resultado_indicadores($cod_indicador, $mes, $zona);				
+			}
 			$claseMetaEjecutada = $zona . "-" . $mes . "-" . $cod_indicador;
 			//echo '<td align="center" bgcolor="#93CDDD">'.$meta_alcanzada.'</td>';
 			$consulta = $consulta.'<td align="center" id="' . $claseMetaEjecutada . '">'.$meta_alcanzada.'</td>';
 			$meta_alcanzada_total = $meta_alcanzada + $meta_alcanzada_total;
 		}
 	$consulta = $consulta.'<td align="center" bgcolor="#93CDDD"><strong>'.$meta_alcanzada_total.'</strong></td>';
-	$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="../../clases/detalle.php?indicador=' . $cod_indicador . '&mes=' . $cod_mes . '&zona=' . $zona . '&anio='. $anioCurso . '" target="_blank">Detalle</a></td>';
+	if($reporteTipo == 'normal')
+	{
+		$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="../../clases/detalle.php?indicador=' . $cod_indicador . '&mes=' . $cod_mes . '&zona=' . $zona . '&anio='. $anioCurso . '" target="_blank">Detalle</a></td>';		
+	}
+	else
+	{
+		$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="#">Detalle</a></td>';
+	}
 	return $consulta;
+}
+
+function ShowIndicadorRegistrado($codIndicador, $anio, $mes, $zona)
+{
+	$departamento = 'FA';
+	$sqlIndicador = "select * from indicador_registro_mensual where cod_indicador = " . $codIndicador . " and departamento = '" . $departamento . "' and mes = " . $mes . " and anio = " . $anio . " and zona = " . $zona;
+	$resIndicador = query($sqlIndicador);
+	$valorIndicador = 0;
+	while($filaIndicador = mysql_fetch_array($resIndicador))
+	{
+		$valorIndicador = $filaIndicador['valor_registro'];
+	}
+	return $valorIndicador;
 }
 
 function print_r2($val)
