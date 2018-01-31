@@ -1,6 +1,6 @@
 table {
   background: rgba(169,169,169,0.2);
-  font-size: 9px;
+  font-size: 13px;
   border-collapse: collapse;
   text-align: center;
   width: 100%;
@@ -50,6 +50,7 @@ td {
 .cabecera {
   background: rgba(7,7,186,0.8);
   color: #fff;
+  text-align: center;
 }
 
 #cargando
@@ -122,3 +123,5 @@ td {
 {
   background: rgba(18, 60, 142, 1);
 }
+
+

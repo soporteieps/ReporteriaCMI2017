@@ -25,28 +25,28 @@ function nuevoAjax()
 
 function reporte(indicador, mes, zona, anio)
 {
-	//alert ("reporte = "+indicador+" - "+mes+" - "+zona);
-	/*if(mes == '-1')
-	{
-		alert("Seleccione el mes");
-	}
-	else
-	{*/
-		var ajax=nuevoAjax();
-			ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&accion=consultar",true);
-			ajax.onreadystatechange=function() 
-			{
-				
-				document.getElementById('DivIndex').innerHTML = '<img src="../../images/cargando.gif"x/>';
-				 ajax.onreadystatechange=function() 
-				{ 
-					if (ajax.readyState==4)
-					{
-						document.getElementById("DivIndex").parentNode.innerHTML=ajax.responseText;
-						vu=true;
-					}
+	
+	// se debe revisar si el reporte es anterior al mes y año actual
+	var fecha = <?php = time(); ?>;
+	console.log(fecha);
+
+
+	var perfil = 7;
+	var ajax=nuevoAjax();
+		ajax.open("GET", "../../clases/index.php?indicador="+indicador+"&mes="+mes+"&zona="+zona+"&anio="+anio+"&perfil=" + perfil + "&accion=consultar",true);
+		ajax.onreadystatechange=function() 
+		{
+			
+			document.getElementById('DivIndex').innerHTML = '<img src="../../images/cargando.gif"x/>';
+			 ajax.onreadystatechange=function() 
+			{ 
+				if (ajax.readyState==4)
+				{
+					document.getElementById("DivIndex").parentNode.innerHTML=ajax.responseText;
+					vu=true;
 				}
 			}
-			ajax.send(null);
-	//}
+		}
+		ajax.send(null);
+	
 }

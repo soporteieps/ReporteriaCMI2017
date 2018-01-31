@@ -88,3 +88,37 @@ td,th {
 	padding-bottom: 5%;
 	
 }
+
+.botonGrabar,
+.botonSubirArchivo
+{
+	height: 100%;
+	border: 1px solid white;
+	box-shadow: 2px 2px rgba(0,0,0,0.6);
+	margin: 0;
+	cursor: pointer;
+}
+
+.botonSubirArchivo
+{
+	margin-left: 2px;
+	width: 0;
+	height: 0;	
+	visibility: hidden;
+
+}
+
+#labelBotonSubirArchivo
+{
+	background: #f0f0f0;
+	margin: 0;
+	padding: 5px;
+	box-shadow: 2px 2px rgba(0,0,0,0.5);
+	border: 1px solid white;
+	cursor: pointer;
+}
+
+#perfilUsuario
+{
+	visibility: hidden;
+}
