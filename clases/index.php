@@ -137,10 +137,12 @@ function consultar($cod_indicador, $cod_mes, $cod_zona, $anio)
               <tr>
 					<td colspan="9" width="140" height="30" style="text-align:center">
                      <input name="btnExportar" id="btnExportar" type="button" value="   Exportar" style="background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;" onclick="exportarExcell();">';
-                     $perfil = $_GET['perfil'];                     
-                     if($perfil == 7)
+                     $perfil = $_GET['perfil'];
+                     echo "<span id='perfilUsuario'>" . $perfil . "</span>";
+                     if($perfil == 1)
                      {
-                     	echo '<input type="button" class="botonGrabar" id="botonGrabar" value="Grabar Indicador" onclick="VerificarDatos();" />';
+                     	echo '<input type="button" class="botonGrabar" id="botonGrabar" value="Grabar Indicador" onclick="VerificarDatos(\'FA\');" />';
+                     	echo '<input type="file" class="botonSubirArchivo" id="botonSubirArchivo" id="botonSubirArchivo" value="Subir Archivo" onchange="ExisteArchivo(\'FA\');" /><label id="labelBotonSubirArchivo" for="botonSubirArchivo">Subir Archivo</label>';
                      }
                      
                      echo '</td>

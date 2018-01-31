@@ -2134,7 +2134,7 @@ function meta_ejecutada($zona,$cod_indicador,$cod_mes)
 	$consulta="";
 	$reporteTipo = $_GET['tipoReporte'];
 	$meta_alcanzada_total = 0;
-	// echo $reporteTipo . "</br>";
+	// echo $cod_mes . "</br>";
 	while($mes_aux2=mysql_fetch_object($result_meses2))
 		{
 			$mes = $mes_aux2->mes;
@@ -2144,7 +2144,31 @@ function meta_ejecutada($zona,$cod_indicador,$cod_mes)
 			}
 			else
 			{
-				$meta_alcanzada = resultado_indicadores($cod_indicador, $mes, $zona);				
+				//********************************************
+				// Se debe revisar si el mes consultado del año en curso ya fue guardado
+				// Si es asi, se debe mostrar los datos ya guardados
+				//*********************************************
+
+				$sqlIndicadoresGuardados = "select count(*) as numIndicadores from indicador_registro_mensual where mes = " . $mes . " and anio = " . $anioCurso . " and zona = " . $zona . " and departamento = 'FA' and cod_indicador = " . $cod_indicador;
+				// echo $sqlIndicadoresGuardados . "<br>";
+				$resIndicadoresGuardados = query($sqlIndicadoresGuardados);
+				$numIndicadoresGuardados = 0;
+				
+				while($indicadoresGuardados = mysql_fetch_array($resIndicadoresGuardados))
+				{
+					$numIndicadoresGuardados = $indicadoresGuardados['numIndicadores'];
+				}
+
+				// Si la variable $numIndicadoresGuardados = 0 muestro el calculo normal de los indicadores
+				if($numIndicadoresGuardados == 0)
+				{
+					$meta_alcanzada = resultado_indicadores($cod_indicador, $mes, $zona);				
+				}
+				else
+				{
+					// Caso contrario muestro los reportes ya guardados en la base de datos
+					$meta_alcanzada = ShowIndicadorRegistrado($cod_indicador, $anioCurso, $mes, $zona);
+				}
 			}
 			$claseMetaEjecutada = $zona . "-" . $mes . "-" . $cod_indicador;
 			//echo '<td align="center" bgcolor="#93CDDD">'.$meta_alcanzada.'</td>';
@@ -2158,7 +2182,7 @@ function meta_ejecutada($zona,$cod_indicador,$cod_mes)
 	}
 	else
 	{
-		$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="#">Detalle</a></td>';
+		$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="../../archivos/' . $anioCurso . '/FA/RESUMEN_EJECUTIVO.xls" target="_blank">Detalle</a></td>';
 	}
 	return $consulta;
 }

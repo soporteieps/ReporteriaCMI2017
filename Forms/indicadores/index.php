@@ -105,8 +105,7 @@
                     <td colspan="9" width="140" height="30">
                      <input name='btnExportar' id='btnExportar' type='button' value="   Exportar" style='background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;' onclick='exportarExcell();'>
                      
-                     </td>
-                      
+                     </td>                     
 			</tr>      
 </table>
 <table style="border-style:none" align="center">               
@@ -151,6 +150,8 @@
     </form>
 </div>
 <div id="fechaServer"><?php echo date('Y-m-d'); ?></div>
+<?php $perfil = $_GET['perfil']; ?>
+<span id='perfilUsuario'><?php echo $perfil; ?></span>
 <script type="text/javascript">
 function exportarExcell() {
 	//alert("*************************function exportarExcell******************************");

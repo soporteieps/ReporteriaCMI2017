@@ -45,7 +45,12 @@ function reporte(indicador, mes, zona, anio)
 	arrayDate[2] = parseInt(arrayDate[2]);	
 
 
-	var perfil = 7;
+	var perfil = 0;
+	var elementoPerfil = document.getElementById('perfilUsuario');
+	if(elementoPerfil)
+	{
+		perfil = elementoPerfil.innerHTML;
+	}
 	var ajax=crearAjax();
 	if(arrayDate[0] == anio && arrayDate[1] == mes)
 	{
@@ -143,9 +148,19 @@ function BucarIndicadorIM()
 			document.getElementById("reporteGeneral").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=0&mes=" + idMes + "&zona=" + idZona;
 			document.getElementById("reporteMontoPublicoBoton").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=1&mes=" + idMes + "&zona=" + idZona;
 			document.getElementById("reporteMontoPrivadoBoton").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=2&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteMontoPublicoBotonUeps").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=3&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteMontoPrivadoBotonUeps").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=4&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteAcumuladoPublico").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=5&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteAcumuladoPrivado").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=6&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteAcumuladoAnual").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=7&mes=" + idMes + "&zona=" + idZona;
 			document.getElementById("reporteGeneral").target = "_blank";
 			document.getElementById("reporteMontoPublicoBoton").target = "_blank";
 			document.getElementById("reporteMontoPrivadoBoton").target = "_blank";
+			document.getElementById("reporteMontoPublicoBotonUeps").target = "_blank";
+			document.getElementById("reporteMontoPrivadoBotonUeps").target = "_blank";
+			document.getElementById("reporteAcumuladoPublico").target = "_blank";
+			document.getElementById("reporteAcumuladoPrivado").target = "_blank";
+			document.getElementById("reporteAcumuladoAnual").target = "_blank";
 		}
 		else
 			console.log('no se logro la conexion');
@@ -267,7 +282,7 @@ function GuardarIndicadores(departamento, anio, mes, zona)
 	console.log(idZona + " - " + idMes + " - " + idAnio);
 }
 
-function VerificarDatos()
+function VerificarDatos(departamento)
 {
 	var consulta = crearAjax();
 	document.getElementById('botonGrabar').disabled = true;
@@ -275,7 +290,7 @@ function VerificarDatos()
 	var idZona = $('#cmbZona').prop('selected', true).val();
 	var idMes = $('#cmbMeses').prop('selected', true).val();
 	var idAnio = $('#cmbAnios').prop('selected', true).val();
-	var idDepartamento = 'FA';
+	var idDepartamento = departamento;
 
 	if(idZona == -1)
 	{
@@ -332,3 +347,153 @@ function VerificarDatos()
 	
 }
 
+function ExisteArchivo(departamento)
+{
+	var idDepartamento = departamento;
+
+	var fdata = new FormData();
+	var idAnio = $('#cmbAnios').prop('selected', true).val();
+	fdata.append('idDepartamento', idDepartamento);
+	fdata.append('idAnio', idAnio);
+	fdata.append('accion', 'existeArchivo');
+
+	var numArchivos = $('#botonSubirArchivo').prop('files').length;
+	if(numArchivos <= 0)
+	{
+		alert("No ha seleccionado ningun archivo.");
+		return false;
+	}
+
+	//cargamos archivos
+	var archivo = document.getElementById('botonSubirArchivo').files;
+	var extensionPermitida = ".xlsx";
+	var extensionPermitida2 = ".xls";
+	var cont = 0;
+	var contSize = 0;
+	for(var i = 0; i < numArchivos; i++)
+	{
+		var nombreArchivo = archivo[i].name;
+		var ext = nombreArchivo.substring(nombreArchivo.lastIndexOf(".")).toLowerCase();
+		// var sizeArchivo = archivo[i].size;
+		// console.log(sizeArchivo);
+		// sizeArchivo = sizeArchivo / 1000000;
+		// console.log(sizeArchivo);
+		// if(sizeArchivo > 6)
+		// {
+		// 	contSize++;
+		// }
+		console.log(nombreArchivo);
+
+		if((ext == extensionPermitida || ext == extensionPermitida2) && nombreArchivo == 'RESUMEN_EJECUTIVO.xls')
+		{
+			console.log(archivo[i].size);			
+			cont++;
+		}
+			
+	}
+
+	if(cont == 0)
+	{
+		alert("Solo puede cargar un archivo con extensión .xls con el nombre del archivo: RESUMEN_EJECUTIVO");
+		return false;
+	}
+
+	var consulta = crearAjax();
+	consulta.open('POST', "../../clases/grabarIndicadoresCMI.php", true );
+
+	consulta.onload = function(e)
+	{
+		if(consulta.status == 200)
+		{
+			var confirmar = confirm(consulta.responseText);
+			if(confirmar)
+			{
+				subidaArchivos(archivo, idDepartamento);
+			}
+			else
+			{
+				alert("No se reemplazo el archivo en el servidor");
+			}
+		}
+	}
+
+	consulta.send(fdata);
+
+}
+
+//llamara al codigo php para subir el archivo al servidor
+function subidaArchivos(documentos, departamento)
+{
+
+	//cargamos ajax
+	var request = crearAjax();
+
+	//variable que transportara los valores
+	var fdata = new FormData();
+
+	//revisamos si ha escogido un archivo
+	var numArchivos = $('#botonSubirArchivo').prop('files').length;
+	if(numArchivos <= 0)
+	{
+		alert("No ha seleccionado ningun archivo.");
+		return false;
+	}
+
+	//cargamos archivos
+	var archivo = documentos;
+	var extensionPermitida = ".xlsx";
+	var extensionPermitida2 = ".xls";
+	var cont = 0;
+	var contSize = 0;
+	for(var i = 0; i < numArchivos; i++)
+	{
+		console.log(archivo[i].size);
+		fdata.append('archivo' + i, archivo[i]);
+		cont++;
+		
+			
+	}
+
+	// if(contSize > 0)
+	// {
+	// 	alert("El archivo no debe pesar más de 6MB (6 Megabytes).");
+	// 	return false;
+	// }
+
+	var idZona = $('#cmbZona').prop('selected', true).val();
+	var idMes = $('#cmbMeses').prop('selected', true).val();
+	var idAnio = $('#cmbAnios').prop('selected', true).val();
+	var idDepartamento = departamento;
+	fdata.append('accion', 'subirArchivo');
+	fdata.append('idDepartamento', idDepartamento);
+	fdata.append('idAnio', idAnio);
+	fdata.append('idMes', idMes);
+	fdata.append('idZona', idZona);
+
+	console.log(fdata);
+	request.open("POST", "../../clases/grabarIndicadoresCMI.php", true);
+
+	request.onload = function(e)
+	{
+		if(request.status == 200)
+		{
+			// $('#botonSubirArchivo').removeAttr('disabled');
+			alert(request.responseText);			
+		}
+		else
+		{
+			alert(request.responseText);
+		}
+	};
+
+	// request.upload.addEventListener('progress', function(e){
+	// 	if(e.lengthComputable)
+	// 	{
+	// 		$('#botonSubirArchivo').prop('disabled', true);
+	// 		document.querySelector('.progreso').style.width = ((e.loaded / e.total) * 100) + '%';
+	// 	}
+	// });	
+
+	request.send(fdata);
+
+}

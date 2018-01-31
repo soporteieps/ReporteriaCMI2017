@@ -173,6 +173,90 @@ function VerificarIndicadoresIngresados()
     } 
 }
 
+function SubirArchivo()
+{
+    //$server = "http://190.11.20.107/Generador/archivos/";
+    $server = "http://10.2.74.100/cmi/reportes/archivos/";
+    $contador = 0;
+    $anio = getAnio();
+    $mes = getMes();
+    $departamento = getDepartamento();
+
+
+    //revisamos si la carpeta del año existe
+    if(!is_dir('../archivos/' . $anio))
+    {
+        //si no existe
+        mkdir('../archivos/' . $anio, 0777);        
+        mkdir('../archivos/' . $anio . '/' . $departamento, 0777);
+        // mkdir('../archivos/' . $anio. '/' . $mes . '/' . $departamento, 0777);
+
+    }
+    else
+    {
+        //revisamos si la carpeta del mes existe
+        if(!is_dir('../archivos/' . $anio. '/' . $departamento))
+        {
+            mkdir('../archivos/' . $anio. '/' . $departamento, 0777);
+            // mkdir('../archivos/' . $anio. '/' . $mes . '/' . $departamento, 0777);
+        }
+        // else
+        // {
+        //     if(!is_dir('../archivos/' . $anio. '/' . $mes . '/' . $departamento))
+        //     {
+        //         mkdir('../archivos/' . $anio. '/' . $mes . '/' . $departamento, 0777);
+        //     }
+        // }
+    }
+
+    foreach ($_FILES as $key) 
+    {
+        $ruta = "../archivos/";
+        $nombreOriginal = $key['name'];
+        $temporal = $key['tmp_name'];
+
+        
+        $ruta = $ruta . $anio. '/' . $departamento . '/';
+        $destino = $ruta . $nombreOriginal;
+
+        if($key['error'] == UPLOAD_ERR_OK)
+        {
+            move_uploaded_file($temporal, $destino);
+            
+        }
+
+        if($key['error'] == '')
+        {
+                    
+            echo "Archivo " . $nombreOriginal . " subido exitosamente";
+
+        }
+
+        if($key['error'] != '')
+            echo "Error al subir el archivo " . $nombreOriginal;
+    }
+}
+
+function ExisteArchivo()
+{
+    $anio = getAnio();
+    $departamento = getDepartamento();
+    $ruta = '../archivos/' . $anio . "/" . $departamento .'/';
+    $nombreArchivo = "RESUMEN_EJECUTIVO.xls";
+
+    $ruta .= $nombreArchivo;
+
+    // compruebo si existe el archivo
+    if(file_exists($ruta))
+    {
+        echo "El documento " . $nombreArchivo . " ya existe. Desea reemplazarlo??";
+    }
+    else
+    {
+        echo "Se guardará el archivo " . $nombreArchivo . ". Desea continuar???";
+    }
+}
+
 function print_r2($val)
 {
     echo '<pre>';
@@ -189,6 +273,7 @@ function print_r2($val)
 //**********************************************
 
 $accion = $_POST['accion'];
+// echo $accion;
 if($accion == 'verificar')
 {
     VerificarIndicadoresIngresados();
@@ -198,6 +283,17 @@ if($accion == 'procesar')
 {
     GrabarIndicadores();    
 }
+
+if($accion == 'existeArchivo')
+{
+    ExisteArchivo();
+}
+
+if($accion == 'subirArchivo')
+{
+    SubirArchivo();
+}
+
 
 
 ?>
