@@ -90,9 +90,19 @@ function BucarIndicadorIM()
 			document.getElementById("reporteGeneral").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=0&mes=" + idMes + "&zona=" + idZona;
 			document.getElementById("reporteMontoPublicoBoton").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=1&mes=" + idMes + "&zona=" + idZona;
 			document.getElementById("reporteMontoPrivadoBoton").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=2&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteMontoPublicoBotonUeps").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=3&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteMontoPrivadoBotonUeps").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=4&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteAcumuladoPublico").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=5&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteAcumuladoPrivado").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=6&mes=" + idMes + "&zona=" + idZona;
+			document.getElementById("reporteAcumuladoAnual").href = "../../clases/detalleIntercambio.php?anio=" + idAnio +"&indicador=7&mes=" + idMes + "&zona=" + idZona;
 			document.getElementById("reporteGeneral").target = "_blank";
 			document.getElementById("reporteMontoPublicoBoton").target = "_blank";
 			document.getElementById("reporteMontoPrivadoBoton").target = "_blank";
+			document.getElementById("reporteMontoPublicoBotonUeps").target = "_blank";
+			document.getElementById("reporteMontoPrivadoBotonUeps").target = "_blank";
+			document.getElementById("reporteAcumuladoPublico").target = "_blank";
+			document.getElementById("reporteAcumuladoPrivado").target = "_blank";
+			document.getElementById("reporteAcumuladoAnual").target = "_blank";
 		}
 		else
 			console.log('no se logro la conexion');
