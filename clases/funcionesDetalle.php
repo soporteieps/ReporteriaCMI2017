@@ -1706,8 +1706,8 @@ function primer_indicador($mes,$zona)
 	$sqlEventosMes .= " group by ev.cod_evento";
 	$sqlAsistencias .= " group by a.cod_asistencia_legal";
 
-	/*echo $sqlEventosMes . "<br>";
-	echo $sqlAsistencias . "<br>";*/
+	// echo $sqlEventosMes . "<br>";
+	// echo $sqlAsistencias . "<br>";
 
 	$resSqlEventosMes = query($sqlEventosMes);
 	$resSqlAsistencias = query($sqlAsistencias);
@@ -3988,9 +3988,9 @@ function NumCapacitadosGenero($orgReportadas, $anio, $mes, $tipoOrg, $zona, $gen
 
 		//SOLO PARA INFORME BORRAR LUEGO
 		//print_r2($asistentes);
-		$eventosCapacitados = array_unique($eventosCapacitados);
-		$eventosCapacitados = array_values($eventosCapacitados);
-		EdadesCapacitados($asistentes, $eventosCapacitados, $tipoOrg, $valor);		
+		// $eventosCapacitados = array_unique($eventosCapacitados);
+		// $eventosCapacitados = array_values($eventosCapacitados);
+		// EdadesCapacitados($asistentes, $eventosCapacitados, $tipoOrg, $valor);		
 
 	}
 	return $numGenero;
@@ -4005,13 +4005,14 @@ function EdadesCapacitados($arrayCedulasCapacitados, $eventosCap, $tipoOrg, $org
 	//print_r2($eventosCap);
 
 	$sizeEventos = count($eventosCap);
+	$anioSel = getAnioSeleccionado();
 	global $tablaCapacitados;
 	$indiceCap = 0;
 	foreach($arrayCedulasCapacitados as $valor)
 	{
 		for($i = 0; $i < $sizeEventos; $i++)
 		{
-			$sqlDetalleCapacitados = "select * from asistentes where cod_evento = '" . $eventosCap[$i] . "' and cedula = '" . $valor . "' and anio = 2017 and tipo_evento = '" . $tipoOrg . "' group by cedula";
+			$sqlDetalleCapacitados = "select * from asistentes where cod_evento = '" . $eventosCap[$i] . "' and cedula = '" . $valor . "' and anio = " . $anioSel . " and tipo_evento = '" . $tipoOrg . "' group by cedula";
 			//echo $sqlDetalleCapacitados . "<br>";
 			$resDetalleCap = query($sqlDetalleCapacitados);
 			$numFilas = mysql_num_rows($resDetalleCap);
@@ -4054,13 +4055,14 @@ function EdadesCapacitadosCI($arrayCedulasCapacitados, $eventosCap, $org)
 	//print_r2($eventosCap);
 
 	$sizeEventos = count($eventosCap);
+	$anioSel = getAnioSeleccionado();
 	global $tablaCapacitados;
 	$indiceCap = 0;
 	foreach($arrayCedulasCapacitados as $valor)
 	{
 		for($i = 0; $i < $sizeEventos; $i++)
 		{
-			$sqlDetalleCapacitados = "select * from asistentes where cod_evento = '" . $eventosCap[$i] . "' and cedula = '" . $valor . "' and anio = 2017 group by cedula";
+			$sqlDetalleCapacitados = "select * from asistentes where cod_evento = '" . $eventosCap[$i] . "' and cedula = '" . $valor . "' and anio = " . $anioSel ." group by cedula";
 			//echo $sqlDetalleCapacitados . "<br>";
 			$resDetalleCap = query($sqlDetalleCapacitados);
 			$numFilas = mysql_num_rows($resDetalleCap);

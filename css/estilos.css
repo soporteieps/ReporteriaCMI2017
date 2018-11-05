@@ -12,6 +12,28 @@ td {
   padding-bottom: 2px;
 }
 
+.botones
+{
+  visibility: collapse;
+}
+
+.flecha
+{  
+  padding: 0;
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.flecha i
+{
+  font-size: 32px;
+  padding: 0;
+  margin: 0;
+  float: right;
+  border: 0;
+}
+
 #tablaResultado {
   border: 1px solid #000;
   border-collapse: collapse;
@@ -123,5 +145,6 @@ td {
 {
   background: rgba(18, 60, 142, 1);
 }
+
 
 

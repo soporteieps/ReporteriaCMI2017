@@ -4,7 +4,7 @@
  //$usr_login=$_POST['usr_login'];
  //echo "*****************name=".$name." ,usr_login=".$usr_login."***********************<br>";
  ?>
-<?php $zonaUsr = $_GET['zonaUsr'];  // tomamos la zona del usuario enviada en la url ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,7 +12,7 @@
     <title>REPORTE DE INDICADORES</title>
    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../../css/flexigrid.css" />
-    <script src='../../js/jquery.js'></script> 
+    <script src='../../js/jquery-1.6.4.min.js'></script> 
     <script type="text/javascript" src="../../js/flexigrid.pack.js"></script>  
     <link rel="stylesheet" href="../../css/themes/base/jquery.ui.all.css">
     <script src="../../js/external/jquery.bgiframe-2.1.2.js"></script>
@@ -28,18 +28,8 @@
     <script src="../../js/ui/jquery.ui.datepicker.js"></script> 
 	<script src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
     <script src="../../js/jquery-ui-timepicker-addon.js"></script>
-    <!-- <script src="../../js/index.js"></script> -->
-    <script src="../../js/control.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-73816205-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-73816205-1');
-</script>
-
+    <script src="../../js/index.js"></script>
+  
 </head>
 <body>
 <div id='DivIndex' align='center'>
@@ -105,7 +95,7 @@
                                 {                            
                                     echo '<option value="'. $i .'">'.$i.'</option>';
                                 }
-                        ?>                    
+                        ?>
                     </td>
                    <td colspan="2" width="88" align="center" valign="middle">
                          <input name='btnBuscar' id='btnBuscar' type='button' value="          Buscar" style='background-image:url(../../images/buscar.jpg);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;' onclick='reporte(document.form1.cmbIndicador.value, document.form1.cmbMeses.value, document.form1.cmbZona.value, document.form1.cmbAnios.value);'>
@@ -113,10 +103,8 @@
               </tr>
               <tr>
                     <td colspan="9" width="140" height="30">
-                     <input name='btnExportar' id='btnExportar' type='button' value="   Exportar" style='background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;' onclick='exportarExcell();'>
-                     
-                     </td>                     
-			</tr>      
+                     <input name='btnExportar' id='btnExportar' type='button' value="   Exportar" style='background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;' onclick='exportarExcell();'></td>
+			</tr>
 </table>
 <table style="border-style:none" align="center">               
                  <tr>
@@ -159,9 +147,6 @@
             </table>
     </form>
 </div>
-<div id="fechaServer"><?php echo date('Y-m-d'); ?></div>
-<?php $perfil = $_GET['perfil']; ?>
-<span id='perfilUsuario'><?php echo $perfil; ?></span>
 <script type="text/javascript">
 function exportarExcell() {
 	//alert("*************************function exportarExcell******************************");

@@ -4,6 +4,7 @@
     <meta charset='UTF-8'>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>REPORTE DE INDICADORES</title>
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" />
    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
    <link rel="stylesheet" type="text/css" href="../../css/estilos.css" />
     <link rel="stylesheet" type="text/css" href="../../css/flexigrid.css" />
@@ -61,7 +62,7 @@ echo '<form name="form1" method="post">
           <tr>
         <td width="140" align="center" bgcolor="#000000"><font color="#ffffff" size="2" face="Arial, Helvetica, sans-serif"><strong><left>Indicador</left></strong></font></td>
                 <td width="240" align="center" valign="middle">';
-                 $consulta="select cod_indicador,indicador from indicador where departamento = 'IM' and estado = 1";
+                 $consulta="select cod_indicador,indicador from indicador where departamento = 'IM' and estado = 1 and anio_fin = 2017";
          
                  $result=query($consulta);    
                  echo '<select name="cmbIndicador" id="cmbIndicador" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"><option value = "-1">--TODOS--</option>';
@@ -144,11 +145,19 @@ echo '<form name="form1" method="post">
           </tr>
           <tr>
         <td colspan="9" width="140" height="30">
-                 <input name="btnExportar" id="btnExportar" type="button" value="Exportar" style="background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;" onclick="exportarExcell();"></td>
+                 <input name="btnExportar" id="btnExportar" type="button" value="Exportar" style="background-image:url(../../images/export.gif);background-repeat:no-repeat;height:32px;width:90px;background-position:left; cursor: pointer;" onclick="exportarExcell();">';
+                 
+                 if($perfil == 1)
+                 {
+                  echo '<input type="button" class="botonGrabar" id="botonGrabar" value="Grabar Indicador" onclick="VerificarDatos(\'IM\');" />';
+                      echo '<input type="file" class="botonSubirArchivo" id="botonSubirArchivo" id="botonSubirArchivo" value="Subir Archivo" onchange="ExisteArchivo(\'IM\');" /><label id="labelBotonSubirArchivo" for="botonSubirArchivo">Subir Archivo</label>';
+                 }
+
+              echo '</td>
            </tr>';
             if($perfil == 1 || $perfil == 7)
             {
-              echo '<tr>
+              echo '<tr class="botones" id="botones">
                       <td colspan="2" width="140" height="30">
                         <a id="reporteGeneral" href="#">Reporte General Actores</a>
                       </td>
@@ -178,11 +187,15 @@ echo '<form name="form1" method="post">
             }
 
         
- echo '</table>
+ echo '<tr>
+        <td class="flecha" colspan="9" onclick="MostrarControlReportes()"><i id="controlReporte" class="fa fa-angle-down"></i></td>
+       </tr>
+      </table>
 </form>
 </div>';  
 
 ?>
 <div id="resultadoIndicadores">
 </div><!-- fin div resultadoIndicadores -->
+<?php echo '<div id="fechaServer">' . date('Y-m-d') . '</div>';?>
 

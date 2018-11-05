@@ -9,26 +9,26 @@ $idMes = $_POST['idMes'];
 $nombresMes  = array('ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC');
 
 $tabla = "<table id='tablaResultado'>
-			<tr>				
-				<th colspan='2' class='colorBlanco'></th>
-				<th colspan='12' class='colorIndicador_im1'>DIRECCIÓN TÉCNICA ZONAL " . $idZona . "</th>
-			</tr>
-			<tr>
-				<th class='colorIndicador_im'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador_im'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador_im'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador_im'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador_im'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador_im1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador_im1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador_im1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador_im1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador_im1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador_im1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador_im1'>Zona</th>
-				<th class='colorIndicador_im1'>Mes</th>
-				<th class='colorIndicador_im1' target='_blank'>Detalles</th>
-			</tr>";
+            <tr>                
+                <th colspan='2' class='colorBlanco'></th>
+                <th colspan='12' class='colorIndicador_im1'>DIRECCIÓN TÉCNICA ZONAL " . $idZona . "</th>
+            </tr>
+            <tr>
+                <th class='colorIndicador_im'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador_im'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador_im'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador_im'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador_im'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador_im1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador_im1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador_im1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador_im1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador_im1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador_im1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador_im1'>Zona</th>
+                <th class='colorIndicador_im1'>Mes</th>
+                <th class='colorIndicador_im1' target='_blank'>Detalles</th>
+            </tr>";
 
 //Indicadores
 
@@ -39,19 +39,19 @@ $codIndicadoresArray = array();
 
 while($fila = mysql_fetch_array($resSqlInd))
 {
-	array_push($nombresIndicadores, $fila['indicador']);
-	array_push($codIndicadoresArray, $fila['cod_indicador']);
+    array_push($nombresIndicadores, $fila['indicador']);
+    array_push($codIndicadoresArray, $fila['cod_indicador']);
 }
 
 //print_r2($codIndicadoresArray);
 /*$nombresIndicadores = array('MONTO EN VENTAS DE ORGANIZACIONES EPS Y UEPS AL MERCADO PÚBLICO',
-		'MONTO EN VENTAS DE ORGANIZACIONES EPS Y UEPS AL MERCADO PRIVADO',
-		'NÚMERO DE ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS',
-		'NÚMERO DE UNIDADES ECONÓMICAS POPULARES - UEPS QUE RECIBIERON AL MENOS UN SERVICIO DIRECCIÓN DE INTERCAMBIO Y MERCADOS',
-		'NÚMERO DE PERSONAS QUE CONFORMAN LAS ORGANIZACIONES Y UEPS QUE HAN RECIBIDO AL MENOS UN SERVICIO DE LA DIM Y SE ENMARCAN EN LA ESTRATEGIA PARA EL CAMBIO DE LA MATRIZ PRODUCTIVA',
-		'NÚMERO DE CIRCUITOS ECONÓMICOS QUE HAYAN RECIBIDO AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS',
-		'NÚMERO DE PERSONAS DE LA EPS CON PLAZAS DE TRABAJO POR ACCESO PÚBLICO O PRIVADO',
-		'NÚMERO DE NUEVAS ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS', 'NÚMERO DE ORGANIZACIONES QUE RECIBEN UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS RELATIVO A COMERCIO JUSTO NACIONAL E INTERNACIONAL');*/
+        'MONTO EN VENTAS DE ORGANIZACIONES EPS Y UEPS AL MERCADO PRIVADO',
+        'NÚMERO DE ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS',
+        'NÚMERO DE UNIDADES ECONÓMICAS POPULARES - UEPS QUE RECIBIERON AL MENOS UN SERVICIO DIRECCIÓN DE INTERCAMBIO Y MERCADOS',
+        'NÚMERO DE PERSONAS QUE CONFORMAN LAS ORGANIZACIONES Y UEPS QUE HAN RECIBIDO AL MENOS UN SERVICIO DE LA DIM Y SE ENMARCAN EN LA ESTRATEGIA PARA EL CAMBIO DE LA MATRIZ PRODUCTIVA',
+        'NÚMERO DE CIRCUITOS ECONÓMICOS QUE HAYAN RECIBIDO AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS',
+        'NÚMERO DE PERSONAS DE LA EPS CON PLAZAS DE TRABAJO POR ACCESO PÚBLICO O PRIVADO',
+        'NÚMERO DE NUEVAS ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS', 'NÚMERO DE ORGANIZACIONES QUE RECIBEN UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS RELATIVO A COMERCIO JUSTO NACIONAL E INTERNACIONAL');*/
 
 
 
@@ -59,146 +59,146 @@ while($fila = mysql_fetch_array($resSqlInd))
 if($idZona == -1 && $idMes == -1 && $idIndicador == -1)
 {
 
-	// echo "if 1 <br>";
-	//Quiere ver todos los meses e indicadores
-	for($i = 1; $i < 10; $i++) //zonas
-	{
-		for($j = 1; $j < 13; $j++) //meses
-		{
-			Indicador01($i, $j);
-			Indicador02($i, $j);
-			Indicador03($i, $j);
-			Indicador04($i, $j);
-			Indicador05($i, $j);
-			Indicador06($i, $j);
-			Indicador07($i, $j);
-			Indicador08($i, $j);
-			//Indicador09($i, $j);
-		}
-	}
+    // echo "if 1 <br>";
+    //Quiere ver todos los meses e indicadores
+    for($i = 1; $i < 10; $i++) //zonas
+    {
+        for($j = 1; $j < 13; $j++) //meses
+        {
+            Indicador01($i, $j);
+            Indicador02($i, $j);
+            Indicador03($i, $j);
+            Indicador04($i, $j);
+            Indicador05($i, $j);
+            Indicador06($i, $j);
+            Indicador07($i, $j);
+            Indicador08($i, $j);
+            //Indicador09($i, $j);
+        }
+    }
 }
 
 //Si ha elegido la zona pero no el mes e indicador
 if($idZona != -1 && $idMes == -1 && $idIndicador == -1)
 {
-	// echo "if 2 <br>";
-	for($i = 1; $i < 13; $i++)
-	{
-		Indicador01($idZona, $i);
-		Indicador02($idZona, $i);
-		Indicador03($idZona, $i);
-		Indicador04($idZona, $i);
-		Indicador05($idZona, $i);
-		Indicador06($idZona, $i);
-		Indicador07($idZona, $i);
-		Indicador08($idZona, $i);
-		//Indicador09($idZona, $i);
-	}
+    // echo "if 2 <br>";
+    for($i = 1; $i < 13; $i++)
+    {
+        Indicador01($idZona, $i);
+        Indicador02($idZona, $i);
+        Indicador03($idZona, $i);
+        Indicador04($idZona, $i);
+        Indicador05($idZona, $i);
+        Indicador06($idZona, $i);
+        Indicador07($idZona, $i);
+        Indicador08($idZona, $i);
+        //Indicador09($idZona, $i);
+    }
 }
 
 //Si ha elegido el mes pero no la zona e indicador
 if($idZona == -1 && $idMes != -1 && $idIndicador == -1)
 {
-	// echo "if 3 <br>";
-	for($i = 1; $i < 10; $i++)
-	{
-		Indicador01($i, $idMes);
-		Indicador02($i, $idMes);
-		Indicador03($i, $idMes);
-		Indicador04($i, $idMes);
-		Indicador05($i, $idMes);
-		Indicador06($i, $idMes);
-		Indicador07($i, $idMes);
-		Indicador08($i, $idMes);
-		//Indicador09($i, $idMes);
-	}
+    // echo "if 3 <br>";
+    for($i = 1; $i < 10; $i++)
+    {
+        Indicador01($i, $idMes);
+        Indicador02($i, $idMes);
+        Indicador03($i, $idMes);
+        Indicador04($i, $idMes);
+        Indicador05($i, $idMes);
+        Indicador06($i, $idMes);
+        Indicador07($i, $idMes);
+        Indicador08($i, $idMes);
+        //Indicador09($i, $idMes);
+    }
 }
 
 //Si ha elegido el indicador pero no la zona y el mes
 if($idZona == -1 && $idMes == -1 && $idIndicador != -1)
 {
-	// echo "if 4 <br>";
-	for($i = 1; $i < 10; $i++)
-	{
-		for($j = 1; $j < 13; $j++)
-		{
-		    if($idIndicador == 17)Indicador01($i, $j);
-		    if($idIndicador == 18)Indicador02($i, $j);
-		    if($idIndicador == 19)Indicador03($i, $j);
-		    if($idIndicador == 20)Indicador04($i, $j);
-		    if($idIndicador == 21)Indicador05($i, $j);
-		    if($idIndicador == 22)Indicador06($i, $j);
-		    if($idIndicador == 23)Indicador07($i, $j);
-		    if($idIndicador == 24)Indicador08($i, $j);
-		    //if($idIndicador == 25)Indicador09($i, $j);
-		}
-	}
+    // echo "if 4 <br>";
+    for($i = 1; $i < 10; $i++)
+    {
+        for($j = 1; $j < 13; $j++)
+        {
+            if($idIndicador == 17)Indicador01($i, $j);
+            if($idIndicador == 18)Indicador02($i, $j);
+            if($idIndicador == 19)Indicador03($i, $j);
+            if($idIndicador == 20)Indicador04($i, $j);
+            if($idIndicador == 21)Indicador05($i, $j);
+            if($idIndicador == 22)Indicador06($i, $j);
+            if($idIndicador == 23)Indicador07($i, $j);
+            if($idIndicador == 24)Indicador08($i, $j);
+            //if($idIndicador == 25)Indicador09($i, $j);
+        }
+    }
 }
 
 //Si ha elegido la zona y el mes pero no el Indicador
 if($idZona != -1 && $idMes != -1 && $idIndicador == -1)
 {
-	// echo "if 5 <br>";
-	Indicador01($idZona, $idMes);
-	Indicador02($idZona, $idMes);
-	Indicador03($idZona, $idMes);
-	Indicador04($idZona, $idMes);
-	Indicador05($idZona, $idMes);
-	Indicador06($idZona, $idMes);
-	Indicador07($idZona, $idMes);
-	Indicador08($idZona, $idMes);
-	//Indicador09($idZona, $idMes);
+    // echo "if 5 <br>";
+    Indicador01($idZona, $idMes);
+    Indicador02($idZona, $idMes);
+    Indicador03($idZona, $idMes);
+    Indicador04($idZona, $idMes);
+    Indicador05($idZona, $idMes);
+    Indicador06($idZona, $idMes);
+    Indicador07($idZona, $idMes);
+    Indicador08($idZona, $idMes);
+    //Indicador09($idZona, $idMes);
 }
 
 //Si ha elegido la zona y el indicador pero no el mes
 if($idZona != -1 && $idMes == -1 && $idIndicador != -1)
 {
-	// echo "if 6 <br>";
-	for($i = 1; $i < 13; $i++)
-	{
-		if($idIndicador == 17)Indicador01($idZona, $i);
-	    if($idIndicador == 18)Indicador02($idZona, $i);
-	    if($idIndicador == 19)Indicador03($idZona, $i);
-	    if($idIndicador == 20)Indicador04($idZona, $i);
-	    if($idIndicador == 21)Indicador05($idZona, $i);
-	    if($idIndicador == 22)Indicador06($idZona, $i);
-	    if($idIndicador == 23)Indicador07($idZona, $i);
-	    if($idIndicador == 24)Indicador08($idZona, $i);
-	    //if($idIndicador == 25)Indicador09($idZona, $i);
-	}
+    // echo "if 6 <br>";
+    for($i = 1; $i < 13; $i++)
+    {
+        if($idIndicador == 17)Indicador01($idZona, $i);
+        if($idIndicador == 18)Indicador02($idZona, $i);
+        if($idIndicador == 19)Indicador03($idZona, $i);
+        if($idIndicador == 20)Indicador04($idZona, $i);
+        if($idIndicador == 21)Indicador05($idZona, $i);
+        if($idIndicador == 22)Indicador06($idZona, $i);
+        if($idIndicador == 23)Indicador07($idZona, $i);
+        if($idIndicador == 24)Indicador08($idZona, $i);
+        //if($idIndicador == 25)Indicador09($idZona, $i);
+    }
 }
 
 //Si ha elegido el mes y el indicador pero no la zona
 if($idZona == -1 && $idMes != -1 && $idIndicador != -1)
 {
-	// echo "if 7 <br>";
-	for($i = 1; $i < 10; $i++)
-	{
-		if($idIndicador == 17)Indicador01($i, $idMes);
-	    if($idIndicador == 18)Indicador02($i, $idMes);
-	    if($idIndicador == 19)Indicador03($i, $idMes);
-	    if($idIndicador == 20)Indicador04($i, $idMes);
-	    if($idIndicador == 21)Indicador05($i, $idMes);
-	    if($idIndicador == 22)Indicador06($i, $idMes);
-	    if($idIndicador == 23)Indicador07($i, $idMes);
-	    if($idIndicador == 24)Indicador08($i, $idMes);
-	    //if($idIndicador == 25)Indicador09($i, $idMes);
-	}
+    // echo "if 7 <br>";
+    for($i = 1; $i < 10; $i++)
+    {
+        if($idIndicador == 17)Indicador01($i, $idMes);
+        if($idIndicador == 18)Indicador02($i, $idMes);
+        if($idIndicador == 19)Indicador03($i, $idMes);
+        if($idIndicador == 20)Indicador04($i, $idMes);
+        if($idIndicador == 21)Indicador05($i, $idMes);
+        if($idIndicador == 22)Indicador06($i, $idMes);
+        if($idIndicador == 23)Indicador07($i, $idMes);
+        if($idIndicador == 24)Indicador08($i, $idMes);
+        //if($idIndicador == 25)Indicador09($i, $idMes);
+    }
 }
 
 //Si ha elegido todos los parametros
 if($idZona != -1 && $idMes != -1 && $idIndicador != -1)
-{	
-	// echo "if 8 <br>";
-	if($idIndicador == 17)Indicador01($idZona, $idMes);
+{   
+    // echo "if 8 <br>";
+    if($idIndicador == 17)Indicador01($idZona, $idMes);
     if($idIndicador == 18)Indicador02($idZona, $idMes);
     if($idIndicador == 19)Indicador03($idZona, $idMes);
     if($idIndicador == 20)Indicador04($idZona, $idMes);
     if($idIndicador == 21)Indicador05($idZona, $idMes);
     if($idIndicador == 22)Indicador06($idZona, $idMes);
-    if($idIndicador == 23)Indicador07($idZona, $idMes);	
-    if($idIndicador == 24)Indicador08($idZona, $idMes);	
-    //if($idIndicador == 25)Indicador09($idZona, $idMes);	
+    if($idIndicador == 23)Indicador07($idZona, $idMes); 
+    if($idIndicador == 24)Indicador08($idZona, $idMes); 
+    //if($idIndicador == 25)Indicador09($idZona, $idMes);   
 }
 
 /*Indicador01(2, 4);
@@ -215,568 +215,749 @@ Indicador09(2, 4);  */
 $tabla .= "</table>";
 echo $tabla;
 
+function GetDepartamento()
+{
+    $departamentoRecibido = $_POST['idDepartamento'];
+    return $departamentoRecibido;
+}
+
 function getAnioSeleccionado()
-{	
-	$anioCurso = $_POST['idAnio'];
-	
-	return $anioCurso;
+{   
+    $anioCurso = $_POST['idAnio'];
+    
+    return $anioCurso;
 }
 
 function MetaMensual($zona, $mes, $indicador)
 {
-	$anioCurso = getAnioSeleccionado();
+    $anioCurso = getAnioSeleccionado();
 
-	$metaProgramada = 0;
-	//consultamos la meta programada
-	$sqlMetaProgramada = "
-	select i.indicador, iz.cod_zona, izm.mes, izm.meta_programada 
-	from indicador_zona_mes izm
-	inner join indicador_zona iz on (iz.cod_indicador_zona = izm.cod_indicador_zona)
-	inner join indicador i on (i.cod_indicador = iz.cod_indicador)
-	where i.cod_indicador = " . $indicador . "  and izm.mes = " . $mes . " and iz.cod_zona = " . $zona . " and izm.anio_indicador = " . $anioCurso;
+    $metaProgramada = 0;
+    //consultamos la meta programada
+    $sqlMetaProgramada = "
+    select i.indicador, iz.cod_zona, izm.mes, izm.meta_programada 
+    from indicador_zona_mes izm
+    inner join indicador_zona iz on (iz.cod_indicador_zona = izm.cod_indicador_zona)
+    inner join indicador i on (i.cod_indicador = iz.cod_indicador)
+    where i.cod_indicador = " . $indicador . "  and izm.mes = " . $mes . " and iz.cod_zona = " . $zona . " and izm.anio_indicador = " . $anioCurso;
 
-	//echo $sqlMetaProgramada . "<br>";
+    //echo $sqlMetaProgramada . "<br>";
 
-	$resSqlMetaProgramada = query($sqlMetaProgramada);
-	while($fila = mysql_fetch_array($resSqlMetaProgramada))
-	{
-		$metaProgramada = $fila['meta_programada'];
-	}
+    $resSqlMetaProgramada = query($sqlMetaProgramada);
+    while($fila = mysql_fetch_array($resSqlMetaProgramada))
+    {
+        $metaProgramada = $fila['meta_programada'];
+    }
 
-	return $metaProgramada;
+    return $metaProgramada;
 }
 
 function MetaAnio($zona, $mes, $indicador)
 {
-	$metaA = 0;
-	$anioCurso = getAnioSeleccionado();
+    $metaA = 0;
+    $anioCurso = getAnioSeleccionado();
 
-	//sql meta anual por zona
-	$sqlMetaAnual = "select i.indicador, iz.cod_zona, izm.mes, sum(izm.meta_programada) as suma
-	from indicador_zona_mes izm
-	inner join indicador_zona iz on (iz.cod_indicador_zona = izm.cod_indicador_zona)
-	inner join indicador i on (i.cod_indicador = iz.cod_indicador)
-	where i.cod_indicador = " . $indicador . " and iz.cod_zona = " . $zona . " and izm.anio_indicador = " . $anioCurso . " 
-	group by iz.cod_zona";
+    //sql meta anual por zona
+    $sqlMetaAnual = "select i.indicador, iz.cod_zona, izm.mes, sum(izm.meta_programada) as suma
+    from indicador_zona_mes izm
+    inner join indicador_zona iz on (iz.cod_indicador_zona = izm.cod_indicador_zona)
+    inner join indicador i on (i.cod_indicador = iz.cod_indicador)
+    where i.cod_indicador = " . $indicador . " and iz.cod_zona = " . $zona . " and izm.anio_indicador = " . $anioCurso . " 
+    group by iz.cod_zona";
 
-	$resMetaAnual = query($sqlMetaAnual);
-	
-	while($fila = mysql_fetch_array($resMetaAnual))
-	{
-		$metaA = $fila['suma'];		
-	}
+    $resMetaAnual = query($sqlMetaAnual);
+    
+    while($fila = mysql_fetch_array($resMetaAnual))
+    {
+        $metaA = $fila['suma'];     
+    }
 
-	return $metaA;
+    return $metaA;
 }
 
 function Indicador01($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales	
-	$ventasMes = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0); 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales 
+    $ventasMes = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0); 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== PRIMER INDICADOR =======================*/
-	/*MONTO EN VENTA DE ORGANIZACIONES Y UEPS AL MERCADO PÚBLICO*/
+    /*=========== PRIMER INDICADOR =======================*/
+    /*MONTO EN VENTA DE ORGANIZACIONES Y UEPS AL MERCADO PÚBLICO*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[0]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[0]);
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[0]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[0]);
 
-		//echo $metaMes . "<br>" . $metaAnual;
+    
 
+        //echo $metaMes . "<br>" . $metaAnual;
 
-	//sql que consulta las ventas en el mes indicado
-	$sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_registro from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_registro) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
 
-	//echo $sqlVentasMesPub . "<br>";
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[0];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
 
-	
-	//ejecucion del sql
-	
-	$resVentasMesPub = query($sqlVentasMesPub);
-	while($fila = mysql_fetch_array($resVentasMesPub))
-	{
-		$ventasMes = $fila['ventas'];
-	}
+    if($indicadoresGuardados == 0)
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_registro from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_registro) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
 
-	//echo $ventasMes . "<br>";
+        // echo $sqlVentasMesPub . "<br>";
 
-	//calculamos el avance mensual
-	$avanceMes = round(($ventasMes * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
+        //calcularemos las ventas acumuladas hasta el mes especificado
+        $sqlVentasAcumuladas = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_reporte from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlVentasMesPub = "select valor_registro as ventas from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "' and cod_indicador = " . $codIndicadoresArray[0];
 
-	//calcularemos las ventas acumuladas hasta el mes especificado
-	$sqlVentasAcumuladas = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_reporte from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
-
-	$resVentasAcumuladas = query($sqlVentasAcumuladas);
-	while($fila = mysql_fetch_array($resVentasAcumuladas))
-	{
-		$metaAcumulaEjecutada = $fila['ventas'];
-	}
-
-	//echo $metaAcumulaEjecutada . "<br>";
-
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[0]); 
-	}
-
-	//echo $metaAcumuladaProgramada . "<br>";
-
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
+        //calcularemos las ventas acumuladas hasta el mes especificado
+        $sqlVentasAcumuladas = "select sum(valor_registro) as ventas from indicador_registro_mensual where anio = " . $anioInd . " and cod_indicador = " . $codIndicadoresArray[0] . " and zona = " . $zonaInd . " and mes <= " . $mesInd;
+    }
+    
+    //******************************************************************
 
 
 
+    //sql que consulta las ventas en el mes indicado
+    // $sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_registro from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_registro) = " . $anioInd . " and ic.tipo_contrato = 'publica'";
+
+    //echo $sqlVentasMesPub . "<br>";
+
+    
+    //ejecucion del sql
+    
+    $resVentasMesPub = query($sqlVentasMesPub);
+    while($fila = mysql_fetch_array($resVentasMesPub))
+    {
+        $ventasMes = $fila['ventas'];
+        if($ventasMes == '')
+            $ventasMes = 0;
+    }
+
+    //echo $ventasMes . "<br>";
+
+    //calculamos el avance mensual
+    $avanceMes = round(($ventasMes * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
+
+    
+
+    $resVentasAcumuladas = query($sqlVentasAcumuladas);
+    while($fila = mysql_fetch_array($resVentasAcumuladas))
+    {
+        $metaAcumulaEjecutada = $fila['ventas'];
+    }
+
+    //echo $metaAcumulaEjecutada . "<br>";
+
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[0]); 
+    }
+
+    //echo $metaAcumuladaProgramada . "<br>";
+
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
-	
 
-	//IMPRESION DE RESULATDOS	
 
-	/*"		<tr>
-				<th class='colorIndicador'>ZONA</th>
-				<th class='colorIndicador'>PROVINCIA</th>
-				<th class='colorIndicador'>CANTÓN</th>
-				<th class='colorIndicador'>MES DE REPORTE</th>
-				<th class='colorIndicador'>ENTIDAD CONTRATANTE</th>				
-				<th class='colorIndicador1'>FECHA DE ADJUDICACION</th>
-				<th class='colorIndicador1'>CÓDIGO DEL PROCESO</th>
-				<th class='colorIndicador1'>CÓDIGO CPC</th>
-				<th class='colorIndicador1'>MONTO DE CONTRATACIÓN SIN IVA</th>
-				<th class='colorIndicador1'>TIPO ENTINDAD CONTRATANTE</th>
-				<th class='colorIndicador1'>NOMBRE DE ENTIDAD CONTRATANTE</th>
-				<th class='colorIndicador1'>FECHA DE ADJUDICACION DEL CONTRATO</th>
-				<th class='colorIndicador1'>MONTO DE CONTRATACION SIN IVA</th>
-				<th class='colorIndicador1'>SECTOR PRIORIZADO</th>
-			</tr>";*/
 
-	//print_r2($codIndicadoresArray);
+    
 
-	
-	$tabla .= "<tr>
-			<td>5.1</td>
-			<td>" . $nombresIndicadores[0] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $ventasMes . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[0] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";
+    //IMPRESION DE RESULATDOS   
+
+    /*"     <tr>
+                <th class='colorIndicador'>ZONA</th>
+                <th class='colorIndicador'>PROVINCIA</th>
+                <th class='colorIndicador'>CANTÓN</th>
+                <th class='colorIndicador'>MES DE REPORTE</th>
+                <th class='colorIndicador'>ENTIDAD CONTRATANTE</th>             
+                <th class='colorIndicador1'>FECHA DE ADJUDICACION</th>
+                <th class='colorIndicador1'>CÓDIGO DEL PROCESO</th>
+                <th class='colorIndicador1'>CÓDIGO CPC</th>
+                <th class='colorIndicador1'>MONTO DE CONTRATACIÓN SIN IVA</th>
+                <th class='colorIndicador1'>TIPO ENTINDAD CONTRATANTE</th>
+                <th class='colorIndicador1'>NOMBRE DE ENTIDAD CONTRATANTE</th>
+                <th class='colorIndicador1'>FECHA DE ADJUDICACION DEL CONTRATO</th>
+                <th class='colorIndicador1'>MONTO DE CONTRATACION SIN IVA</th>
+                <th class='colorIndicador1'>SECTOR PRIORIZADO</th>
+            </tr>";*/
+
+    //print_r2($codIndicadoresArray);
+
+    
+    $tabla .= "<tr>
+            <td>5.1</td>
+            <td>" . $nombresIndicadores[0] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "''>" . $ventasMes . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+            if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[0] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";
 
 }
 
 function Indicador02($zona, $mes)
 {
 
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales	
-	$ventasMes = 0;
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0); 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales 
+    $ventasMes = 0;
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0); 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== SEGUNDO INDICADOR =======================*/
-	/*MONTO EN VENTA DE ORGANIZACIONES Y UEPS AL MERCADO PRIVADO*/
+    /*=========== SEGUNDO INDICADOR =======================*/
+    /*MONTO EN VENTA DE ORGANIZACIONES Y UEPS AL MERCADO PRIVADO*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[1]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[1]);
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[1]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[1]);
 
-	//	echo $metaMes . "<br>" . $metaAnual;
+    //  echo $metaMes . "<br>" . $metaAnual;
+
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
+
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[1];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
+
+    if($indicadoresGuardados == 0)
+    {        
+        //sql que consulta las ventas en el mes indicado
+        $sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_reporte from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
+
+        //calcularemos las ventas acumuladas hasta el mes especificado
+        $sqlVentasAcumuladas = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_reporte from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlVentasMesPub = "select valor_registro as ventas from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "' and cod_indicador = " . $codIndicadoresArray[1];
+
+        //calcularemos las ventas acumuladas hasta el mes especificado
+        $sqlVentasAcumuladas = "select sum(valor_registro) as ventas from indicador_registro_mensual where anio = " . $anioInd . " and cod_indicador = " . $codIndicadoresArray[1] . " and zona = " . $zonaInd . " and mes <= " . $mesInd;
+    }
+    
+    //******************************************************************
+
+    //sql que consulta las ventas en el mes indicado
+    // $sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_reporte from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
+
+    //echo $sqlVentasMesPub . "<br>";
+
+    
+    //ejecucion del sql
+    
+    $resVentasMesPub = query($sqlVentasMesPub);
+    while($fila = mysql_fetch_array($resVentasMesPub))
+    {
+        $ventasMes = $fila['ventas'];
+    }
+
+    //echo $ventasMes . "<br>";
+
+    // *********************************************
+    // SE REVISA TAMBIEN EL MONTO DE PARTICIPACIONES, ESTO SE EJECUTA CUANDO NO HAN SIDO GUARDADOS LOS INDICADORES
+    if($indicadoresGuardados == 0)
+    {
+        $sqlParticipacionMonto = "select ip.cod_participacion_eventos, ip.monto_articulado, ip.monto_articulado_postevento from im_participacion_eventos ip where month(ip.fecha_reporte) = " . $mesInd . " and year(ip.fecha_reporte) = " . $anioInd . " and ip.cod_zona = " . $zonaInd;
+    
+        $resParticipacionMonto = query($sqlParticipacionMonto);
+        while($fila = mysql_fetch_array($resParticipacionMonto))
+        {
+            $montoParticipacion += ($fila['monto_articulado'] + $fila['monto_articulado_postevento']);
+        }
+    
+        //Las ventas totales en el sector privado contaran de las contrataciones y los montos articulados y posteventos de cada participación
+        $ventasMes += $montoParticipacion;
+    }
+    //**************************************************
+
+    //calculamos el avance mensual
+    $avanceMes = round(($ventasMes * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
+
+    
+
+    $resVentasAcumuladas = query($sqlVentasAcumuladas);
+    while($fila = mysql_fetch_array($resVentasAcumuladas))
+    {
+        $metaAcumulaEjecutada = $fila['ventas'];
+    }
+
+    //echo $metaAcumulaEjecutada . "<br>";
+
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[1]); 
+    }
+
+    //echo $metaAcumuladaProgramada . "<br>";
+
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
-	//sql que consulta las ventas en el mes indicado
-	$sqlVentasMesPub = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_reporte from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
-
-	//echo $sqlVentasMesPub . "<br>";
-
-	
-	//ejecucion del sql
-	
-	$resVentasMesPub = query($sqlVentasMesPub);
-	while($fila = mysql_fetch_array($resVentasMesPub))
-	{
-		$ventasMes = $fila['ventas'];
-	}
-
-	//echo $ventasMes . "<br>";
-
-	$sqlParticipacionMonto = "select ip.cod_participacion_eventos, ip.monto_articulado, ip.monto_articulado_postevento from im_participacion_eventos ip where month(ip.fecha_reporte) = " . $mesInd . " and year(ip.fecha_reporte) = " . $anioInd . " and ip.cod_zona = " . $zonaInd;
-
-	$resParticipacionMonto = query($sqlParticipacionMonto);
-	while($fila = mysql_fetch_array($resParticipacionMonto))
-	{
-		$montoParticipacion += ($fila['monto_articulado'] + $fila['monto_articulado_postevento']);
-	}
-
-	//Las ventas totales en el sector privado contaran de las contrataciones y los montos articulados y posteventos de cada participación
-	$ventasMes += $montoParticipacion;
-	
-
-	//calculamos el avance mensual
-	$avanceMes = round(($ventasMes * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
-
-	//calcularemos las ventas acumuladas hasta el mes especificado
-	$sqlVentasAcumuladas = "select sum(ic.monto_contratacion) as ventas, ic.cod_zona, ic.fecha_reporte from im_contratacion ic where month(ic.fecha_reporte) <= " . $mesInd . " and ic.cod_zona = ". $zonaInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.tipo_contrato = 'privada'";
-
-	$resVentasAcumuladas = query($sqlVentasAcumuladas);
-	while($fila = mysql_fetch_array($resVentasAcumuladas))
-	{
-		$metaAcumulaEjecutada = $fila['ventas'];
-	}
-
-	//echo $metaAcumulaEjecutada . "<br>";
-
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[1]); 
-	}
-
-	//echo $metaAcumuladaProgramada . "<br>";
-
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
+    
 
+    //IMPRESION DE RESULATDOS   
 
-	
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
 
-	//IMPRESION DE RESULATDOS	
+    
+    $tabla .= "<tr>
+            <td>5.2</td>
+            <td>" . $nombresIndicadores[1] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "'>" . $ventasMes . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+            if($indicadoresGuardados == 0)
+            {
 
-	
-	$tabla .= "<tr>
-			<td>5.2</td>
-			<td>" . $nombresIndicadores[1] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $ventasMes . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[1] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";
-	
-	
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[1] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";
+            
+            
+        
+    
+    
 }
 
 function Indicador03($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales
-	$orgReportadasMes = array();
-	$orgCodYServicios = array();
-	$ventasMes = 0;
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0);
-	$numOrgReportadas = 0; 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales
+    $orgReportadasMes = array();
+    $orgCodYServicios = array();
+    $ventasMes = 0;
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0);
+    $numOrgReportadas = 0; 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== TERCER INDICADOR =======================*/
-	/*NÚMERO DE ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
+    /*=========== TERCER INDICADOR =======================*/
+    /*NÚMERO DE ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[2]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[2]);
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[2]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[2]);
 
-	//	echo $metaMes . "<br>" . $metaAnual;
+    //  echo $metaMes . "<br>" . $metaAnual;
 
-	// echo "Indicador03:" . $mesInd . "<br>";
-	$numOrgReportadas = RevisarOrgMes($zonaInd, $mesInd, "org");
-	//print_r2($numOrgReportadas);
-	//echo $numOrgReportadas . "***********<br>";
-		
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
 
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[2]); 
-	}
-	//echo $metaAcumuladaProgramada . "<br>";
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[2];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
 
-	if($mesInd == 1)
-	{
-		$metaAcumulaEjecutada += RevisarOrgMes($zonaInd, 1, "org");
-	}
-	else
-	{
-		for($i = 1; $i < $mesInd; $i++)
-		{
-			$metaAcumulaEjecutada += RevisarOrgMes($zonaInd, $i, "org");
-		}
-		$metaAcumulaEjecutada += $numOrgReportadas;
-	}
-	
+    if($indicadoresGuardados == 0)
+    {        
+       $numOrgReportadas = RevisarOrgMes($zonaInd, $mesInd, "org");
 
-	//Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
-	
-	
+        if($mesInd == 1)
+        {
+            $metaAcumulaEjecutada += RevisarOrgMes($zonaInd, 1, "org");
+        }
+        else
+        {
+            for($i = 1; $i < $mesInd; $i++)
+            {
+                $metaAcumulaEjecutada += RevisarOrgMes($zonaInd, $i, "org");
+            }
+            $metaAcumulaEjecutada += $numOrgReportadas;
+        }
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlIndicadorGuardado = "select valor_registro as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[2];
+
+        $resIndicadorGuardado = query($sqlIndicadorGuardado);
+
+        while($filaIndicadorGuardado = mysql_fetch_array($resIndicadorGuardado))
+        {
+            $numOrgReportadas = $filaIndicadorGuardado['indicador'];
+        }
+
+        $sqlSumaIndicadorGuardados = "select sum(valor_registro) as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes <= " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[2];
+        $resSumaIndicadorGuardados = query($sqlSumaIndicadorGuardados);
+        while($filaIndicadorGuardado = mysql_fetch_array($resSumaIndicadorGuardados))
+        {
+            $metaAcumulaEjecutada = $filaIndicadorGuardado['indicador'];
+        }
+    }
+    
+    //******************************************************************
+
+    // echo "Indicador03:" . $mesInd . "<br>";
+    
+    //print_r2($numOrgReportadas);
+    //echo $numOrgReportadas . "***********<br>";
+        
+
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[2]); 
+    }
+    //echo $metaAcumuladaProgramada . "<br>";
+
+   
+    
+
+    //Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
+    
+    
 
 
-	//echo $metaAcumulaEjecutada . "<br>";
+    //echo $metaAcumulaEjecutada . "<br>";
 
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-	//calculamos el avance mensual
-	$avanceMes = round(($numOrgReportadas * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+    //calculamos el avance mensual
+    $avanceMes = round(($numOrgReportadas * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
 
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
-
-
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
-	
 
-	//IMPRESION DE RESULATDOS	
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+    
 
-	
-	$tabla .= "<tr>
-			<td>5.5</td>
-			<td>" . $nombresIndicadores[2] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $numOrgReportadas . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[2] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";
+    //IMPRESION DE RESULATDOS   
+
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
+
+    
+    $tabla .= "<tr>
+            <td>5.5</td>
+            <td>" . $nombresIndicadores[2] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "'>" . $numOrgReportadas . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+
+
+             if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[2] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {                
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";  
+                 
+        
 }
 
 function Indicador04($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales
-	$orgReportadasMes = array();
-	$orgCodYServicios = array();
-	$ventasMes = 0;
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0);
-	$numOrgReportadas = 0; 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales
+    $orgReportadasMes = array();
+    $orgCodYServicios = array();
+    $ventasMes = 0;
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0);
+    $numOrgReportadas = 0; 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== CUARTO INDICADOR =======================*/
-	/*NÚMERO DE UNIDADES ECONÓMICAS POPULARES - UEPS QUE RECIBIERON AL MENOS UN SERVICIO DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
+    /*=========== CUARTO INDICADOR =======================*/
+    /*NÚMERO DE UNIDADES ECONÓMICAS POPULARES - UEPS QUE RECIBIERON AL MENOS UN SERVICIO DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
 
-	//consultamos la meta programada
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[3]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[3]);
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[3];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
 
-	//	echo $metaMes . "<br>" . $metaAnual;
+    if($indicadoresGuardados == 0)
+    {
+        $numOrgReportadas = RevisarOrgMes($zonaInd, $mesInd, "uep");
 
-	// echo "Indicador04: " . $mes . "<br>";
-	$numOrgReportadas = RevisarOrgMes($zonaInd, $mesInd, "uep");
-	//echo $numOrgReportadas . "***********<br>";
-		
+        
+        //echo $metaAcumuladaProgramada . "<br>";
 
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[3]); 
-	}
-	//echo $metaAcumuladaProgramada . "<br>";
+        if($mesInd == 1)
+        {
+            $metaAcumulaEjecutada += RevisarOrgMes($zonaInd, 1, "uep");
+        }
+        else
+        {
+            for($i = 1; $i < $mesInd; $i++)
+            {
+                // echo "Indicador04: " . $i . "<br>";
+                $metaAcumulaEjecutada += RevisarOrgMes($zonaInd, $i, "uep");
+            }
+            $metaAcumulaEjecutada += $numOrgReportadas;
+        }
+    }
+    else
+    {
+        //sql que consulta el indicador guardado        
+        $sqlIndicadorGuardado = "select valor_registro as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[3];
 
-	if($mesInd == 1)
-	{
-		$metaAcumulaEjecutada += RevisarOrgMes($zonaInd, 1, "uep");
-	}
-	else
-	{
-		for($i = 1; $i < $mesInd; $i++)
-		{
-			// echo "Indicador04: " . $i . "<br>";
-			$metaAcumulaEjecutada += RevisarOrgMes($zonaInd, $i, "uep");
-		}
-		$metaAcumulaEjecutada += $numOrgReportadas;
-	}
-	
+        $resIndicadorGuardado = query($sqlIndicadorGuardado);
 
-	//Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
-	
-	
+        while($filaIndicadorGuardado = mysql_fetch_array($resIndicadorGuardado))
+        {
+            $numOrgReportadas = $filaIndicadorGuardado['indicador'];
+        }
 
-
-	//echo $metaAcumulaEjecutada . "<br>";
-
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-	//calculamos el avance mensual
-	$avanceMes = round(($numOrgReportadas * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
-
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
+        $sqlSumaIndicadorGuardados = "select sum(valor_registro) as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes <= " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[3];
+        $resSumaIndicadorGuardados = query($sqlSumaIndicadorGuardados);
+        while($filaIndicadorGuardado = mysql_fetch_array($resSumaIndicadorGuardados))
+        {
+            $metaAcumulaEjecutada = $filaIndicadorGuardado['indicador'];
+        }
 
 
+    }
+    
+    //******************************************************************
+
+    //consultamos la meta programada
+
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[3]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[3]);  
+        
+
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[3]); 
+    }
+    
+
+    //Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
+    
+    
+
+
+    //echo $metaAcumulaEjecutada . "<br>";
+
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+    //calculamos el avance mensual
+    $avanceMes = round(($numOrgReportadas * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
+
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
-	
 
-	//IMPRESION DE RESULATDOS	
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+    
 
-	
-	$tabla .= "<tr>
-			<td>5.6</td>
-			<td>" . $nombresIndicadores[3] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $numOrgReportadas . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[3] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";
+    //IMPRESION DE RESULATDOS   
+
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
+
+    
+    $tabla .= "<tr>
+            <td>5.6</td>
+            <td>" . $nombresIndicadores[3] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "'>" . $numOrgReportadas . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+            if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[3] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";    
 
 
 
@@ -784,1270 +965,1516 @@ function Indicador04($zona, $mes)
 
 function Indicador05($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales
-	$orgReportadasMes = array();
-	$orgCodYServicios = array();
-	$ventasMes = 0;
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0);
-	$sociosRep = 0; 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales
+    $orgReportadasMes = array();
+    $orgCodYServicios = array();
+    $ventasMes = 0;
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0);
+    $sociosRep = 0; 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== QUINTO INDICADOR =======================*/
-	/*NÚMERO DE PERSONAS QUE CONFORMAN LAS ORGANIZACIONES Y UEPS QUE HAN RECIBIDO AL MENOS UN SERVICIO DE LA DIM Y SE ENMARCAN EN LA ESTRATEGIA PARA EL CAMBIO DE LA MATRIZ PRODUCTIVA*/
+    /*=========== QUINTO INDICADOR =======================*/
+    /*NÚMERO DE PERSONAS QUE CONFORMAN LAS ORGANIZACIONES Y UEPS QUE HAN RECIBIDO AL MENOS UN SERVICIO DE LA DIM Y SE ENMARCAN EN LA ESTRATEGIA PARA EL CAMBIO DE LA MATRIZ PRODUCTIVA*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[4]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[4]);
-
-	//	echo $metaMes . "<br>" . $metaAnual;
-
-	// echo "REVISAR SOCIOS ORG <BR>";
-
-	$sociosRep = RevisarSociosOrg($zonaInd, $mesInd);
-	// echo "REVISAR SOCIOS ORG <BR>";
-		
-
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[4]); 
-	}
-	//echo $metaAcumuladaProgramada . "<br>";
-
-	if($mesInd == 1)
-	{
-		$metaAcumulaEjecutada += RevisarSociosOrg($zonaInd, 1);
-	}
-	else
-	{
-		for($i = 1; $i < $mesInd; $i++)
-		{
-			$metaAcumulaEjecutada += RevisarSociosOrg($zonaInd, $i);
-		}
-		$metaAcumulaEjecutada += $sociosRep;
-	}
-	
-
-	//Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
-	
-	
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[4]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[4]);
 
 
-	//echo $metaAcumulaEjecutada . "<br>";
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
 
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-	//calculamos el avance mensual
-	$avanceMes = round(($sociosRep * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[4];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
 
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
+    if($indicadoresGuardados == 0)
+    {        
+        $sociosRep = RevisarSociosOrg($zonaInd, $mesInd);
+
+        if($mesInd == 1)
+        {
+            $metaAcumulaEjecutada += RevisarSociosOrg($zonaInd, 1);
+        }
+        else
+        {
+            for($i = 1; $i < $mesInd; $i++)
+            {
+                $metaAcumulaEjecutada += RevisarSociosOrg($zonaInd, $i);
+            }
+            $metaAcumulaEjecutada += $sociosRep;
+        }
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlIndicadorGuardado = "select valor_registro as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[4];
+
+        $resIndicadorGuardado = query($sqlIndicadorGuardado);
+
+        while($filaIndicadorGuardado = mysql_fetch_array($resIndicadorGuardado))
+        {
+            $sociosRep = $filaIndicadorGuardado['indicador'];
+        }
+
+        $sqlSumaIndicadorGuardados = "select sum(valor_registro) as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes <= " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[4];
+        $resSumaIndicadorGuardados = query($sqlSumaIndicadorGuardados);
+        while($filaIndicadorGuardado = mysql_fetch_array($resSumaIndicadorGuardados))
+        {
+            $metaAcumulaEjecutada = $filaIndicadorGuardado['indicador'];
+        }
+    }
+    
+    //******************************************************************
+
+    //  echo $metaMes . "<br>" . $metaAnual;
+
+    // echo "REVISAR SOCIOS ORG <BR>";
+
+    
+    // echo "REVISAR SOCIOS ORG <BR>";
+        
+
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[4]); 
+    }
+    //echo $metaAcumuladaProgramada . "<br>";
+
+    
+    
+
+    //Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
+    
+    
+
+
+    //echo $metaAcumulaEjecutada . "<br>";
+
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+    //calculamos el avance mensual
+    $avanceMes = round(($sociosRep * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
+
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
 
 
-	
+    
 
-	//IMPRESION DE RESULATDOS	
+    //IMPRESION DE RESULATDOS   
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
 
-	
-	$tabla .= "<tr>
-			<td>5.7</td>
-			<td>" . $nombresIndicadores[4] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $sociosRep . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[4] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";
+    
+    $tabla .= "<tr>
+            <td>5.7</td>
+            <td>" . $nombresIndicadores[4] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "'>" . $sociosRep . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+            if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[4] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";
+            
+        
 }
 
 function Indicador06($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales
-	$orgReportadasMes = array();
-	$orgCodYServicios = array();
-	$ventasMes = 0;
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0);
-	$circuitosEconomicos = 0; 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales
+    $orgReportadasMes = array();
+    $orgCodYServicios = array();
+    $ventasMes = 0;
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0);
+    $circuitosEconomicos = 0; 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== SEXTO INDICADOR =======================*/
-	/*NÚMERO DE CIRCUITOS ECONÓMICOS QUE HAYAN RECIBIDO AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
+    /*=========== SEXTO INDICADOR =======================*/
+    /*NÚMERO DE CIRCUITOS ECONÓMICOS QUE HAYAN RECIBIDO AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[5]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[5]);
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[5]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[5]);
 
-	//	echo $metaMes . "<br>" . $metaAnual;
+    //  echo $metaMes . "<br>" . $metaAnual;
+
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
+
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[5];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
+
+    if($indicadoresGuardados == 0)
+    {        
+        $circuitosEconomicos = RevisarCircuitosEconomicos($zonaInd, $mesInd);
+
+        if($mesInd == 1)
+        {
+            $metaAcumulaEjecutada += RevisarCircuitosEconomicos($zonaInd, 1);
+        }
+        else
+        {
+            for($i = 1; $i < $mesInd; $i++)
+            {
+                $metaAcumulaEjecutada += RevisarCircuitosEconomicos($zonaInd, $i);
+            }
+            $metaAcumulaEjecutada += $circuitosEconomicos;
+        }
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlIndicadorGuardado = "select valor_registro as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[5];
+
+        $resIndicadorGuardado = query($sqlIndicadorGuardado);
+
+        while($filaIndicadorGuardado = mysql_fetch_array($resIndicadorGuardado))
+        {
+            $circuitosEconomicos = $filaIndicadorGuardado['indicador'];
+        }
+
+        $sqlSumaIndicadorGuardados = "select sum(valor_registro) as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes <= " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[5];
+        $resSumaIndicadorGuardados = query($sqlSumaIndicadorGuardados);
+        while($filaIndicadorGuardado = mysql_fetch_array($resSumaIndicadorGuardados))
+        {
+            $metaAcumulaEjecutada = $filaIndicadorGuardado['indicador'];
+        }
+    }
+    
+    //******************************************************************
 
 
-	$circuitosEconomicos = RevisarCircuitosEconomicos($zonaInd, $mesInd);
-		
+    
+        
 
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[5]); 
-	}
-	//echo $metaAcumuladaProgramada . "<br>";
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[5]); 
+    }
+    //echo $metaAcumuladaProgramada . "<br>";
 
-	if($mesInd == 1)
-	{
-		$metaAcumulaEjecutada += RevisarCircuitosEconomicos($zonaInd, 1);
-	}
-	else
-	{
-		for($i = 1; $i < $mesInd; $i++)
-		{
-			$metaAcumulaEjecutada += RevisarCircuitosEconomicos($zonaInd, $i);
-		}
-		$metaAcumulaEjecutada += $circuitosEconomicos;
-	}
-	
+    
+    
 
-	//Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
-	
-	
+    //Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
+    
+    
 
 
-	//echo $metaAcumulaEjecutada . "<br>";
+    //echo $metaAcumulaEjecutada . "<br>";
 
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-	//calculamos el avance mensual
-	$avanceMes = round(($circuitosEconomicos * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+    //calculamos el avance mensual
+    $avanceMes = round(($circuitosEconomicos * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
 
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
 
 
-	
+    
 
-	//IMPRESION DE RESULATDOS	
+    //IMPRESION DE RESULATDOS   
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
 
-	
-	$tabla .= "<tr>
-			<td>5.8</td>
-			<td>" . $nombresIndicadores[5] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $circuitosEconomicos . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[5] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";
+    
+    $tabla .= "<tr>
+            <td>5.8</td>
+            <td>" . $nombresIndicadores[5] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "'>" . $circuitosEconomicos . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+            if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[5] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";
+            
+        
 }
 
 function Indicador07($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales
-	$orgReportadasMes = array();
-	$orgCodYServicios = array();	
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0);
-	$plazasTrabajo = 0; 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales
+    $orgReportadasMes = array();
+    $orgCodYServicios = array();    
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0);
+    $plazasTrabajo = 0; 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== SEPTIMO INDICADOR =======================*/
-	/*NÚMERO DE PERSONAS DE LA EPS CON PLAZAS DE TRABAJO POR ACCESO PÚBLICO O PRIVADO*/
+    /*=========== SEPTIMO INDICADOR =======================*/
+    /*NÚMERO DE PERSONAS DE LA EPS CON PLAZAS DE TRABAJO POR ACCESO PÚBLICO O PRIVADO*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[6]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[6]);
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[6]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[6]);
 
-	//	echo $metaMes . "<br>" . $metaAnual;
+    //  echo $metaMes . "<br>" . $metaAnual;
 
-	//echo "indicador 07 <br>";
-	$plazasTrabajo = RevisarPlazasTrabajo($zonaInd, $mesInd);
-		
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
 
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[6]); 
-	}
-	//echo $metaAcumuladaProgramada . "<br>";
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[6];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
 
-	if($mesInd == 1)
-	{
-		$metaAcumulaEjecutada += RevisarPlazasTrabajo($zonaInd, 1);
-	}
-	else
-	{
-		for($i = 1; $i < $mesInd; $i++)
-		{
-			$metaAcumulaEjecutada += RevisarPlazasTrabajo($zonaInd, $i);
-		}
-		$metaAcumulaEjecutada += $plazasTrabajo;
-	}
-	
+    if($indicadoresGuardados == 0)
+    {        
+        $plazasTrabajo = RevisarPlazasTrabajo($zonaInd, $mesInd);
 
-	//Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
-	
-	
+        if($mesInd == 1)
+        {
+            $metaAcumulaEjecutada += RevisarPlazasTrabajo($zonaInd, 1);
+        }
+        else
+        {
+            for($i = 1; $i < $mesInd; $i++)
+            {
+                $metaAcumulaEjecutada += RevisarPlazasTrabajo($zonaInd, $i);
+            }
+            $metaAcumulaEjecutada += $plazasTrabajo;
+        }
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlIndicadorGuardado = "select valor_registro as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[6];
+
+        $resIndicadorGuardado = query($sqlIndicadorGuardado);
+
+        while($filaIndicadorGuardado = mysql_fetch_array($resIndicadorGuardado))
+        {
+            $plazasTrabajo = $filaIndicadorGuardado['indicador'];
+        }
+
+        $sqlSumaIndicadorGuardados = "select sum(valor_registro) as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes <= " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[6];
+        $resSumaIndicadorGuardados = query($sqlSumaIndicadorGuardados);
+        while($filaIndicadorGuardado = mysql_fetch_array($resSumaIndicadorGuardados))
+        {
+            $metaAcumulaEjecutada = $filaIndicadorGuardado['indicador'];
+        }
+    }
+    
+    //******************************************************************
+
+    //echo "indicador 07 <br>";
+    
+        
+
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[6]); 
+    }
+    //echo $metaAcumuladaProgramada . "<br>";
+
+    
+    
+
+    //Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
+    
+    
 
 
-	//echo $metaAcumulaEjecutada . "<br>";
+    //echo $metaAcumulaEjecutada . "<br>";
 
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-	//calculamos el avance mensual
-	$avanceMes = round(($plazasTrabajo * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+    //calculamos el avance mensual
+    $avanceMes = round(($plazasTrabajo * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
 
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
-
-
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
-	
 
-	//IMPRESION DE RESULATDOS	
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+    
 
-	
-	$tabla .= "<tr>
-			<td>5.9</td>
-			<td>" . $nombresIndicadores[6] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $plazasTrabajo . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[6] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";	
-	
+    //IMPRESION DE RESULATDOS   
+
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
+
+    
+    $tabla .= "<tr>
+            <td>5.9</td>
+            <td>" . $nombresIndicadores[6] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "'>" . $plazasTrabajo . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+            if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[6] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";
+    
 }
 
 function Indicador08($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales
-	$orgReportadasMes = array();
-	$orgCodYServicios = array();	
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0);
-	$orgNuevas = 0; 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales
+    $orgReportadasMes = array();
+    $orgCodYServicios = array();    
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0);
+    $orgNuevas = 0; 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== OCTAVO INDICADOR =======================*/
-	/*NÚMERO DE NUEVAS ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
+    /*=========== OCTAVO INDICADOR =======================*/
+    /*NÚMERO DE NUEVAS ORGANIZACIONES DE LA EPS QUE RECIBIERON AL MENOS UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[7]);
-	$metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[7]);
+    $metaMes = MetaMensual($zona, $mes, $codIndicadoresArray[7]);
+    $metaAnual = MetaAnio($zona, $mes, $codIndicadoresArray[7]);
 
-	//	echo $metaMes . "<br>" . $metaAnual;
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
 
-	// echo "mes Indicador = " .  $mesInd;
-	$orgNuevas = RevisarOrgMesNuevas($zonaInd, $mesInd);
-	//echo $orgNuevas . "*****<br>";
-		
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[7];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
 
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[7]); 
-	}
-	//echo $metaAcumuladaProgramada . "<br>";
+    if($indicadoresGuardados == 0)
+    {        
+        $orgNuevas = RevisarOrgMesNuevas($zonaInd, $mesInd);
 
-	if($mesInd == 1)
-	{
-		$metaAcumulaEjecutada += RevisarOrgMesNuevas($zonaInd, 1);
-	}
-	else
-	{
-		for($i = 1; $i < $mesInd; $i++)
-		{
-			$metaAcumulaEjecutada += RevisarOrgMesNuevas($zonaInd, $i);
-		}
-		$metaAcumulaEjecutada += $orgNuevas;
-	}
-	
+        if($mesInd == 1)
+        {
+            $metaAcumulaEjecutada += RevisarOrgMesNuevas($zonaInd, 1);
+        }
+        else
+        {
+            for($i = 1; $i < $mesInd; $i++)
+            {
+                $metaAcumulaEjecutada += RevisarOrgMesNuevas($zonaInd, $i);
+            }
+            $metaAcumulaEjecutada += $orgNuevas;
+        }
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlIndicadorGuardado = "select valor_registro as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[7];
 
-	//Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
-	
-	
+        $resIndicadorGuardado = query($sqlIndicadorGuardado);
+
+        while($filaIndicadorGuardado = mysql_fetch_array($resIndicadorGuardado))
+        {
+            $orgNuevas = $filaIndicadorGuardado['indicador'];
+        }
+
+        $sqlSumaIndicadorGuardados = "select sum(valor_registro) as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes <= " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[7];
+        $resSumaIndicadorGuardados = query($sqlSumaIndicadorGuardados);
+        while($filaIndicadorGuardado = mysql_fetch_array($resSumaIndicadorGuardados))
+        {
+            $metaAcumulaEjecutada = $filaIndicadorGuardado['indicador'];
+        }
+    }
+    
+    //******************************************************************
+
+    //  echo $metaMes . "<br>" . $metaAnual;
+
+    // echo "mes Indicador = " .  $mesInd;
+    
+    //echo $orgNuevas . "*****<br>";
+        
+
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, $codIndicadoresArray[7]); 
+    }
+    //echo $metaAcumuladaProgramada . "<br>";
+
+    
+    
+
+    //Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
+    
+    
 
 
-	//echo $metaAcumulaEjecutada . "<br>";
+    //echo $metaAcumulaEjecutada . "<br>";
 
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-	//calculamos el avance mensual
-	$avanceMes = round(($orgNuevas * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+    //calculamos el avance mensual
+    $avanceMes = round(($orgNuevas * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
 
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
-
-
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
-	
 
-	//IMPRESION DE RESULATDOS	
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+    
 
-	
-	$tabla .= "<tr>
-			<td>5.10</td>
-			<td>" . $nombresIndicadores[7] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $orgNuevas . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[7] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";	
-	
+    //IMPRESION DE RESULATDOS   
+
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
+
+    
+    $tabla .= "<tr>
+            <td>5.10</td>
+            <td>" . $nombresIndicadores[7] . "</td>
+            <td>" . $metaMes . "</td>
+            <td id='" . $claseEjecutada . "'>" . $orgNuevas . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+            if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[7] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                 $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";
+            
+      
+    
 }
 
 function Indicador09($zona, $mes)
 {
-	global $tabla, $nombresIndicadores, $codIndicadoresArray;	
-	
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
+    global $tabla, $nombresIndicadores, $codIndicadoresArray;   
+    
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
 
-	//variables locales
-	$orgReportadasMes = array();
-	$orgCodYServicios = array();	
-	$montoParticipacion = 0;
-	$avanceMes = 0;
-	$avanceEjecutadoAcumulado = 0;
-	$avanceEjecutadoAnual = 0;
-	$metaAcumulaEjecutada = 0;
-	$metaAcumuladaProgramada = 0;
-	//$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
-	$orgServicios = array(0, 0, 0, 0, 0);
-	$comercio = 0; 
-	$metaMes = 0;
-	$metaAnual = 0;
+    //variables locales
+    $orgReportadasMes = array();
+    $orgCodYServicios = array();    
+    $montoParticipacion = 0;
+    $avanceMes = 0;
+    $avanceEjecutadoAcumulado = 0;
+    $avanceEjecutadoAnual = 0;
+    $metaAcumulaEjecutada = 0;
+    $metaAcumuladaProgramada = 0;
+    //$orgServicios contendra los resultados finales asi (indicador 1, indicador 2, indicador 3, indicador 4, total)
+    $orgServicios = array(0, 0, 0, 0, 0);
+    $comercio = 0; 
+    $metaMes = 0;
+    $metaAnual = 0;
 
-	//fecha a consultar-formato: Y-m-d
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
+    //fecha a consultar-formato: Y-m-d
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01'; 
 
-	/*=========== NOVENO INDICADOR =======================*/
-	/*NÚMERO DE ORGANIZACIONES QUE RECIBEN UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS RELATIVO A COMERCIO JUSTO NACIONAL E INTERNACIONAL*/
+    /*=========== NOVENO INDICADOR =======================*/
+    /*NÚMERO DE ORGANIZACIONES QUE RECIBEN UN SERVICIO DE LA DIRECCIÓN DE INTERCAMBIO Y MERCADOS RELATIVO A COMERCIO JUSTO NACIONAL E INTERNACIONAL*/
 
-	//consultamos la meta programada
+    //consultamos la meta programada
 
-	$metaMes = MetaMensual($zona, $mes, 25);
-	$metaAnual = MetaAnio($zona, $mes, 25);
+    $metaMes = MetaMensual($zona, $mes, 25);
+    $metaAnual = MetaAnio($zona, $mes, 25);
 
-	//	echo $metaMes . "<br>" . $metaAnual;
+    //******************************************************************
+    // Proceso que verifica si el indicador ya se encuentra guardado o necesita calcularse
+
+    $claseEjecutada = $zona . "-" . $mesInd . "-" . $codIndicadoresArray[8];
+    $departamento = GetDepartamento();
+    $indicadoresGuardados = VerificarIndicadorGuardado($mesInd, $zonaInd, $departamento, $anioInd);
+    // echo $indicadoresGuardados . "<br>";
+
+    if($indicadoresGuardados == 0)
+    {        
+        $comercio = RevisarComercios($zonaInd, $mesInd);
+
+        if($mesInd == 1)
+        {
+            $metaAcumulaEjecutada += RevisarComercios($zonaInd, 1);
+        }
+        else
+        {
+            for($i = 1; $i < $mesInd; $i++)
+            {
+                $metaAcumulaEjecutada += RevisarComercios($zonaInd, $i);
+            }
+            $metaAcumulaEjecutada += $comercio;
+        }
+    }
+    else
+    {
+        //sql que consulta las ventas en el mes indicado
+        $sqlIndicadorGuardado = "select valor_registro as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes = " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[8];
+
+        $resIndicadorGuardado = query($sqlIndicadorGuardado);
+
+        while($filaIndicadorGuardado = mysql_fetch_array($resIndicadorGuardado))
+        {
+            $comercio = $filaIndicadorGuardado['indicador'];
+        }
+
+        $sqlSumaIndicadorGuardados = "select sum(valor_registro) as indicador from indicador_registro_mensual where zona = " . $zonaInd . " and mes <= " . $mesInd . " and anio = " . $anioInd . " and departamento = '" . $departamento . "'  and cod_indicador = " . $codIndicadoresArray[8];
+        $resSumaIndicadorGuardados = query($sqlSumaIndicadorGuardados);
+        while($filaIndicadorGuardado = mysql_fetch_array($resSumaIndicadorGuardados))
+        {
+            $metaAcumulaEjecutada = $filaIndicadorGuardado['indicador'];
+        }
+    }
+    
+    //******************************************************************
+
+    //  echo $metaMes . "<br>" . $metaAnual;
 
 
-	$comercio = RevisarComercios($zonaInd, $mesInd);
-		
+    
+        
 
-	//calcular la meta acumulada programada hasta el mes señalado	
-	for($i = 1; $i <= $mesInd; $i++)
-	{
-		$metaAcumuladaProgramada += metaMensual($zonaInd, $i, 25); 
-	}
-	//echo $metaAcumuladaProgramada . "<br>";
+    //calcular la meta acumulada programada hasta el mes señalado   
+    for($i = 1; $i <= $mesInd; $i++)
+    {
+        $metaAcumuladaProgramada += metaMensual($zonaInd, $i, 25); 
+    }
+    //echo $metaAcumuladaProgramada . "<br>";
 
-	if($mesInd == 1)
-	{
-		$metaAcumulaEjecutada += RevisarComercios($zonaInd, 1);
-	}
-	else
-	{
-		for($i = 1; $i < $mesInd; $i++)
-		{
-			$metaAcumulaEjecutada += RevisarComercios($zonaInd, $i);
-		}
-		$metaAcumulaEjecutada += $comercio;
-	}
-	
+    
+    
 
-	//Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
-	
-	
+    //Ahora ejecutaremos la misma codificacion pero para meses anteriores al señalado para tener la meta acumulada ejecutada
+    
+    
 
 
-	//echo $metaAcumulaEjecutada . "<br>";
+    //echo $metaAcumulaEjecutada . "<br>";
 
-	//calculamos el porcentaje de cada uno
-	$avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
-	$avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
-	//calculamos el avance mensual
-	$avanceMes = round(($comercio * 100) / $metaMes, 2);
-	//echo $avanceMes . "<br>";
+    //calculamos el porcentaje de cada uno
+    $avanceEjecutadoAcumulado = round(($metaAcumulaEjecutada * 100) / $metaAcumuladaProgramada, 2);
+    $avanceEjecutadoAnual = round(($metaAcumulaEjecutada * 100) / $metaAnual, 2);
+    //calculamos el avance mensual
+    $avanceMes = round(($comercio * 100) / $metaMes, 2);
+    //echo $avanceMes . "<br>";
 
-	//echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
+    //echo $avanceEjecutadoAcumulado . "<br>" . $avanceEjecutadoAnual;
 
 
 
 
 
-	
+    
 
-	//IMPRESION DE RESULATDOS	
+    //IMPRESION DE RESULATDOS   
 
-	/*"		<tr>
-				<th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
-				<th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
-				<th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
-				<th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
-				<th class='colorIndicador1'>% AVANCE (ANUAL)</th>
-				<th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
-				<th class='colorIndicador1'>Zona</th>
-				<th class='colorIndicador1'>Mes</th>
-			</tr>";*/
+    /*"     <tr>
+                <th class='colorIndicador'>NUMERACIÓN GPR DEL INDICADOR</th>
+                <th class='colorIndicador'>NOMBRES DE LOS INDICADORES (Misma denominación que consta en GPR y Fichas Técnicas)</th>
+                <th class='colorIndicador'>META MENSUAL PROGRAMADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>META MENSUAL EJECUTADA (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador'>% DE AVANCE MENSUAL (". $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META PROGRAMADA (ENE-DIC)</th>
+                <th class='colorIndicador1'>META ACUMULADA PROGRAMADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>META ACUMULADA EJECUTADA (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ENE - " . $nombresMes[$idMes - 1] . ")</th>
+                <th class='colorIndicador1'>% AVANCE (ANUAL)</th>
+                <th class='colorIndicador1'>JUSTIFICACIÓN SOBRECUMPLIMIENTO O NO CUMPLIMIENTO</th>
+                <th class='colorIndicador1'>Zona</th>
+                <th class='colorIndicador1'>Mes</th>
+            </tr>";*/
 
-	
-	$tabla .= "<tr>
-			<td>5.11</td>
-			<td>" . $nombresIndicadores[8] . "</td>
-			<td>" . $metaMes . "</td>
-			<td>" . $comercio . "</td>
-			<td>" . $avanceMes . "%</td>
-			<td>" . $metaAnual . "</td>			
-			<td>" . $metaAcumuladaProgramada . "</td>
-			<td>" . $metaAcumulaEjecutada . "</td>
-			<td>" . $avanceEjecutadoAcumulado . "%</td>
-			<td>" . $avanceEjecutadoAnual . "%</td>
-			<td></td>
-			<td>" . $zonaInd . "</td>
-			<td>" . $mesInd . "</td>
-			<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[8] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>
-		</tr>";	
-	
+    
+    $tabla .= "<tr>
+            <td>5.11</td>
+            <td>" . $nombresIndicadores[8] . "</td>
+            <td>" . $metaMes . "</td>
+            <td>" . $comercio . "</td>
+            <td>" . $avanceMes . "%</td>
+            <td>" . $metaAnual . "</td>         
+            <td>" . $metaAcumuladaProgramada . "</td>
+            <td>" . $metaAcumulaEjecutada . "</td>
+            <td>" . $avanceEjecutadoAcumulado . "%</td>
+            <td>" . $avanceEjecutadoAnual . "%</td>
+            <td></td>
+            <td>" . $zonaInd . "</td>
+            <td>" . $mesInd . "</td>";
+            if($indicadoresGuardados == 0)
+            {
+
+                $tabla .= "<td><a href='../../clases/detalleIntercambio.php?anio=" . $anioInd . "&indicador=" . $codIndicadoresArray[8] . "&mes=" . $mesInd . "&zona=" . $zonaInd . "' target='_blank'>Detalles</a></td>";
+                    
+            }
+            else
+            {
+                $tabla .= "<td><a href='../../archivos/" . $anioInd . "/" . $mes . "/" . $zona .  "/IM/RESUMEN_EJECUTIVO.pdf' target='_blank'>Datos Guardados</a></td>";
+            }
+            $tabla .= "</tr>";       
+    
 }
 
 function print_r2($val)
 {
-	echo '<pre>';
-	print_r($val);
-	echo '</pre>';
+    echo '<pre>';
+    print_r($val);
+    echo '</pre>';
 }
 
 function RevisarOrgMes($zona, $mes, $tipoOrg)
 {
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$numOrgReportadas = 0;
-	$orgReportadasMes = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $numOrgReportadas = 0;
+    $orgReportadasMes = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
 
-	if($tipoOrg == 'org')
-	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
-	}
-	else
-	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
-	}
+    if($tipoOrg == 'org')
+    {
+        $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
+    }
+    else
+    {
+        $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
+    }
 
-	//echo $sqlOrgMes . "<br>";
+    //echo $sqlOrgMes . "<br>";
 
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);		
-	}
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);       
+    }
 
-	if($tipoOrg == 'org')
-	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
-	}
-	else
-	{
-		$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
-	}
+    if($tipoOrg == 'org')
+    {
+        $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
+    }
+    else
+    {
+        $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
+    }
 
-	//echo $sqlOrgMes . "<br>";
+    //echo $sqlOrgMes . "<br>";
 
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		
-	}
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        
+    }
 
-	// Caso Especial por pedido de Paola Villavicencio
-	if($zona == 3 and $mes == 2)
-	{
-		array_push($orgReportadasMes, '1734');	
-		
-	}
+    // Caso Especial por pedido de Paola Villavicencio
+    if($zona == 3 and $mes == 2)
+    {
+        array_push($orgReportadasMes, '1734');  
+        
+    }
 
-	$orgReportadasMes = array_unique($orgReportadasMes);
-	$orgReportadasMes =  array_values($orgReportadasMes);
-	//print_r2($orgReportadasMes);
+    $orgReportadasMes = array_unique($orgReportadasMes);
+    $orgReportadasMes =  array_values($orgReportadasMes);
+    //print_r2($orgReportadasMes);
 
-	//Revisamos las organizaciones / uep reportadas en meses anteriores
-	$orgReportadasMesAnterior = array();
-	$orgReportadasMesAnterior = OrgReportadasMesesAnteriores($mesInd, $zonaInd, $tipoOrg);
-	// print_r2($orgReportadasMesAnterior);
-
-
-	$posicionArray = 0;
-	foreach ($orgReportadasMes as $valor) 
-	{
-		if(in_array($valor, $orgReportadasMesAnterior))
-		{
-			unset($orgReportadasMes[$posicionArray]);
-		}
-		$posicionArray++;
-	}	
-
-	$orgReportadasMes = array_unique($orgReportadasMes);
-	$orgReportadasMes =  array_values($orgReportadasMes);
-
-	// echo "mes: " . $mes . "<br>";
-	// print_r2($orgReportadasMes);
+    //Revisamos las organizaciones / uep reportadas en meses anteriores
+    $orgReportadasMesAnterior = array();
+    $orgReportadasMesAnterior = OrgReportadasMesesAnteriores($mesInd, $zonaInd, $tipoOrg);
+    // print_r2($orgReportadasMesAnterior);
 
 
-	$numOrgReportadas = count($orgReportadasMes);
+    $posicionArray = 0;
+    foreach ($orgReportadasMes as $valor) 
+    {
+        if(in_array($valor, $orgReportadasMesAnterior))
+        {
+            unset($orgReportadasMes[$posicionArray]);
+        }
+        $posicionArray++;
+    }   
+
+    $orgReportadasMes = array_unique($orgReportadasMes);
+    $orgReportadasMes =  array_values($orgReportadasMes);
+
+    // echo "mes: " . $mes . "<br>";
+    // print_r2($orgReportadasMes);
+
+
+    $numOrgReportadas = count($orgReportadasMes);
 
 
 
-	
+    
 
-	return $numOrgReportadas;
+    return $numOrgReportadas;
 
 }
 
 function OrgReportadasMesesAnteriores($mes, $zona, $tipoOrg)
 {
 
-	$sqlOrgMesesAnteriores = "";
-	$anioInd = getAnioSeleccionado();
-	$orgAux = array();
+    $sqlOrgMesesAnteriores = "";
+    $anioInd = getAnioSeleccionado();
+    $orgAux = array();
 
-	// Servicios
-	if($tipoOrg == 'org')
-	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and antiguedad = 'no' group by si.cod_u_organizaciones";
-	}
-	else
-	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
-	}
+    // Servicios
+    if($tipoOrg == 'org')
+    {
+        $sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and antiguedad = 'no' group by si.cod_u_organizaciones";
+    }
+    else
+    {
+        $sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
+    }
 
-	$resSqlOrgMesesAnteriores = query($sqlOrgMesesAnteriores);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMesesAnteriores))
-	{
-		array_push($orgAux, $fila['cod_u_organizaciones']);		
-	}
+    $resSqlOrgMesesAnteriores = query($sqlOrgMesesAnteriores);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMesesAnteriores))
+    {
+        array_push($orgAux, $fila['cod_u_organizaciones']);     
+    }
 
 
-	// Contrataciones
-	if($tipoOrg == 'org')
-	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
-	}
-	else
-	{
-		$sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
-	}
+    // Contrataciones
+    if($tipoOrg == 'org')
+    {
+        $sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.antiguedad = 'no' group by si.cod_u_organizaciones";
+    }
+    else
+    {
+        $sqlOrgMesesAnteriores = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mes . " and si.cod_zona = " . $zona . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' group by si.cod_u_organizaciones";
+    }
 
-	//echo $sqlOrgMesesAnteriores . "<br>";
+    //echo $sqlOrgMesesAnteriores . "<br>";
 
-	$resSqlOrgMesesAnteriores = query($sqlOrgMesesAnteriores);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMesesAnteriores))
-	{
-		array_push($orgAux, $fila['cod_u_organizaciones']);
-		
-	}
+    $resSqlOrgMesesAnteriores = query($sqlOrgMesesAnteriores);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMesesAnteriores))
+    {
+        array_push($orgAux, $fila['cod_u_organizaciones']);
+        
+    }
 
-	$orgAux = array_unique($orgAux);
-	$orgAux = array_values($orgAux);
+    $orgAux = array_unique($orgAux);
+    $orgAux = array_values($orgAux);
 
-	return $orgAux;
+    return $orgAux;
 }
 
 function RevisarSociosOrg($zona, $mes)
 {
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$sociosReportados = 0;
-	$orgReportadasMes = array();
-	$orgNoRepetidas = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $sociosReportados = 0;
+    $orgReportadasMes = array();
+    $orgNoRepetidas = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
-	$arraySociosMes = array();
-	$arraySociosMesAnterior = array();
-
-
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.cod_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
-
-	//echo $sqlOrgMes . "<br>";
-
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		//array_push($orgReportadasMes, $fila['cod_servicio']);
-		//array_push($orgReportadasMes, $fila['tipo_servicio']);
-	}
-
-	//print_r2($orgReportadasMes);	
-
-	$sqlOrgMes = "select si.cod_u_organizaciones from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
-
-	//echo $sqlOrgMes . "<br>";
-
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		//array_push($orgReportadasMes, $fila['cod_servicio']);
-		//array_push($orgReportadasMes, $fila['tipo_servicio']);
-	}
-	$orgReportadasMes = array_unique($orgReportadasMes); 
-	$orgReportadasMes =  array_values($orgReportadasMes);
+    $arraySociosMes = array();
+    $arraySociosMesAnterior = array();
 
 
+    $sqlOrgMes = "select si.cod_u_organizaciones, si.cod_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
 
-	//print_r2($orgReportadasMes);	
+    //echo $sqlOrgMes . "<br>";
 
-	//se revisara si el codigo en la tabla de socios es igual al reportado
-	for($i = 0; $i < count($orgReportadasMes); $i++)
-	{
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        //array_push($orgReportadasMes, $fila['cod_servicio']);
+        //array_push($orgReportadasMes, $fila['tipo_servicio']);
+    }
 
-		
-		$sqlSocios = "select cod_socios, cedula from im_contratacion_servicios_socios where year(fecha_reporte) = " . $anioInd . " and month(fecha_reporte) = " . $mesInd . " and cod_u_organizaciones = " . $orgReportadasMes[$i];
+    //print_r2($orgReportadasMes);  
 
-		// $sqlSocios = "select s.cod_socios, s.cedula from socios  s inner join im_contratacion_socios ic on (s.cod_socios = ic.cod_socios) where s.estado = 1 and year(ic.fecha_reporte_im) = " . $anioInd . " and month(ic.fecha_reporte_im) = " . $mesInd . " and ic.cod_u_organizaciones = " . $orgReportadasMes[$i];
+    $sqlOrgMes = "select si.cod_u_organizaciones from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_reporte) = " . $anioInd . " and si.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
 
-		//$sqlSocios = "select cod_socios, cedula from socios where estado = 1 and cod_u_organizaciones = " . $orgReportadasMes[$i];
-		//echo $sqlSocios . "<br>";
+    //echo $sqlOrgMes . "<br>";
 
-		$resSqlSocios = query($sqlSocios);
-
-		while($fila = mysql_fetch_array($resSqlSocios))
-		{
-
-			array_push($arraySociosMes, $fila['cedula']);
-			//$sociosReportados++;
-		}	
-
-		
-		
-	}
-	$arraySociosMes = array_unique($arraySociosMes);
-	$arraySociosMes = array_values($arraySociosMes);
-
-	
-
-	//print_r2($arraySociosMes);
-	$sociosReportados = count($arraySociosMes);
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        //array_push($orgReportadasMes, $fila['cod_servicio']);
+        //array_push($orgReportadasMes, $fila['tipo_servicio']);
+    }
+    $orgReportadasMes = array_unique($orgReportadasMes); 
+    $orgReportadasMes =  array_values($orgReportadasMes);
 
 
 
+    //print_r2($orgReportadasMes);  
 
-	//si existen organizaciones, se debe contar los usuarios
+    //se revisara si el codigo en la tabla de socios es igual al reportado
+    for($i = 0; $i < count($orgReportadasMes); $i++)
+    {
 
-	//CONSERVAMOS CODIGO POR POSIBLES CAMBIOS A FUTURO
-	/*$sqlOrgMes = "select si.cod_u_organizaciones, si.cod_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_registro) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_registro) = " . $anioInd . " and u.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
+        
+        $sqlSocios = "select cod_socios, cedula from im_contratacion_servicios_socios where year(fecha_reporte) = " . $anioInd . " and month(fecha_reporte) = " . $mesInd . " and cod_u_organizaciones = " . $orgReportadasMes[$i];
 
-	echo $sqlOrgMes . "<br>";
+        // $sqlSocios = "select s.cod_socios, s.cedula from socios  s inner join im_contratacion_socios ic on (s.cod_socios = ic.cod_socios) where s.estado = 1 and year(ic.fecha_reporte_im) = " . $anioInd . " and month(ic.fecha_reporte_im) = " . $mesInd . " and ic.cod_u_organizaciones = " . $orgReportadasMes[$i];
 
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		array_push($orgReportadasMes, $fila['cod_servicio']);
-		//array_push($orgReportadasMes, $fila['tipo_servicio']);
-	}
+        //$sqlSocios = "select cod_socios, cedula from socios where estado = 1 and cod_u_organizaciones = " . $orgReportadasMes[$i];
+        //echo $sqlSocios . "<br>";
 
-	//print_r2($orgReportadasMes);	
+        $resSqlSocios = query($sqlSocios);
 
-	//se revisara si el codigo en la tabla de socios es igual al reportado
-	for($i = 0; $i < count($orgReportadasMes); $i = $i + 2)
-	{
-		$sqlSocios = "select cod_socios, cod_servicio_im from socios where cod_u_organizaciones = " . $orgReportadasMes[$i];
+        while($fila = mysql_fetch_array($resSqlSocios))
+        {
 
-		$resSqlSocios = query($sqlSocios);
+            array_push($arraySociosMes, $fila['cedula']);
+            //$sociosReportados++;
+        }   
 
-		while($fila = mysql_fetch_array($resSqlSocios))
-		{
-			//si el cod_servicio_im es igual al reportado con la organizacion, se suma el socio al indicador
-			if($fila['cod_servicio_im'] == $orgReportadasMes[$i + 1])
-				$sociosReportados++;
-		}
-	}
+        
+        
+    }
+    $arraySociosMes = array_unique($arraySociosMes);
+    $arraySociosMes = array_values($arraySociosMes);
 
-	//si existen organizaciones, se debe contar los usuarios*/
+    
+
+    //print_r2($arraySociosMes);
+    $sociosReportados = count($arraySociosMes);
 
 
-	return $sociosReportados;
+
+
+    //si existen organizaciones, se debe contar los usuarios
+
+    //CONSERVAMOS CODIGO POR POSIBLES CAMBIOS A FUTURO
+    /*$sqlOrgMes = "select si.cod_u_organizaciones, si.cod_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_registro) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and year(si.fecha_registro) = " . $anioInd . " and u.categoria_actividad_mp <> 'no_priorizado_en_el_cambio_matriz_productiva' group by si.cod_u_organizaciones";
+
+    echo $sqlOrgMes . "<br>";
+
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        array_push($orgReportadasMes, $fila['cod_servicio']);
+        //array_push($orgReportadasMes, $fila['tipo_servicio']);
+    }
+
+    //print_r2($orgReportadasMes);  
+
+    //se revisara si el codigo en la tabla de socios es igual al reportado
+    for($i = 0; $i < count($orgReportadasMes); $i = $i + 2)
+    {
+        $sqlSocios = "select cod_socios, cod_servicio_im from socios where cod_u_organizaciones = " . $orgReportadasMes[$i];
+
+        $resSqlSocios = query($sqlSocios);
+
+        while($fila = mysql_fetch_array($resSqlSocios))
+        {
+            //si el cod_servicio_im es igual al reportado con la organizacion, se suma el socio al indicador
+            if($fila['cod_servicio_im'] == $orgReportadasMes[$i + 1])
+                $sociosReportados++;
+        }
+    }
+
+    //si existen organizaciones, se debe contar los usuarios*/
+
+
+    return $sociosReportados;
 
 }
 
 function RevisarOrgMesNuevas($zona, $mes)
 {
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$numOrgReportadas = 0;
-	$orgReportadasMes = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $numOrgReportadas = 0;
+    $orgReportadasMes = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$numOrgReportadas = 0;
-	$orgReportadasMes = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
-	$tipoOrg = 'org';
-
-
-
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and antiguedad = 'si' group by si.cod_u_organizaciones";
-
-	//echo $sqlOrgMes . "<br>";
-
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);		
-	}
-
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and antiguedad = 'si' group by si.cod_u_organizaciones";
-
-	//echo $sqlOrgMes . "<br>";
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $numOrgReportadas = 0;
+    $orgReportadasMes = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    $tipoOrg = 'org';
 
 
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		
-	}
 
-	$orgReportadasMes = array_unique($orgReportadasMes);
-	$orgReportadasMes = array_values($orgReportadasMes);
-	
+    $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and antiguedad = 'si' group by si.cod_u_organizaciones";
 
-	// Revisar si las org /uep no han sido reportadas anteriormente
-	$indiceArray = 0;
-	foreach($orgReportadasMes as $valor)
-	{
-		$sqlRevision = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.cod_u_organizaciones = " . $valor;
-		// echo $sqlRevision . "<br>";
-		$resRevision = query($sqlRevision);
-		$numFilasRevision = mysql_num_rows($resRevision);
-		if($numFilasRevision > 0)
-		{
-			unset($orgReportadasMes[$indiceArray]);
-		}
-		else
-		{
-			// Revisar las contrataciones
-			$sqlRevision = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.cod_u_organizaciones = " . $valor;
-			// echo $sqlRevision . "<br>";
+    //echo $sqlOrgMes . "<br>";
 
-			$resRevision = query($sqlRevision);
-			$numFilasRevision = mysql_num_rows($resRevision);
-			if($numFilasRevision > 0)
-			{
-				unset($orgReportadasMes[$indiceArray]);
-			}
-		}
-		$indiceArray++;
-	}
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);       
+    }
 
-	$orgReportadasMes = array_unique($orgReportadasMes);
-	$orgReportadasMes = array_values($orgReportadasMes);
-	// print_r2($orgReportadasMes);	
-	$numOrgReportadas = count($orgReportadasMes);	
+    $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and antiguedad = 'si' group by si.cod_u_organizaciones";
 
-	return $numOrgReportadas;
+    //echo $sqlOrgMes . "<br>";
+
+
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        
+    }
+
+    $orgReportadasMes = array_unique($orgReportadasMes);
+    $orgReportadasMes = array_values($orgReportadasMes);
+    
+
+    // Revisar si las org /uep no han sido reportadas anteriormente
+    $indiceArray = 0;
+    foreach($orgReportadasMes as $valor)
+    {
+        $sqlRevision = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.cod_u_organizaciones = " . $valor;
+        // echo $sqlRevision . "<br>";
+        $resRevision = query($sqlRevision);
+        $numFilasRevision = mysql_num_rows($resRevision);
+        if($numFilasRevision > 0)
+        {
+            unset($orgReportadasMes[$indiceArray]);
+        }
+        else
+        {
+            // Revisar las contrataciones
+            $sqlRevision = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = '" . $tipoOrg . "' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.cod_u_organizaciones = " . $valor;
+            // echo $sqlRevision . "<br>";
+
+            $resRevision = query($sqlRevision);
+            $numFilasRevision = mysql_num_rows($resRevision);
+            if($numFilasRevision > 0)
+            {
+                unset($orgReportadasMes[$indiceArray]);
+            }
+        }
+        $indiceArray++;
+    }
+
+    $orgReportadasMes = array_unique($orgReportadasMes);
+    $orgReportadasMes = array_values($orgReportadasMes);
+    // print_r2($orgReportadasMes); 
+    $numOrgReportadas = count($orgReportadasMes);   
+
+    return $numOrgReportadas;
 
 }
 
 function RevisarPlazasTrabajo($zona, $mes)
 {
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$numPlazasTrabajo = 0;
-	$orgReportadasMes = array();
-	$orgNoRepetidas = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
-	$arraySociosReportar = array();
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $numPlazasTrabajo = 0;
+    $orgReportadasMes = array();
+    $orgNoRepetidas = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    $arraySociosReportar = array();
 
-	$sqlOrgMes = "select ic.cod_contratacion, ic.tipo_contrato, ic.cod_u_organizaciones, ic.num_socios, ic.num_empleados, ic.fecha_adjudicacion, ic.monto_contratacion from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.monto_contratacion > 0 and ic.cod_zona = " . $zonaInd;
+    $sqlOrgMes = "select ic.cod_contratacion, ic.tipo_contrato, ic.cod_u_organizaciones, ic.num_socios, ic.num_empleados, ic.fecha_adjudicacion, ic.monto_contratacion from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and year(ic.fecha_reporte) = " . $anioInd . " and ic.monto_contratacion > 0 and ic.cod_zona = " . $zonaInd;
 
-	//echo $sqlOrgMes . "<br>";
+    //echo $sqlOrgMes . "<br>";
 
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);		
-	}
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);       
+    }
 
-	//print_r2($orgReportadasMes);
-	$orgFiltrada = array();
-	for($i = 0;  $i < count($orgReportadasMes); $i++)
-	{
-		if(in_array($orgReportadasMes[$i], $orgFiltrada) == 0)
-		{
-			array_push($orgFiltrada, $orgReportadasMes[$i]);
-			
-		}
-		
-	}
+    //print_r2($orgReportadasMes);
+    $orgFiltrada = array();
+    for($i = 0;  $i < count($orgReportadasMes); $i++)
+    {
+        if(in_array($orgReportadasMes[$i], $orgFiltrada) == 0)
+        {
+            array_push($orgFiltrada, $orgReportadasMes[$i]);
+            
+        }
+        
+    }
 
-	//print_r2($orgFiltrada);	
+    //print_r2($orgFiltrada);   
 
-	//Se debe revisar si las organizaciones consultadas tienen reportado el mismo contratacion en meses anteriores
-	for($i = 0; $i < count($orgFiltrada); $i++)
-	{
+    //Se debe revisar si las organizaciones consultadas tienen reportado el mismo contratacion en meses anteriores
+    for($i = 0; $i < count($orgFiltrada); $i++)
+    {
 
-		// $sqlSociosReportados = "select cedula from socios where cod_u_organizaciones = " . $orgFiltrada[$i] . " and estado = 1 and socio_empleado in ('socio', 'socio_trabajador') and year(fecha_reporte_im) = " . $anioInd . " and month(fecha_reporte_im) = " . $mesInd;
+        // $sqlSociosReportados = "select cedula from socios where cod_u_organizaciones = " . $orgFiltrada[$i] . " and estado = 1 and socio_empleado in ('socio', 'socio_trabajador') and year(fecha_reporte_im) = " . $anioInd . " and month(fecha_reporte_im) = " . $mesInd;
 
-		$sqlSociosReportados = "select ic.cedula, s.estado, s.socio_empleado, ic.fecha_reporte from im_contratacion_servicios_socios ic inner join socios s on (s.cedula = ic.cedula) where ic.cod_u_organizaciones = " . $orgFiltrada[$i] . " and s.estado = 1 and s.socio_empleado in ('socio', 'socio_trabajador') and year(ic.fecha_reporte) = " . $anioInd . " and month(ic.fecha_reporte) = " . $mesInd;
-		
+        $sqlSociosReportados = "select ic.cedula, s.estado, s.socio_empleado, ic.fecha_reporte from im_contratacion_servicios_socios ic inner join socios s on (s.cedula = ic.cedula) where ic.cod_u_organizaciones = " . $orgFiltrada[$i] . " and s.estado = 1 and s.socio_empleado in ('socio', 'socio_trabajador') and year(ic.fecha_reporte) = " . $anioInd . " and month(ic.fecha_reporte) = " . $mesInd;
+        
 
-		//echo $sqlSociosReportados . "<br>";
-		$resSociosReportados = query($sqlSociosReportados);
+        //echo $sqlSociosReportados . "<br>";
+        $resSociosReportados = query($sqlSociosReportados);
 
-		while($fila = mysql_fetch_array($resSociosReportados))
-		{
-			array_push($arraySociosReportar, $fila['cedula']);
-		}
+        while($fila = mysql_fetch_array($resSociosReportados))
+        {
+            array_push($arraySociosReportar, $fila['cedula']);
+        }
 
-		//**************************************************************************************
-		//*	Se debe buscar:
-		//		Registros de la organizacion con el mismo tipo de contrato. Si existen, no se debe sumar a este indicador
-		//		Si no existen:				
-		//		-Si no existen mas registros ademas del reportado en el mes indicado, esta organizacion  debe sumar al indicador
+        //**************************************************************************************
+        //* Se debe buscar:
+        //      Registros de la organizacion con el mismo tipo de contrato. Si existen, no se debe sumar a este indicador
+        //      Si no existen:              
+        //      -Si no existen mas registros ademas del reportado en el mes indicado, esta organizacion  debe sumar al indicador
 
-		//****************************************************************************************
-		
-	}
+        //****************************************************************************************
+        
+    }
 
-	//print_r2($arraySociosReportar);
+    //print_r2($arraySociosReportar);
 
-	// Caso Especial por pedido de Stefany Lopez
+    // Caso Especial por pedido de Stefany Lopez
 
-	// echo $zona . " - -" . $mes . "<br>";
-	if($zona == 1 && $mes == 2)
-	{
-		array_push($arraySociosReportar, '0502284243');
-		array_push($arraySociosReportar, '1707550834');
-		array_push($arraySociosReportar, '1711931723');
-	}
-
-
-	$arraySociosReportar = array_unique($arraySociosReportar);
-	$arraySociosReportar = array_values($arraySociosReportar);
-	$numPlazasTrabajo = count($arraySociosReportar);
-
-	//print_r2($arraySociosReportar);
+    // echo $zona . " - -" . $mes . "<br>";
+    if($zona == 1 && $mes == 2)
+    {
+        array_push($arraySociosReportar, '0502284243');
+        array_push($arraySociosReportar, '1707550834');
+        array_push($arraySociosReportar, '1711931723');
+    }
 
 
-	//si existen organizaciones, se debe contar los usuarios
+    $arraySociosReportar = array_unique($arraySociosReportar);
+    $arraySociosReportar = array_values($arraySociosReportar);
+    $numPlazasTrabajo = count($arraySociosReportar);
+
+    //print_r2($arraySociosReportar);
 
 
-	return $numPlazasTrabajo;
+    //si existen organizaciones, se debe contar los usuarios
+
+
+    return $numPlazasTrabajo;
 
 }
 
 function RevisarPlazasTrabajo1($zona, $mes)
 {
 
-	//SE MANTIENE CODIGO POR POSIBLES CAMBIOS
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$numPlazasTrabajo = 0;
-	$orgReportadasMes = array();
-	$orgNoRepetidas = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    //SE MANTIENE CODIGO POR POSIBLES CAMBIOS
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $numPlazasTrabajo = 0;
+    $orgReportadasMes = array();
+    $orgNoRepetidas = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
-	$sqlOrgMes = "select ic.cod_contratacion, ic.tipo_contrato, ic.cod_u_organizaciones, ic.num_socios, ic.num_empleados, ic.fecha_adjudicacion, ic.monto_contratacion from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and se_reporta = 'si' and year(ic.fecha_reporte) = " . $anioInd . " and ic.monto_contratacion > 0 and ic.cod_zona = " . $zonaInd;
+    $sqlOrgMes = "select ic.cod_contratacion, ic.tipo_contrato, ic.cod_u_organizaciones, ic.num_socios, ic.num_empleados, ic.fecha_adjudicacion, ic.monto_contratacion from im_contratacion ic where month(ic.fecha_reporte) = " . $mesInd . " and se_reporta = 'si' and year(ic.fecha_reporte) = " . $anioInd . " and ic.monto_contratacion > 0 and ic.cod_zona = " . $zonaInd;
 
-	//echo $sqlOrgMes . "<br>";
+    //echo $sqlOrgMes . "<br>";
 
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		array_push($orgReportadasMes, $fila['tipo_contrato']);
-		array_push($orgReportadasMes, $fila['num_socios']);
-		array_push($orgReportadasMes, $fila['num_empleados']);
-		array_push($orgReportadasMes, $fila['fecha_adjudicacion']);
-	}
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        array_push($orgReportadasMes, $fila['tipo_contrato']);
+        array_push($orgReportadasMes, $fila['num_socios']);
+        array_push($orgReportadasMes, $fila['num_empleados']);
+        array_push($orgReportadasMes, $fila['fecha_adjudicacion']);
+    }
 
-	$orgFiltrada = array();
-	for($i = 0;  $i < count($orgReportadasMes); $i = $i + 5)
-	{
-		if(in_array($orgReportadasMes[$i], $orgFiltrada) == 0)
-		{
-			array_push($orgFiltrada, $orgReportadasMes[$i]);
-			array_push($orgFiltrada, $orgReportadasMes[$i + 1]);
-			array_push($orgFiltrada, $orgReportadasMes[$i + 2]);
-			array_push($orgFiltrada, $orgReportadasMes[$i + 3]);
-			array_push($orgFiltrada, $orgReportadasMes[$i + 4]);
-		}
-		
-	}
+    $orgFiltrada = array();
+    for($i = 0;  $i < count($orgReportadasMes); $i = $i + 5)
+    {
+        if(in_array($orgReportadasMes[$i], $orgFiltrada) == 0)
+        {
+            array_push($orgFiltrada, $orgReportadasMes[$i]);
+            array_push($orgFiltrada, $orgReportadasMes[$i + 1]);
+            array_push($orgFiltrada, $orgReportadasMes[$i + 2]);
+            array_push($orgFiltrada, $orgReportadasMes[$i + 3]);
+            array_push($orgFiltrada, $orgReportadasMes[$i + 4]);
+        }
+        
+    }
 
-	//print_r2($orgFiltrada);	
+    //print_r2($orgFiltrada);   
 
-	//Se debe revisar si las organizaciones consultadas tienen reportado el mismo contratacion en meses anteriores
-	for($i = 0; $i < count($orgFiltrada); $i = $i + 5)
-	{
-		$sqlContratosAnteriores = "select ic.cod_u_organizaciones from im_contratacion ic where ic.fecha_reporte <= '" . $fechaConsultar . "' and year(ic.fecha_reporte) = " . $anioInd . " and ic.cod_zona = " . $zonaInd . " and ic.tipo_contrato = '" . $orgFiltrada[$i + 1] . "' and ic.fecha_adjudicacion <> '" . $orgFiltrada[$i + 4] . "' and ic.cod_u_organizaciones = " . $orgFiltrada[$i];
+    //Se debe revisar si las organizaciones consultadas tienen reportado el mismo contratacion en meses anteriores
+    for($i = 0; $i < count($orgFiltrada); $i = $i + 5)
+    {
+        $sqlContratosAnteriores = "select ic.cod_u_organizaciones from im_contratacion ic where ic.fecha_reporte <= '" . $fechaConsultar . "' and year(ic.fecha_reporte) = " . $anioInd . " and ic.cod_zona = " . $zonaInd . " and ic.tipo_contrato = '" . $orgFiltrada[$i + 1] . "' and ic.fecha_adjudicacion <> '" . $orgFiltrada[$i + 4] . "' and ic.cod_u_organizaciones = " . $orgFiltrada[$i];
 
-		//echo $sqlContratosAnteriores . "<br>";
-		$resSqlContratosAnteriores = query($sqlContratosAnteriores);
+        //echo $sqlContratosAnteriores . "<br>";
+        $resSqlContratosAnteriores = query($sqlContratosAnteriores);
 
-		/**************************************************************************************
-		*	Se debe buscar:
-				Registros de la organizacion con el mismo tipo de contrato. Si existen, no se debe sumar a este indicador
-				Si no existen:				
-				-Si no existen mas registros ademas del reportado en el mes indicado, esta organizacion  debe sumar al indicador
+        /**************************************************************************************
+        *   Se debe buscar:
+                Registros de la organizacion con el mismo tipo de contrato. Si existen, no se debe sumar a este indicador
+                Si no existen:              
+                -Si no existen mas registros ademas del reportado en el mes indicado, esta organizacion  debe sumar al indicador
 
-		*****************************************************************************************/
-		$numFilas = mysql_num_rows($resSqlContratosAnteriores);
+        *****************************************************************************************/
+        $numFilas = mysql_num_rows($resSqlContratosAnteriores);
 
-		//echo $numFilas . "<br>";
+        //echo $numFilas . "<br>";
 
-		if($numFilas == 0)
-		{
-			$numPlazasTrabajo += ($orgFiltrada[$i +2] + $orgFiltrada[$i + 3]);
+        if($numFilas == 0)
+        {
+            $numPlazasTrabajo += ($orgFiltrada[$i +2] + $orgFiltrada[$i + 3]);
 
-		}
-	}
+        }
+    }
 
-	//si existen organizaciones, se debe contar los usuarios
+    //si existen organizaciones, se debe contar los usuarios
 
 
-	return $numPlazasTrabajo;
+    return $numPlazasTrabajo;
 
 }
 
 function RevisarCircuitosEconomicos($zona, $mes)
 {
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$numOrgReportadas = 0;
-	$orgReportadasMes = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $numOrgReportadas = 0;
+    $orgReportadasMes = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
+    $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.se_reporta = 'si' and si.circuito_economico = 'si' group by si.cod_u_organizaciones";
 
-	// echo $sqlOrgMes . "<br>";
+    // echo $sqlOrgMes . "<br>";
 
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		//array_push($orgReportadasMes, $fila['servicio']);
-		//array_push($orgReportadasMes, $fila['tipo_servicio']);
-	}
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        //array_push($orgReportadasMes, $fila['servicio']);
+        //array_push($orgReportadasMes, $fila['tipo_servicio']);
+    }
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.se_reporta = 'si' group by si.cod_u_organizaciones";
+    $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.se_reporta = 'si' group by si.cod_u_organizaciones";
 
-	// echo $sqlOrgMes . "<br>";
+    // echo $sqlOrgMes . "<br>";
 
-	$resSqlOrgMes = query($sqlOrgMes);
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		//array_push($orgReportadasMes, $fila['servicio']);
-		//array_push($orgReportadasMes, $fila['tipo_servicio']);
-	}
+    $resSqlOrgMes = query($sqlOrgMes);
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        //array_push($orgReportadasMes, $fila['servicio']);
+        //array_push($orgReportadasMes, $fila['tipo_servicio']);
+    }
 
-	$orgReportadasMes = array_unique($orgReportadasMes); 
-	$orgReportadasMes =  array_values($orgReportadasMes);
+    $orgReportadasMes = array_unique($orgReportadasMes); 
+    $orgReportadasMes =  array_values($orgReportadasMes);
 
 
-	// Reviso si la org ha sido reportada antes
-	$indiceArray = 0;
-	foreach($orgReportadasMes as $valor)
-	{
-		$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and si.se_reporta = 'si' and  year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.cod_u_organizaciones = " . $valor;
+    // Reviso si la org ha sido reportada antes
+    $indiceArray = 0;
+    foreach($orgReportadasMes as $valor)
+    {
+        $sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and si.se_reporta = 'si' and  year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.cod_u_organizaciones = " . $valor;
 
-		// echo $sqlOrgMesReportada . "<br>";
-		$resOrgMesReportada = query($sqlOrgMesReportada);
-		$vecesOrgReportada = mysql_num_rows($resOrgMesReportada);
+        // echo $sqlOrgMesReportada . "<br>";
+        $resOrgMesReportada = query($sqlOrgMesReportada);
+        $vecesOrgReportada = mysql_num_rows($resOrgMesReportada);
 
-		if($vecesOrgReportada > 0)
-		{
-			unset($orgReportadasMes[$indiceArray]);
-		}
-		else
-		{
-			// se revisa en contrataciones si ya fue reportada la org o uep
-			$sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.se_reporta = 'si' and  si.cod_u_organizaciones = " . $valor;
-			$resOrgMesReportada = query($sqlOrgMesReportada);
-			$vecesOrgReportada = mysql_num_rows($resOrgMesReportada);
-			if($vecesOrgReportada > 0)
-			{
-				unset($orgReportadasMes[$indiceArray]);
-			}
-		}
-		$indiceArray++;
-	}
+        if($vecesOrgReportada > 0)
+        {
+            unset($orgReportadasMes[$indiceArray]);
+        }
+        else
+        {
+            // se revisa en contrataciones si ya fue reportada la org o uep
+            $sqlOrgMesReportada = "select si.cod_u_organizaciones, si.fecha_reporte, si.cod_zona from im_contratacion si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_reporte) < " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and year(si.fecha_reporte) = " . $anioInd . " and si.circuito_economico = 'si' and si.se_reporta = 'si' and  si.cod_u_organizaciones = " . $valor;
+            $resOrgMesReportada = query($sqlOrgMesReportada);
+            $vecesOrgReportada = mysql_num_rows($resOrgMesReportada);
+            if($vecesOrgReportada > 0)
+            {
+                unset($orgReportadasMes[$indiceArray]);
+            }
+        }
+        $indiceArray++;
+    }
 
-	$orgReportadasMes = array_values($orgReportadasMes);
+    $orgReportadasMes = array_values($orgReportadasMes);
 
-	$numOrgReportadas = count($orgReportadasMes);
+    $numOrgReportadas = count($orgReportadasMes);
 
-	// print_r2($orgReportadasMes);	
+    // print_r2($orgReportadasMes); 
 
-	return $numOrgReportadas;
+    return $numOrgReportadas;
 
 }
 
 function RevisarComercios($zona, $mes)
 {
-	$zonaInd = $zona;
-	$mesInd = $mes;
-	$anioInd = getAnioSeleccionado();
-	$numOrgReportadas = 0;
-	$orgReportadasMes = array();
-	$fechaConsultar = $anioInd . '-' . $mesInd . '-01';
+    $zonaInd = $zona;
+    $mesInd = $mes;
+    $anioInd = getAnioSeleccionado();
+    $numOrgReportadas = 0;
+    $orgReportadasMes = array();
+    $fechaConsultar = $anioInd . '-' . $mesInd . '-01';
 
-	$sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_registro, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_registro) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and si.servicio = 'asistencia_tecnica_comercial' and si.tipo_servicio = 'comercio_justo' and year(si.fecha_registro) = " . $anioInd . " group by si.cod_u_organizaciones";
+    $sqlOrgMes = "select si.cod_u_organizaciones, si.fecha_registro, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where month(si.fecha_registro) = " . $mesInd . " and si.cod_zona = " . $zonaInd . " and u.tipo = 'org' and si.servicio = 'asistencia_tecnica_comercial' and si.tipo_servicio = 'comercio_justo' and year(si.fecha_registro) = " . $anioInd . " group by si.cod_u_organizaciones";
 
-	//echo $sqlOrgMes . "<br>";
+    //echo $sqlOrgMes . "<br>";
 
-	//ejecucion del sql que busca las organizaciones del mes y zona indicados
-	$resSqlOrgMes = query($sqlOrgMes);	
-	
-	while($fila = mysql_fetch_array($resSqlOrgMes))
-	{
-		array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
-		array_push($orgReportadasMes, $fila['servicio']);
-		array_push($orgReportadasMes, $fila['tipo_servicio']);
-	}
+    //ejecucion del sql que busca las organizaciones del mes y zona indicados
+    $resSqlOrgMes = query($sqlOrgMes);  
+    
+    while($fila = mysql_fetch_array($resSqlOrgMes))
+    {
+        array_push($orgReportadasMes, $fila['cod_u_organizaciones']);
+        array_push($orgReportadasMes, $fila['servicio']);
+        array_push($orgReportadasMes, $fila['tipo_servicio']);
+    }
 
-	//print_r2($orgReportadasMes);
+    //print_r2($orgReportadasMes);
 
-	//Se debe revisar si las organizaciones consultadas tienen reportado el mismo servicio en meses anteriores
-	for($i = 0; $i < count($orgReportadasMes); $i = $i + 3)
-	{
-		$sqlRevisarServicioAnterior = "select si.cod_u_organizaciones, si.fecha_registro, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where si.fecha_registro <= '" . $fechaConsultar . "' and u.cod_u_organizaciones = " . $orgReportadasMes[$i] . " and si.servicio = '" . $orgReportadasMes[$i + 1] . "' and si.tipo_servicio = '" . $orgReportadasMes[$i + 2] . "' group by si.cod_u_organizaciones ";
+    //Se debe revisar si las organizaciones consultadas tienen reportado el mismo servicio en meses anteriores
+    for($i = 0; $i < count($orgReportadasMes); $i = $i + 3)
+    {
+        $sqlRevisarServicioAnterior = "select si.cod_u_organizaciones, si.fecha_registro, si.cod_zona, si.servicio, si.tipo_servicio from im_servicios si inner join u_organizaciones u on (u.cod_u_organizaciones = si.cod_u_organizaciones) where si.fecha_registro <= '" . $fechaConsultar . "' and u.cod_u_organizaciones = " . $orgReportadasMes[$i] . " and si.servicio = '" . $orgReportadasMes[$i + 1] . "' and si.tipo_servicio = '" . $orgReportadasMes[$i + 2] . "' group by si.cod_u_organizaciones ";
 
-		//echo $sqlRevisarServicioAnterior . "<br>";
-		$resSqlRevisarServicioAnterior = query($sqlRevisarServicioAnterior);
+        //echo $sqlRevisarServicioAnterior . "<br>";
+        $resSqlRevisarServicioAnterior = query($sqlRevisarServicioAnterior);
 
-		/**************************************************************************************
-		*	Se debe buscar:
-				Registros de la organizacion con los mismos servicios. Si existen, no se debe sumar a este indicador
+        /**************************************************************************************
+        *   Se debe buscar:
+                Registros de la organizacion con los mismos servicios. Si existen, no se debe sumar a este indicador
 
-				-Si no existen mas registros ademas del reportado en el mes indicado, esta organizacion es nueva y  debe sumar al indicador
+                -Si no existen mas registros ademas del reportado en el mes indicado, esta organizacion es nueva y  debe sumar al indicador
 
-		*****************************************************************************************/
-		$numFilas = mysql_num_rows($resSqlRevisarServicioAnterior);
+        *****************************************************************************************/
+        $numFilas = mysql_num_rows($resSqlRevisarServicioAnterior);
 
-		//echo $numFilas . "<br>";
+        //echo $numFilas . "<br>";
 
-		if($numFilas == 0)
-		{
-			$numOrgReportadas++;
-		}
-	}
+        if($numFilas == 0)
+        {
+            $numOrgReportadas++;
+        }
+    }
 
-	return $numOrgReportadas;
+    return $numOrgReportadas;
 
+}
+
+function VerificarIndicadorGuardado($mes, $zona, $departamento, $anioInd)
+{
+    $sqlVerficacion = "select count(*) as totalIndicadoresGuardados from indicador_registro_mensual where zona = " . $zona . " and mes = " . $mes . " and departamento = '" . $departamento . "' and anio = " . $anioInd;
+    // echo $sqlVerficacion . "<br>";
+    $resVerificacion = query($sqlVerficacion);
+    $numVerificacion = 0;
+    while($filaVerificacion = mysql_fetch_array($resVerificacion))
+    {
+        $numVerificacion = $filaVerificacion['totalIndicadoresGuardados'];
+    }
+
+    return $numVerificacion;
 }
 
 

@@ -1,4 +1,5 @@
-var numClicks = 0;
+var numClicks = 0;					// Variable para Fomento Productivo
+var numClicsShowControl = 0;		// Variable para Intercambio de Mercados
 var respuesta = "";
 $(document).on('ready', inicio);
 
@@ -122,6 +123,11 @@ function BucarIndicadorIM()
 	var idZona = $('#cmbZona').prop('selected', true).val();
 	var idMes = $('#cmbMeses').prop('selected', true).val();
 	var idAnio = $('#cmbAnios').prop('selected', true).val();
+	if(document.getElementById('botonGrabar') != null)
+	{
+		document.getElementById('botonGrabar').disabled = false;
+	}
+	var idDepartamento = 'IM';
 
 	var zonaUsr = $('#zonaUsr').html();
 	console.log(zonaUsr);
@@ -133,6 +139,8 @@ function BucarIndicadorIM()
 	fdata.append('idZona', idZona);
 	fdata.append('idMes', idMes);
 	fdata.append('idAnio', idAnio);
+	fdata.append('idDepartamento', idDepartamento);
+	// fdata.append('accion')
 
 	//variable ajax
 	var request = crearAjax();
@@ -234,22 +242,45 @@ function GuardarIndicadores(departamento, anio, mes, zona)
 	var valoresIndicadores = [];
 	console.log(lengthIndicador);
 
-	for(var i = 1; i < lengthIndicador; i++)
-	{
-		var idText = idZona + "-" + idMes + "-" + i;
-		
-		if(document.getElementById(idText) == null)
+	if(idDepartamento == 'FA')
+	{ 
+	
+		for(var i = 1; i < lengthIndicador; i++)
 		{
-			alert('Por favor, pulse el botón de "Buscar" para calcular los indicadores que desea guardar. (La ZONA, MES o AÑO NO CONCUERDAN CON LOS DATOS MOSTRADOS EN PATALLA).');
-			return false;
-		}
-		else
-		{
-			var textoTd = document.getElementById(idText).innerHTML;
-			valoresIndicadores.push(textoTd);
+			var idText = idZona + "-" + idMes + "-" + i;
+			
+			if(document.getElementById(idText) == null)
+			{
+				alert('Por favor, pulse el botón de "Buscar" para calcular los indicadores que desea guardar. (La ZONA, MES o AÑO NO CONCUERDAN CON LOS DATOS MOSTRADOS EN PANTALLA).');
+				return false;
+			}
+			else
+			{
+				var textoTd = document.getElementById(idText).innerHTML;
+				valoresIndicadores.push(textoTd);
+			}
 		}
 	}
 
+	if(idDepartamento == 'IM')
+	{
+		lengthIndicador += 16;
+		for(var i = 17; i < lengthIndicador; i++)
+		{
+			var idText = idZona + "-" + idMes + "-" + i;
+			
+			if(document.getElementById(idText) == null)
+			{
+				alert('Por favor, pulse el botón de "Buscar" para calcular los indicadores que desea guardar. (La ZONA, MES o AÑO NO CONCUERDAN CON LOS DATOS MOSTRADOS EN PANTALLA).');
+				return false;
+			}
+			else
+			{
+				var textoTd = document.getElementById(idText).innerHTML;
+				valoresIndicadores.push(textoTd);
+			}
+		}
+	}
 	console.log(valoresIndicadores);
 	
 	fdata.append('idZona', idZona);
@@ -353,8 +384,10 @@ function ExisteArchivo(departamento)
 
 	var fdata = new FormData();
 	var idAnio = $('#cmbAnios').prop('selected', true).val();
+	var idZona = $('#cmbZona').prop('selected', true).val();
 	fdata.append('idDepartamento', idDepartamento);
 	fdata.append('idAnio', idAnio);
+	fdata.append('idZona', idZona);
 	fdata.append('accion', 'existeArchivo');
 
 	var numArchivos = $('#botonSubirArchivo').prop('files').length;
@@ -366,8 +399,8 @@ function ExisteArchivo(departamento)
 
 	//cargamos archivos
 	var archivo = document.getElementById('botonSubirArchivo').files;
-	var extensionPermitida = ".xlsx";
-	var extensionPermitida2 = ".xls";
+	var extensionPermitida = ".pdf";
+	var extensionPermitida2 = ".pdf";
 	var cont = 0;
 	var contSize = 0;
 	for(var i = 0; i < numArchivos; i++)
@@ -384,7 +417,7 @@ function ExisteArchivo(departamento)
 		// }
 		console.log(nombreArchivo);
 
-		if((ext == extensionPermitida || ext == extensionPermitida2) && nombreArchivo == 'RESUMEN_EJECUTIVO.xls')
+		if((ext == extensionPermitida || ext == extensionPermitida2) && nombreArchivo == 'RESUMEN_EJECUTIVO.pdf')
 		{
 			console.log(archivo[i].size);			
 			cont++;
@@ -394,7 +427,7 @@ function ExisteArchivo(departamento)
 
 	if(cont == 0)
 	{
-		alert("Solo puede cargar un archivo con extensión .xls con el nombre del archivo: RESUMEN_EJECUTIVO");
+		alert("Solo puede cargar un archivo con extensión .pdf con el nombre del archivo: RESUMEN_EJECUTIVO");
 		return false;
 	}
 
@@ -441,8 +474,8 @@ function subidaArchivos(documentos, departamento)
 
 	//cargamos archivos
 	var archivo = documentos;
-	var extensionPermitida = ".xlsx";
-	var extensionPermitida2 = ".xls";
+	var extensionPermitida = ".pdf";
+	var extensionPermitida2 = ".pdf";
 	var cont = 0;
 	var contSize = 0;
 	for(var i = 0; i < numArchivos; i++)
@@ -496,4 +529,25 @@ function subidaArchivos(documentos, departamento)
 
 	request.send(fdata);
 
+}
+
+function MostrarControlReportes()
+{
+	numClicsShowControl++;
+	console.log(numClicsShowControl);
+	if(numClicsShowControl % 2)
+	{
+		document.getElementById('controlReporte').classList.remove('fa-angle-down');
+		document.getElementById('controlReporte').classList.add('fa-angle-up');	
+		document.getElementById('botones').style.visibility = 'visible';	
+	}
+	else
+	{
+		document.getElementById('controlReporte').classList.remove('fa-angle-up');
+		document.getElementById('controlReporte').classList.add('fa-angle-down');
+		document.getElementById('botones').style.visibility = 'collapse';	
+			
+	}
+	// document.getElementById('botonMuestra').classList.remove('fa-angle-down');
+	// document.getElementById('botonMuestra').classList.add('fa-angle-up');
 }

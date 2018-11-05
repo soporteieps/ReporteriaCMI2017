@@ -2136,53 +2136,55 @@ function meta_ejecutada($zona,$cod_indicador,$cod_mes)
 	$meta_alcanzada_total = 0;
 	// echo $cod_mes . "</br>";
 	while($mes_aux2=mysql_fetch_object($result_meses2))
+	{
+		$mes = $mes_aux2->mes;
+		
+		//********************************************
+		// Se debe revisar si el mes consultado del año en curso ya fue guardado
+		// Si es asi, se debe mostrar los datos ya guardados
+		//*********************************************
+
+		$sqlIndicadoresGuardados = "select count(*) as numIndicadores from indicador_registro_mensual where mes = " . $mes . " and anio = " . $anioCurso . " and zona = " . $zona . " and departamento = 'FA' and cod_indicador = " . $cod_indicador;
+		// echo $sqlIndicadoresGuardados . "<br>";
+		$resIndicadoresGuardados = query($sqlIndicadoresGuardados);
+		$numIndicadoresGuardados = 0;
+		
+		while($indicadoresGuardados = mysql_fetch_array($resIndicadoresGuardados))
 		{
-			$mes = $mes_aux2->mes;
-			if($reporteTipo == 'antiguo')
-			{
-				$meta_alcanzada = ShowIndicadorRegistrado($cod_indicador, $anioCurso, $mes, $zona);	
-			}
-			else
-			{
-				//********************************************
-				// Se debe revisar si el mes consultado del año en curso ya fue guardado
-				// Si es asi, se debe mostrar los datos ya guardados
-				//*********************************************
-
-				$sqlIndicadoresGuardados = "select count(*) as numIndicadores from indicador_registro_mensual where mes = " . $mes . " and anio = " . $anioCurso . " and zona = " . $zona . " and departamento = 'FA' and cod_indicador = " . $cod_indicador;
-				// echo $sqlIndicadoresGuardados . "<br>";
-				$resIndicadoresGuardados = query($sqlIndicadoresGuardados);
-				$numIndicadoresGuardados = 0;
-				
-				while($indicadoresGuardados = mysql_fetch_array($resIndicadoresGuardados))
-				{
-					$numIndicadoresGuardados = $indicadoresGuardados['numIndicadores'];
-				}
-
-				// Si la variable $numIndicadoresGuardados = 0 muestro el calculo normal de los indicadores
-				if($numIndicadoresGuardados == 0)
-				{
-					$meta_alcanzada = resultado_indicadores($cod_indicador, $mes, $zona);				
-				}
-				else
-				{
-					// Caso contrario muestro los reportes ya guardados en la base de datos
-					$meta_alcanzada = ShowIndicadorRegistrado($cod_indicador, $anioCurso, $mes, $zona);
-				}
-			}
-			$claseMetaEjecutada = $zona . "-" . $mes . "-" . $cod_indicador;
-			//echo '<td align="center" bgcolor="#93CDDD">'.$meta_alcanzada.'</td>';
-			$consulta = $consulta.'<td align="center" id="' . $claseMetaEjecutada . '">'.$meta_alcanzada.'</td>';
-			$meta_alcanzada_total = $meta_alcanzada + $meta_alcanzada_total;
+			$numIndicadoresGuardados = $indicadoresGuardados['numIndicadores'];
 		}
+
+		// Si la variable $numIndicadoresGuardados = 0 muestro el calculo normal de los indicadores
+		if($numIndicadoresGuardados == 0)
+		{
+			$meta_alcanzada = resultado_indicadores($cod_indicador, $mes, $zona);				
+		}
+		else
+		{
+			// Caso contrario muestro los reportes ya guardados en la base de datos
+			$meta_alcanzada = ShowIndicadorRegistrado($cod_indicador, $anioCurso, $mes, $zona);										
+		}
+		
+		$claseMetaEjecutada = $zona . "-" . $mes . "-" . $cod_indicador;
+		//echo '<td align="center" bgcolor="#93CDDD">'.$meta_alcanzada.'</td>';
+		$consulta = $consulta.'<td align="center" id="' . $claseMetaEjecutada . '">'.QuitarDecimales($meta_alcanzada).'</td>';
+		$meta_alcanzada_total = $meta_alcanzada + $meta_alcanzada_total;
+	}
 	$consulta = $consulta.'<td align="center" bgcolor="#93CDDD"><strong>'.$meta_alcanzada_total.'</strong></td>';
-	if($reporteTipo == 'normal')
+	if($numIndicadoresGuardados == 0)
 	{
 		$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="../../clases/detalle.php?indicador=' . $cod_indicador . '&mes=' . $cod_mes . '&zona=' . $zona . '&anio='. $anioCurso . '" target="_blank">Detalle</a></td>';		
 	}
 	else
 	{
-		$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="../../archivos/' . $anioCurso . '/FA/RESUMEN_EJECUTIVO.xls" target="_blank">Detalle</a></td>';
+		if($anioCurso == 2017)
+		{			
+			$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="../../archivos/' . $anioCurso . '/1/' . $zona . '/FA/RESUMEN_EJECUTIVO.pdf" target="_blank">Datos Guardados</a></td>';
+		}
+		else
+		{
+			$consulta =  $consulta.'<td align="center" bgcolor="#93CDDD"><a href="../../archivos/' . $anioCurso . '/' . $mes .'/' . $zona . '/FA/RESUMEN_EJECUTIVO.pdf" target="_blank">Datos Guardados</a></td>';	
+		}
 	}
 	return $consulta;
 }
@@ -2198,6 +2200,16 @@ function ShowIndicadorRegistrado($codIndicador, $anio, $mes, $zona)
 		$valorIndicador = $filaIndicador['valor_registro'];
 	}
 	return $valorIndicador;
+}
+
+
+
+
+function QuitarDecimales($valor)
+{
+	$respuesta = round($valor);
+	// echo $respuesta . "****<br>";
+	return $respuesta;
 }
 
 function print_r2($val)

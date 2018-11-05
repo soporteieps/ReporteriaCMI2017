@@ -26,6 +26,16 @@
     <script src="../../js/jquery-ui-timepicker-addon.js"></script>
     <script src="../../js/index.js"></script>
     <script src="../../js/control.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-73816205-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-73816205-1');
+</script>
+
 
   
 </head>
